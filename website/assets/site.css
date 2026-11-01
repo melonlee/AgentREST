@@ -209,3 +209,27 @@ section { padding: 88px 0; border-top: 1px solid var(--line); scroll-margin-top:
   .step { grid-template-columns: minmax(0, 1fr); }
   .step .code { grid-column: 1; grid-row: auto; }
 }
+
+/* beaver mascot: rises from behind a card, paws resting on its top edge (same pose as the app icon) */
+.peek { position: relative; min-width: 0; }
+.peek > .beaver { position: absolute; bottom: 100%; right: 30px; width: 176px; height: auto; pointer-events: none; animation: rise .9s cubic-bezier(.2,.8,.2,1) .25s both; }
+.peek > .card { position: relative; z-index: 1; }
+.hero-stack { padding-top: 116px; }
+@keyframes rise { from { transform: translateY(40%); } }
+@media (prefers-reduced-motion: reduce) { .peek > .beaver { animation: none; } }
+.closing { padding-top: 150px; }
+.closing .peek > .beaver { right: auto; left: 44px; width: 200px; animation: none; }
+.closing-card { display: flex; align-items: center; justify-content: space-between; gap: 28px 40px; flex-wrap: wrap; padding: 34px 36px; background: linear-gradient(120deg, rgba(52,224,161,.08), rgba(17,25,22,.94) 55%); border-color: rgba(52,224,161,.35); }
+.closing-card > div:first-child { flex: 1 1 420px; min-width: 0; }
+.closing-card h2 { font-size: clamp(24px, 2.8vw, 32px); letter-spacing: -.02em; font-weight: 750; }
+.closing-card h2 em { font-style: normal; color: var(--mint); }
+.closing-card p { margin-top: 10px; color: var(--text); font-size: 15.5px; max-width: 620px; }
+.closing-card p b { color: var(--paper); font-weight: 600; }
+.closing-card .cta { margin-top: 0; }
+@media (max-width: 720px) {
+  .hero-stack { padding-top: 96px; }
+  .peek > .beaver { width: 144px; right: 18px; }
+  .closing { padding-top: 124px; }
+  .closing .peek > .beaver { width: 160px; left: 22px; }
+  .closing-card { padding: 26px 22px; }
+}

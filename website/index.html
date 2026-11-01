@@ -28,6 +28,9 @@
   <meta name="twitter:description" content="Spring Boot 4.1 REST 脚手架，接口同时是 MCP 工具 —— 同样的权限，同样的审计。" />
   <meta name="twitter:image" content="https://melonlee.github.io/LazyREST/assets/lazyrest-social-preview.png" />
 
+  <link rel="icon" href="assets/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="assets/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="stylesheet" href="assets/site.css" />
@@ -38,7 +41,7 @@
 
   <header class="site-header">
     <nav class="wrap nav" aria-label="主导航">
-      <a class="brand" href="./" aria-label="LazyREST 首页"><img src="assets/lazyrest-logo-dark.svg" alt="LazyREST" width="124" height="29" /></a>
+      <a class="brand" href="./" aria-label="LazyREST 首页"><img src="assets/lazyrest-logo-dark.svg" alt="LazyREST" width="125" height="26" /></a>
       <div class="nav-links">
         <a href="#how">原理</a>
         <a href="#mcp">MCP 接入</a>
@@ -71,6 +74,8 @@
           <p class="note">只需 JDK 21：<code>./mvnw spring-boot:run</code>，不需要数据库、Redis 或 Docker。</p>
         </div>
         <div class="hero-stack">
+          <div class="peek">
+          <img class="beaver" src="assets/lazyrest-beaver.svg" width="840" height="824" alt="LazyREST 吉祥物河狸" />
           <div class="card term">
             <div class="card-head"><span class="dots"><i></i><i></i><i></i></span><span>~/LazyREST</span></div>
 <pre><span class="p">$</span> claude mcp add --transport http lazyrest \
@@ -79,6 +84,7 @@
 <span class="m">●</span> lazyrest - searchArticles(query: "MCP")
 <span class="c">  ⎿ 1 result · "Exposing Spring services as MCP tools"</span>
 <span class="m">●</span> lazyrest - getArticle(id: 2)</pre>
+          </div>
           </div>
           <div class="card">
             <div class="card-head"><span class="dots"><i></i><i></i><i></i></span><span>GET /api/audit-logs · REST 与 MCP 同一条审计链</span></div>
@@ -245,11 +251,28 @@
         </div>
       </div>
     </section>
+    <section class="closing" aria-label="收尾">
+      <div class="wrap">
+        <div class="peek">
+          <img class="beaver" src="assets/lazyrest-beaver.svg" width="840" height="824" alt="" loading="lazy" />
+          <div class="card closing-card">
+            <div>
+              <h2>你负责偷懒，<em>河狸负责把接口接给 AI。</em></h2>
+              <p>一条命令跑起来，接口同时就是 MCP 工具。河狸是 LazyREST 的吉祥物，和 <b>喵想</b> 同属 FantasyAI Lab 吉祥物家族。</p>
+            </div>
+            <div class="cta">
+              <a class="btn primary" href="https://github.com/melonlee/LazyREST/generate">Use this template</a>
+              <a class="btn" href="https://github.com/melonlee/LazyREST">在 GitHub 查看源码</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <img src="assets/lazyrest-logo-dark.svg" alt="LazyREST" width="94" height="22" loading="lazy" />
+      <img src="assets/lazyrest-logo-dark.svg" alt="LazyREST" width="106" height="22" loading="lazy" />
       <nav aria-label="页脚">
         <a href="https://github.com/melonlee/LazyREST">GitHub</a>
         <a href="https://github.com/melonlee/LazyREST/blob/HEAD/LICENSE">Apache-2.0</a>

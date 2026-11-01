@@ -28,6 +28,9 @@
   <meta name="twitter:description" content="A Spring Boot 4.1 REST starter whose endpoints are also MCP tools: same permissions, same audit trail." />
   <meta name="twitter:image" content="https://melonlee.github.io/LazyREST/assets/lazyrest-social-preview.png" />
 
+  <link rel="icon" href="../assets/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="../assets/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="../assets/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
   <link rel="stylesheet" href="../assets/site.css" />
@@ -38,7 +41,7 @@
 
   <header class="site-header">
     <nav class="wrap nav" aria-label="Main">
-      <a class="brand" href="./" aria-label="LazyREST home"><img src="../assets/lazyrest-logo-dark.svg" alt="LazyREST" width="124" height="29" /></a>
+      <a class="brand" href="./" aria-label="LazyREST home"><img src="../assets/lazyrest-logo-dark.svg" alt="LazyREST" width="125" height="26" /></a>
       <div class="nav-links">
         <a href="#how">How it works</a>
         <a href="#mcp">MCP</a>
@@ -71,6 +74,8 @@
           <p class="note">Only JDK 21 needed: <code>./mvnw spring-boot:run</code>. No database, Redis or Docker.</p>
         </div>
         <div class="hero-stack">
+          <div class="peek">
+          <img class="beaver" src="../assets/lazyrest-beaver.svg" width="840" height="824" alt="The LazyREST beaver mascot" />
           <div class="card term">
             <div class="card-head"><span class="dots"><i></i><i></i><i></i></span><span>~/LazyREST</span></div>
 <pre><span class="p">$</span> claude mcp add --transport http lazyrest \
@@ -79,6 +84,7 @@
 <span class="m">●</span> lazyrest - searchArticles(query: "MCP")
 <span class="c">  ⎿ 1 result · "Exposing Spring services as MCP tools"</span>
 <span class="m">●</span> lazyrest - getArticle(id: 2)</pre>
+          </div>
           </div>
           <div class="card">
             <div class="card-head"><span class="dots"><i></i><i></i><i></i></span><span>GET /api/audit-logs · one trail for REST and MCP</span></div>
@@ -245,11 +251,28 @@
         </div>
       </div>
     </section>
+    <section class="closing" aria-label="Get started">
+      <div class="wrap">
+        <div class="peek">
+          <img class="beaver" src="../assets/lazyrest-beaver.svg" width="840" height="824" alt="" loading="lazy" />
+          <div class="card closing-card">
+            <div>
+              <h2>You stay lazy. <em>The beaver wires your API to AI.</em></h2>
+              <p>One command to run it, and your endpoints are MCP tools too. The beaver is LazyREST’s mascot, part of the FantasyAI Lab mascot family with <b>喵想</b>.</p>
+            </div>
+            <div class="cta">
+              <a class="btn primary" href="https://github.com/melonlee/LazyREST/generate">Use this template</a>
+              <a class="btn" href="https://github.com/melonlee/LazyREST">View the source on GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <img src="../assets/lazyrest-logo-dark.svg" alt="LazyREST" width="94" height="22" loading="lazy" />
+      <img src="../assets/lazyrest-logo-dark.svg" alt="LazyREST" width="106" height="22" loading="lazy" />
       <nav aria-label="Footer">
         <a href="https://github.com/melonlee/LazyREST">GitHub</a>
         <a href="https://github.com/melonlee/LazyREST/blob/HEAD/LICENSE">Apache-2.0</a>
