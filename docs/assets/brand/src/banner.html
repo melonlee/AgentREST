@@ -1,18 +1,22 @@
 <!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css">
 <style>
-.canvas { width: 1280px; height: 400px; padding: 52px 64px; display: grid; grid-template-columns: 1fr 560px; gap: 40px; align-items: center; }
-.logo { height: 50px; display: block; margin-bottom: 30px; }
+.canvas { width: 1280px; height: 400px; padding: 44px 64px 0; display: grid; grid-template-columns: 1fr 540px; gap: 48px; }
+.canvas::after { right: -360px; top: -470px; }
+.left { align-self: center; padding-bottom: 40px; }
+.logo { height: 48px; display: block; margin-bottom: 26px; }
 h1 { font-size: 44px; line-height: 1.12; letter-spacing: -.02em; font-weight: 700; }
 p.sub { margin-top: 14px; font-size: 17px; line-height: 1.5; color: var(--muted); max-width: 560px; }
-.chips { margin-top: 24px; }
+.chips { margin-top: 22px; }
+.peek { align-self: end; margin-bottom: 22px; }
+.peek > .beaver { right: 40px; width: 164px; }
 </style></head><body>
 <div class="canvas">
-  <div>
+  <div class="left">
     <img class="logo" src="../lazyrest-logo-dark.svg">
     <h1>Your REST API,<br><span class="mint">ready for AI agents.</span></h1>
     <p class="sub">A production-shaped Spring Boot starter whose endpoints are also MCP tools — same permissions, same audit trail.</p>
     <div class="chips"><span class="chip"><b>Spring Boot</b> 4.1</span><span class="chip"><b>Java</b> 21</span><span class="chip"><b>MCP</b> /mcp</span><span class="chip">JWT · API keys · RBAC</span></div>
   </div>
-  <!--include:audit-card-->
+  <div class="peek"><img class="beaver" src="../lazyrest-beaver.svg" alt=""><!--include:audit-card--></div>
 </div>
 </body></html>

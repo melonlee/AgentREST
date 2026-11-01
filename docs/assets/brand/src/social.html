@@ -1,12 +1,14 @@
 <!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css">
 <style>
-.canvas { width: 1280px; height: 640px; padding: 64px 64px 0; display: grid; grid-template-columns: 1fr 560px; gap: 48px; }
+.canvas { width: 1280px; height: 640px; padding: 64px 64px 0; display: grid; grid-template-columns: 1fr 580px; gap: 48px; }
+.canvas::after { right: -330px; top: -430px; }
 .logo { height: 54px; display: block; margin-bottom: 52px; }
 h1 { font-size: 58px; line-height: 1.06; letter-spacing: -.03em; font-weight: 750; }
 p.sub { margin-top: 22px; font-size: 20px; line-height: 1.5; color: var(--muted); }
 .chips { margin-top: 30px; }
-.right { padding-top: 6px; display: grid; gap: 18px; align-content: start; }
-.term pre { font-size: 13px; }
+.peek { align-self: end; margin-bottom: 64px; }
+.peek > .beaver { right: 40px; width: 360px; }
+.term pre { font-size: 14px; }
 .canvas > footer { left: 64px; bottom: 40px; font-family: var(--mono); font-size: 15px; color: var(--muted); }
 </style></head><body>
 <div class="canvas">
@@ -16,6 +18,6 @@ p.sub { margin-top: 22px; font-size: 20px; line-height: 1.5; color: var(--muted)
     <p class="sub">Spring Boot starter whose endpoints are also MCP tools — same permissions, same audit trail.</p>
     <div class="chips"><span class="chip"><b>Spring Boot</b> 4.1</span><span class="chip"><b>Java</b> 21</span><span class="chip"><b>MCP</b> Streamable HTTP</span><span class="chip">JWT · API keys · RBAC</span></div>
   </div>
-  <div class="right"><!--include:term-mcp--><!--include:audit-card--></div>
+  <div class="peek"><img class="beaver" src="../lazyrest-beaver.svg" alt=""><!--include:term-mcp--></div>
   <footer>github.com/melonlee/LazyREST</footer>
 </div></body></html>

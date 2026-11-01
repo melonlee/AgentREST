@@ -1,20 +1,17 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css">
 <style>
 .canvas { width: 1080px; height: 1440px; padding: 72px 76px; }
-.canvas::after { width: 1200px; height: 1200px; right: -520px; top: -560px; }
+.canvas::after { width: 1200px; height: 1200px; right: -520px; top: -420px; }
 .top { display: flex; justify-content: space-between; align-items: center; }
-.top img { height: 52px; }
+.top img { height: 56px; }
 .top span { font-size: 22px; color: var(--muted); letter-spacing: .08em; }
-h1 { margin-top: 96px; font-size: 92px; line-height: 1.16; font-weight: 800; letter-spacing: -.01em; }
-p.sub { margin-top: 34px; font-size: 30px; line-height: 1.6; color: #C4D0CA; }
+h1 { margin-top: 84px; font-size: 76px; line-height: 1.2; font-weight: 800; letter-spacing: -.01em; }
+p.sub { margin-top: 30px; font-size: 29px; line-height: 1.6; color: #C4D0CA; }
 p.sub b { color: var(--paper); }
-.tiles { margin-top: 52px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.tile { border: 1px solid var(--line-2); background: rgba(17,25,22,.85); border-radius: 14px; padding: 22px 20px; min-height: 186px; }
-.tile.on { border-color: rgba(52,224,161,.6); background: rgba(52,224,161,.07); }
-.tile h4 { font-size: 30px; font-weight: 700; margin-bottom: 14px; }
-.tile.on h4 { color: var(--mint); }
-.tile p { font-family: var(--mono); font-size: 15.5px; line-height: 1.6; color: var(--muted); }
-.term { margin-top: 56px; }
+.peek { position: absolute; left: 76px; right: 76px; bottom: 236px; }
+.peek > .beaver { right: 30px; width: 420px; }
+.peek > .tag-note { position: absolute; bottom: calc(100% + 34px); left: 0; font-family: var(--mono); font-size: 20px; line-height: 1.8; color: var(--muted); }
+.peek > .tag-note b { color: var(--mint); font-weight: 500; }
 .term pre { font-size: 19px; line-height: 1.75; padding: 22px 26px 26px; }
 .term .card-head { font-size: 15px; }
 .canvas > footer { left: 76px; right: 76px; bottom: 64px; display: flex; justify-content: space-between; align-items: flex-end; }
@@ -25,15 +22,13 @@ p.sub b { color: var(--paper); }
 </style></head><body>
 <div class="canvas">
   <div class="top"><img src="../lazyrest-logo-dark.svg"><span>Spring Boot · 开源脚手架</span></div>
-  <h1>你的业务 API<br><span class="mint">让 AI Agent 安全调用</span></h1>
+  <h1>你负责偷懒，<br><span class="mint">河狸负责把接口接给 AI。</span></h1>
   <p class="sub">一个<b>诚实的、生产级形态</b>的 Spring Boot REST 脚手架：<br>接口同时是 <b>MCP 工具</b>，同样的权限，同样的审计。</p>
-  <div class="tiles">
-    <div class="tile"><h4>认证</h4><p>JWT 访问令牌<br>刷新令牌轮换<br>个人 API Key</p></div>
-    <div class="tile"><h4>权限</h4><p>RBAC<br>@PreAuthorize<br>所有权校验</p></div>
-    <div class="tile on"><h4>MCP</h4><p>/mcp 端点<br>写工具三重门控<br>Agent 只能存草稿</p></div>
-    <div class="tile"><h4>审计</h4><p>REST + MCP<br>同一条审计链<br>谁 · 做了什么</p></div>
+  <div class="peek">
+    <div class="tag-note">认证 · RBAC · 所有权校验<br><b>REST + MCP 同一条审计链</b><br>Agent 写操作三重门控</div>
+    <img class="beaver" src="../lazyrest-beaver.svg" alt="">
+    <!--include:term-mcp-->
   </div>
-  <!--include:term-mcp-->
   <footer>
     <div class="chips"><span class="chip">Spring Boot 4.1</span><span class="chip">Java 21</span><span class="chip">Spring AI MCP</span><span class="chip">H2 零配置启动</span><span class="chip">MySQL / PostgreSQL</span><span class="chip">68 个测试</span></div>
     <div class="r">Apache-2.0 开源<br><b>github.com/melonlee/LazyREST</b></div>
