@@ -1,340 +1,387 @@
-# LazyREST 🚀
+<!-- banner -->
 
-> 一个功能完善的 Spring Boot REST API 脚手架，集成了现代化的最佳实践和丰富的功能特性。
+# LazyREST
 
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7.x-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Java](https://img.shields.io/badge/Java-8+-orange.svg)](https://www.oracle.com/java/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+> 一个**诚实的、生产级形态**的 Spring Boot REST 脚手架 —— 你的业务接口，同时也是 AI Agent 可以安全调用的 **MCP 工具**。
 
-## ✨ 特性
+[![CI](https://github.com/melonlee/LazyREST/actions/workflows/ci.yml/badge.svg)](https://github.com/melonlee/LazyREST/actions/workflows/ci.yml)
+![Java 21](https://img.shields.io/badge/Java-21-orange)
+![Spring Boot 4.1](https://img.shields.io/badge/Spring%20Boot-4.1-brightgreen)
+![Spring AI 2.0 MCP](https://img.shields.io/badge/Spring%20AI-2.0%20MCP-blue)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-### 🏗️ 现代化技术栈
-- **Spring Boot 2.7.x** - 基于 Java 8 的企业级框架
-- **Spring Data JPA** - 数据持久化解决方案
-- **Spring Security** - JWT 认证授权
-- **Spring Cache** - Redis 缓存支持
-- **Spring Actuator** - 应用监控
-- **Spring AOP** - 面向切面编程
+简体中文 | [English](README.en.md)
 
-### 🔐 安全框架
-- **JWT 认证** - 无状态 Token 认证机制
-- **RBAC 权限模型** - 角色基础访问控制
-- **密码加密** - BCrypt + 盐值加密
-- **接口保护** - 方法级别的安全控制
-- **CORS 配置** - 跨域资源共享
-- **XSS 防护** - 跨站脚本攻击防护
-- **SQL 注入防护** - 数据库安全保护
+LazyREST v2 有两个支柱：
 
-### 🗄️ 数据库支持
-- **MySQL 8.0+** - 主流关系型数据库
-- **Druid 连接池** - 阿里巴巴高性能数据库连接池
-- **自动建表** - 基于 JPA 的数据库迁移
-- **性能优化** - 针对高并发场景的配置优化
-- **审计日志** - 数据变更追踪
+1. **小而真实的生产级 REST 基线** —— 一条命令跑起来，所有功能都有测试覆盖，README 里写的每一项都真的实现了。
+2. **AI-ready** —— 选定的 Service 方法通过 Spring AI 的 MCP Server 暴露为 **MCP 工具**（Model Context Protocol），Claude Code / Claude Desktop / Cursor 等 Agent 可以直接调用你的业务 API；权限、所有权校验、参数校验、审计与 REST 完全共用同一套规则。
 
-### ⚡ 缓存系统
-- **Redis 集成** - 分布式缓存解决方案
-- **灵活配置** - 多种缓存策略
-- **缓存抽象** - 统一的缓存接口
-- **缓存管理** - 缓存监控和管理端点
-
-### 📚 API 文档
-- **OpenAPI 3.0** - 标准化 API 文档
-- **Swagger UI** - 交互式 API 测试界面
-- **详细示例** - 完整的请求响应示例
-- **版本控制** - API 版本管理支持
-
-### 📊 审计日志
-- **操作审计** - 基于 AOP 的操作记录
-- **全面日志** - SLF4J 统一日志框架
-- **性能监控** - 接口响应时间统计
-- **用户行为** - 用户操作轨迹追踪
-- **访问日志** - API 访问记录
-
-### 🛠️ 工具类库
-- **日期时间** - 基于 Java 8 Time API
-- **字符串处理** - 丰富的字符串操作工具
-- **加密工具** - AES、RSA、MD5、SHA256 等
-- **验证工具** - 正则表达式验证器
-- **文件处理** - 文件上传下载工具
-- **JSON 处理** - JSON 序列化反序列化
-
-## 📋 环境要求
-
-- ☕ **JDK 1.8+**
-- 🔧 **Maven 3.6+**
-- 🐬 **MySQL 8.0+**
-- 🔴 **Redis 6.0+**
-- 📦 **Git**
-
-## 🚀 快速开始
-
-### 1️⃣ 克隆项目
-```bash
-git clone https://github.com/yourusername/LazyREST.git
-cd LazyREST
-```
-
-### 2️⃣ 配置数据库
-在 `application.yml` 中配置数据库连接：
-```yaml
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/lazy_rest?useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: your_username
-    password: your_password
-```
-
-### 3️⃣ 配置 Redis
-在 `application.yml` 中配置 Redis：
-```yaml
-spring:
-  redis:
-    host: localhost
-    port: 6379
-    database: 0
-```
-
-### 4️⃣ 配置 JWT 密钥
-在 `application.yml` 中配置 JWT：
-```yaml
-jwt:
-  secret: your-secret-key-here-must-be-at-least-256-bits
-  expiration: 86400
-```
-
-### 5️⃣ 构建项目
-```bash
-mvn clean package
-```
-
-### 6️⃣ 运行应用
-```bash
-java -jar target/lazy-rest-1.0.0.jar
-```
-
-### 7️⃣ 访问 Swagger UI
-```
-http://localhost:8080/api/swagger-ui.html
-```
-
-## 🏗️ 项目架构
-
-<div align="center">
-  <img src="architecture.svg" alt="LazyREST 项目架构图" width="800"/>
-</div>
-
-## 📁 项目结构
-
-```
-src/main/java/com/lazy/rest/
-├── 📂 common/                   # 通用组件
-│   ├── 📂 audit/               # 审计框架
-│   │   ├── 📄 AuditLog.java    # 审计日志实体
-│   │   ├── 📄 Auditable.java   # 审计注解
-│   │   └── 📄 AuditAspect.java # 审计切面
-│   ├── 📂 exception/           # 全局异常处理
-│   ├── 📂 response/            # 统一响应处理
-│   └── 📂 util/                # 通用工具类
-│       ├── 📄 DateUtils.java   # 日期时间工具
-│       ├── 📄 StringUtils.java # 字符串工具
-│       ├── 📄 EncryptUtils.java# 加密工具
-│       └── 📄 ValidatorUtils.java# 验证工具
-├── 📂 config/                  # 配置类
-│   ├── 📄 SecurityConfig.java  # 安全配置
-│   └── 📄 OpenApiConfig.java   # Swagger 配置
-├── 📂 security/                # 安全框架
-│   ├── 📂 jwt/                 # JWT 实现
-│   ├── 📂 model/               # 安全领域模型
-│   └── 📂 service/             # 安全服务
-└── 📄 LazyRestApplication.java
-```
-
-## 🔧 API 使用
-
-### 🔐 用户认证
-
-#### 注册新用户
-```http
-POST /api/auth/register
-Content-Type: application/json
-
-{
-  "username": "user123",
-  "password": "Password123",
-  "email": "user@example.com"
-}
-```
-
-#### 用户登录获取 Token
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "username": "user123",
-  "password": "Password123"
-}
-```
-
-#### 使用 Token 访问受保护资源
-```http
-GET /api/secure/resource
-Authorization: Bearer your_token_here
-```
-
-### 👥 权限控制
-
-基于角色的访问控制包含以下角色：
-- **ADMIN** 🔑 - 管理员，拥有所有权限
-- **USER** 👤 - 普通用户，访问用户相关接口
-- **GUEST** 👻 - 访客，仅能访问公开接口
-
-接口权限控制示例：
-```java
-@PreAuthorize("hasRole('ADMIN')")
-@GetMapping("/admin/users")
-public List<User> getAllUsers() {
-    // 仅管理员可访问
-}
-
-@PreAuthorize("hasRole('USER')")
-@GetMapping("/user/profile")
-public User getProfile() {
-    // 用户可访问
-}
-```
-
-## 🛠️ 工具类使用
-
-### 📅 日期工具
-```java
-// 格式化日期
-String dateStr = DateUtils.formatDateTime(new Date());
-
-// 解析日期
-Date date = DateUtils.parseDateTime("2023-10-01 12:00:00");
-
-// 日期计算
-Date futureDate = DateUtils.addDays(new Date(), 7);
-```
-
-### 📝 字符串工具
-```java
-// 生成随机字符串
-String random = StringUtils.randomString(10);
-
-// 脱敏处理
-String maskedEmail = StringUtils.maskEmail("user@example.com"); // u***@example.com
-```
-
-### 🔒 加密工具
-```java
-// 生成盐值
-String salt = EncryptUtils.generateSalt();
-
-// 密码加密
-String encrypted = EncryptUtils.encryptPassword("password123", salt);
-```
-
-## 📊 审计日志
-
-使用 `@Auditable` 注解记录操作：
-```java
-@Auditable(operation = "创建用户")
-@PostMapping("/users")
-public User createUser(@RequestBody User user) {
-    // 方法实现
-}
-```
-
-## 💡 最佳实践
-
-### 🔐 安全建议
-- ✅ 始终验证输入数据
-- ✅ 生产环境使用 HTTPS
-- ✅ 实施接口限流
-- ✅ 定期更新安全补丁
-
-### ⚡ 性能优化
-- ✅ 合理使用缓存
-- ✅ 优化数据库查询
-- ✅ 实现分页查询
-- ✅ 监控应用指标
-
-### 👨‍💻 开发规范
-- ✅ 遵循编码规范
-- ✅ 编写单元测试
-- ✅ 完善代码注释
-- ✅ 使用有意义的提交信息
-
-## ⚙️ 配置说明
-
-关键配置项及其说明：
-
-```yaml
-server:
-  port: 8080                 # 服务器端口
-  servlet:
-    context-path: /api       # API 基础路径
-
-spring:
-  datasource:
-    # 数据库配置
-  jpa:
-    # JPA/Hibernate 配置
-  redis:
-    # Redis 配置
-
-jwt:
-  secret: your-secret        # JWT 签名密钥
-  expiration: 86400          # Token 过期时间（秒）
-
-springdoc:
-  # Swagger/OpenAPI 配置
-```
-
-## 🤝 贡献指南
-
-1. 🍴 Fork 本仓库
-2. 🌟 创建特性分支 (`git checkout -b feature/amazing-feature`)
-3. 📝 提交更改 (`git commit -m 'Add amazing feature'`)
-4. 🚀 推送到分支 (`git push origin feature/amazing-feature`)
-5. 🔄 创建 Pull Request
-
-## 🐛 常见问题
-
-### 数据库连接问题
-- ✅ 确认 MySQL 服务正在运行
-- ✅ 检查连接凭据
-- ✅ 确保数据库存在
-
-### Redis 连接问题
-- ✅ 确认 Redis 服务正在运行
-- ✅ 检查 Redis 连接设置
-- ✅ 确保 Redis 配置正确
-
-### JWT 相关问题
-- ✅ 验证密钥配置
-- ✅ 检查 Token 过期设置
-- ✅ 确保正确使用 Token
-
-## 📄 许可证
-
-本项目基于 Apache License 2.0 许可证开源 - 查看 [LICENSE](LICENSE) 文件了解详情。
-
-## 🙏 致谢
-
-- Spring Boot 和 Spring Framework 团队
-- OpenAPI/Swagger 团队
-- 所有为本项目做出贡献的开发者
+<!-- banner: screenshot of Claude Code calling a LazyREST MCP tool -->
 
 ---
 
-⭐ 如果这个项目对你有帮助，请给个 Star 支持一下！
+## 目录
 
-💬 有问题或建议？欢迎提交 Issue 或 Pull Request！
+- [功能清单](#功能清单)
+- [1 分钟快速开始](#1-分钟快速开始)
+- [用 curl 走一遍](#用-curl-走一遍)
+- [让 AI Agent 调用你的接口（MCP）](#让-ai-agent-调用你的接口mcp)
+- [Docker Compose（MySQL）](#docker-composemysql)
+- [项目结构](#项目结构)
+- [配置与环境变量](#配置与环境变量)
+- [安全说明](#安全说明)
+- [测试](#测试)
+- [作为模板使用](#作为模板使用)
+- [路线图](#路线图)
 
+---
 
+## 功能清单
 
+以下每一项都已实现，并有自动化测试覆盖。
+
+| 模块 | 内容 |
+|---|---|
+| **auth** | 用户名密码登录（BCrypt）、JWT 访问令牌（HS256，15 分钟）、**不透明刷新令牌**（哈希存储、每次使用即轮换、重用检测会吊销整组令牌）、登出、可开关的自助注册、`/api/auth/me`；登录/刷新/注册按 IP **限流**（429 + `Retry-After`） |
+| **API Key** | 个人 API Key（`lr_` 前缀，只存 SHA-256，明文只显示一次，可吊销，可设为**只读**），专供 MCP 客户端使用 |
+| **user** | RBAC：角色（`ROLE_ADMIN` / `ROLE_EDITOR` / `ROLE_USER`）+ 细粒度权限（`article:write`、`audit:read`、`mcp:write` …），`@PreAuthorize` 方法级安全，管理员用户管理接口，首个管理员通过环境变量引导创建 |
+| **article**（示例领域） | CRUD、Jakarta Validation、分页 + 排序（白名单）、搜索（安全转义的 LIKE）、状态/作者过滤、**所有权校验**（草稿对他人返回 404，修改他人文章 403）、乐观锁、发布流程 |
+| **audit** | `@Audited` AOP 审计：谁 / 做了什么 / 资源 / 何时 / 结果（SUCCESS / DENIED / FAILURE）/ 渠道（REST / MCP）/ requestId / IP / 耗时，独立事务持久化，管理员可按条件查询 |
+| **common** | RFC 9457 `application/problem+json` 错误响应（含 `code`、`requestId`、字段级 `errors`）、`X-Request-Id` 请求追踪（日志 MDC）、统一分页 DTO |
+| **mcp** | Streamable HTTP MCP 端点 `/mcp`：`searchArticles`、`getArticle`、`createArticleDraft`；必须认证（API Key 或 JWT）；写工具三重门控；**每次工具调用都审计** |
+| **持久化** | Spring Data JPA + **Flyway** 迁移（无 `ddl-auto`，Hibernate 只校验）；dev = H2 内存库 + 演示数据；prod = MySQL 8（PostgreSQL 同样可用） |
+| **运维** | springdoc OpenAPI 3 + Swagger UI（带 JWT Authorize 按钮）、Actuator（仅 health 公开，其余需 ADMIN）、Prometheus 指标、优雅停机、虚拟线程 |
+| **交付** | Maven Wrapper、多阶段 Dockerfile（分层 jar、非 root）、docker-compose（app + MySQL）、GitHub Actions CI（含 Testcontainers MySQL/PostgreSQL） |
+
+**v2 刻意不包含**（不写就不吹）：缓存 / Redis、文件上传、XSS 过滤器、API 版本管理、多租户、OAuth2 授权服务器、MFA。需要时再加 —— 见[路线图](#路线图)。
+
+---
+
+## 1 分钟快速开始
+
+只需要 **JDK 21**（不需要数据库、Redis 或 Docker）：
+
+```bash
+git clone https://github.com/melonlee/LazyREST.git
+cd LazyREST
+./mvnw spring-boot:run
+```
+
+- Swagger UI：<http://localhost:8080/swagger-ui.html>（先调用 `POST /api/auth/login`，再点 **Authorize** 粘贴 `accessToken`）
+- 健康检查：<http://localhost:8080/actuator/health>
+- MCP 端点：`http://localhost:8080/mcp`
+
+dev 环境自动创建的演示账号（**仅 dev profile**，prod 不会创建）：
+
+| 用户名 / 密码 | 角色 | 能做什么 |
+|---|---|---|
+| `admin` / `admin123` | ROLE_ADMIN | 全部权限：用户管理、审计查询、Actuator |
+| `editor` / `editor123` | ROLE_EDITOR | 写 + 发布文章，可用 MCP 写工具 |
+| `alice` / `alice123` | ROLE_USER | 读文章、写自己的草稿 |
+| `bob` / `bob123456` | ROLE_USER | 同上 |
+
+演示 API Key（绑定 `editor`，可读写）：`lr_dev_editor_0123456789abcdefghijklmnop`
+
+<!-- banner: Swagger UI screenshot -->
+
+---
+
+## 用 curl 走一遍
+
+下面的命令在本地实测通过（需要 `jq`）：
+
+```bash
+# 1. 登录拿令牌
+TOKEN=$(curl -s -X POST localhost:8080/api/auth/login -H 'Content-Type: application/json' \
+  -d '{"username":"alice","password":"alice123"}' | jq -r .accessToken)
+
+# 2. 创建草稿（201 + Location）
+curl -s -X POST localhost:8080/api/articles -H "Authorization: Bearer $TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"title":"Hello LazyREST","summary":"My first draft","content":"Written with curl"}' | jq -c .
+# {"id":8,"title":"Hello LazyREST",...,"status":"DRAFT","author":"alice",...,"version":0}
+
+# 3. 搜索 + 分页 + 排序
+curl -s "localhost:8080/api/articles?q=hello&size=5&sort=createdAt,desc" \
+  -H "Authorization: Bearer $TOKEN" | jq -c '{totalElements, titles: [.content[].title]}'
+# {"totalElements":1,"titles":["Hello LazyREST"]}
+
+# 4. 更新（乐观锁 version +1）
+curl -s -X PUT localhost:8080/api/articles/8 -H "Authorization: Bearer $TOKEN" \
+  -H 'Content-Type: application/json' -d '{"title":"Hello LazyREST v2","content":"Edited"}' | jq -c '{id,title,version}'
+# {"id":8,"title":"Hello LazyREST v2","version":1}
+
+# 5. 校验失败 -> RFC 9457 ProblemDetail
+curl -s -X POST localhost:8080/api/articles -H "Authorization: Bearer $TOKEN" \
+  -H 'Content-Type: application/json' -d '{"title":""}' | jq .
+```
+
+```json
+{
+  "detail": "Request validation failed",
+  "instance": "/api/articles",
+  "status": 400,
+  "title": "Validation failed",
+  "code": "VALIDATION_FAILED",
+  "requestId": "978da650-5f5f-4404-b2d8-1e7e59184f93",
+  "timestamp": "2026-11-01T06:58:11.749072Z",
+  "errors": [
+    { "field": "content", "message": "must not be blank" },
+    { "field": "title", "message": "must not be blank" }
+  ]
+}
+```
+
+```bash
+# 6. 没有发布权限 -> 403（同样会被审计为 DENIED）
+curl -s -X POST localhost:8080/api/articles/8/publish -H "Authorization: Bearer $TOKEN" | jq -c '{status,code,detail}'
+# {"status":403,"code":"FORBIDDEN","detail":"You do not have permission to perform this action"}
+
+# 7. 管理员查看审计日志
+ADMIN=$(curl -s -X POST localhost:8080/api/auth/login -H 'Content-Type: application/json' \
+  -d '{"username":"admin","password":"admin123"}' | jq -r .accessToken)
+curl -s "localhost:8080/api/audit-logs?actor=alice&size=5" -H "Authorization: Bearer $ADMIN" \
+  | jq -c '.content[] | {actor, action, resourceId, channel, outcome}'
+# {"actor":"alice","action":"ARTICLE_PUBLISH","resourceId":"8","channel":"REST","outcome":"DENIED"}
+# {"actor":"alice","action":"ARTICLE_UPDATE","resourceId":"8","channel":"REST","outcome":"SUCCESS"}
+# {"actor":"alice","action":"ARTICLE_CREATE","resourceId":"8","channel":"REST","outcome":"SUCCESS"}
+# ...
+```
+
+错误语言默认英文，可通过 `Accept-Language: zh-CN` 获取中文校验信息。
+
+---
+
+## 让 AI Agent 调用你的接口（MCP）
+
+2026 年，团队越来越需要把**已有的业务 API** 开放给 AI Agent。LazyREST 的做法是：Agent 不直连数据库，也不绕过业务规则，而是通过 MCP 调用**同一个 Service 层** —— 和 REST 共享权限、所有权、校验与审计。
+
+<!-- banner: architecture diagram (REST client + AI agent -> Spring Security -> Service layer -> DB, audit) -->
+
+### 暴露的工具
+
+| 工具 | 类型 | 说明 |
+|---|---|---|
+| `searchArticles` | 只读 | 按关键字 / 状态搜索文章（已发布 + 自己的草稿），分页 |
+| `getArticle` | 只读 | 按 id 读取全文；看不到的草稿返回 “not found” |
+| `createArticleDraft` | 写 | 以调用者身份创建**草稿**；发布永远需要人工（仅 REST） |
+
+工具带有 JSON Schema 与 MCP 提示（`readOnlyHint`、`destructiveHint` …），描述专为模型编写。
+
+### 安全模型
+
+- `/mcp` 必须认证：`X-API-Key: lr_…`（或 `Authorization: Bearer lr_…`），也接受普通 JWT。未认证返回 401 ProblemDetail。
+- Agent 的权限 = API Key 主人的权限；**只读 Key** 只保留 `*:read` 权限。
+- 写工具三重门控：`lazyrest.mcp.write-tools-enabled`（prod 默认关闭，关闭时工具根本不会出现在 `tools/list`）→ `mcp:write` 权限 → Service 层 `article:write`。
+- 每次工具调用记录一条 `MCP_TOOL_CALL` 审计（含参数摘要、结果、耗时），内部业务操作也会以 `channel=MCP` 记录。
+- 工具错误以 `isError: true` + 一句可读的话返回给模型（不含堆栈、不泄露内部信息）。
+
+创建你自己的 API Key（推荐只读）：
+
+```bash
+curl -s -X POST localhost:8080/api/api-keys -H "Authorization: Bearer $TOKEN" \
+  -H 'Content-Type: application/json' -d '{"name":"claude-code on my laptop","readOnly":true}' | jq .
+# 返回中的 apiKey 只显示这一次
+```
+
+### Claude Code
+
+```bash
+claude mcp add --transport http lazyrest http://localhost:8080/mcp \
+  --header "X-API-Key: lr_dev_editor_0123456789abcdefghijklmnop"
+```
+
+或者提交到项目的 `.mcp.json`（Key 从环境变量读取，不进仓库）：
+
+```json
+{
+  "mcpServers": {
+    "lazyrest": {
+      "type": "http",
+      "url": "http://localhost:8080/mcp",
+      "headers": {
+        "X-API-Key": "${LAZYREST_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+```bash
+export LAZYREST_API_KEY=lr_dev_editor_0123456789abcdefghijklmnop
+claude mcp list   # lazyrest: http://localhost:8080/mcp (HTTP) - ✓ Connected
+```
+
+### Claude Desktop
+
+Claude Desktop 的配置文件只支持本地（stdio）服务器，用 [`mcp-remote`](https://github.com/geelen/mcp-remote) 桥接（需要 Node.js）。编辑 `claude_desktop_config.json`：
+
+```json
+{
+  "mcpServers": {
+    "lazyrest": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "http://localhost:8080/mcp", "--header", "X-API-Key:${LAZYREST_API_KEY}"],
+      "env": {
+        "LAZYREST_API_KEY": "lr_dev_editor_0123456789abcdefghijklmnop"
+      }
+    }
+  }
+}
+```
+
+其他支持 Streamable HTTP 的客户端（Cursor 等）：URL 填 `http://localhost:8080/mcp`，请求头加 `X-API-Key`，具体格式见各客户端文档。
+
+### 用 MCP Inspector 调试
+
+```bash
+npx -y @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transport http \
+  --header "X-API-Key: lr_dev_editor_0123456789abcdefghijklmnop" --method tools/list
+
+npx -y @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transport http \
+  --header "X-API-Key: lr_dev_editor_0123456789abcdefghijklmnop" \
+  --method tools/call --tool-name searchArticles --tool-arg query=mcp
+```
+
+### 可以这样问 Agent
+
+- “用 lazyrest 搜索和 MCP 相关的文章，总结要点。”
+- “读一下第 2 篇文章，帮我改写成面向初学者的版本，用 createArticleDraft 存成草稿。”
+- “列出我所有的草稿，告诉我哪些还缺摘要。”
+
+然后在审计日志里能看到 Agent 做的每一件事：`GET /api/audit-logs?channel=MCP`。
+
+### 暴露你自己的工具
+
+在任意 Spring Bean 上写一个 `@McpTool` 方法，调用你的 Service，并交给 `McpToolExecutor`（负责身份绑定、权限、审计和错误翻译）：
+
+```java
+@McpTool(name = "getOrder", description = "Get one order by id, including its items and status.",
+        annotations = @McpTool.McpAnnotations(readOnlyHint = true, destructiveHint = false))
+public CallToolResult getOrder(McpTransportContext ctx,
+        @McpToolParam(description = "Order id") long id) {
+    return executor.call("getOrder", ctx, Map.of("id", id), null, () -> orderService.get(id));
+}
+```
+
+---
+
+## Docker Compose（MySQL）
+
+```bash
+cp .env.example .env      # 填入 JWT_SECRET（openssl rand -base64 48）、数据库密码、管理员密码
+docker compose up --build
+```
+
+app 使用 `prod` profile 连接 MySQL 8.4，Flyway 自动建表，首次启动按 `LAZYREST_ADMIN_*` 创建管理员。缺少任何必需的环境变量时，compose 和应用都会**直接拒绝启动**并指出缺了什么。
+
+使用 PostgreSQL：把 `DB_URL` 换成 `jdbc:postgresql://host:5432/lazyrest` 即可（Flyway 自动选择 `db/migration/postgresql`）。
+
+---
+
+## 项目结构
+
+```
+src/main/java/com/lazy/rest/
+├── LazyRestApplication.java
+├── auth/            登录 / 刷新 / 登出 / 注册 / me、JWT、限流、SecurityConfig
+│   └── apikey/      API Key 实体、服务、过滤器、接口
+├── user/            User / Role / Permission、用户管理、首个管理员引导
+├── article/         示例领域模块（可整体删除）
+├── audit/           @Audited、切面、审计日志实体与查询接口
+├── mcp/             MCP 工具、McpToolExecutor、传输层配置
+├── common/
+│   ├── api/         PageResponse、排序白名单、LIKE 转义
+│   ├── error/       ProblemDetail 异常体系与全局处理
+│   ├── security/    SecurityUtils、安全令牌工具
+│   ├── web/         RequestIdFilter
+│   └── config/      OpenAPI、prod 配置守卫
+└── dev/             DevDataSeeder（仅 dev profile）
+src/main/resources/
+├── application.yml / application-dev.yml / application-prod.yml
+└── db/migration/{mysql,postgresql}/   Flyway 脚本
+docs/decisions.md    技术选型与取舍
+```
+
+---
+
+## 配置与环境变量
+
+| 变量 | 默认值 | 说明 |
+|---|---|---|
+| `SPRING_PROFILES_ACTIVE` | `dev` | `dev`（H2 + 演示数据）或 `prod` |
+| `DB_URL` | — | **prod 必填**，如 `jdbc:mysql://db:3306/lazyrest` |
+| `DB_USERNAME` / `DB_PASSWORD` | — | **prod 必填** |
+| `DB_POOL_SIZE` | `10` | Hikari 连接池大小 |
+| `JWT_SECRET` | dev 内置的明显假值 | **prod 必填**，≥ 32 字节；dev 假值在 prod 下会被拒绝 |
+| `LAZYREST_ADMIN_USERNAME` / `_EMAIL` / `_PASSWORD` | — | 数据库没有任何用户时创建首个管理员（密码 ≥ 12 位） |
+| `MCP_WRITE_TOOLS_ENABLED` | dev `true` / prod `false` | 是否注册 MCP 写工具 |
+| `REGISTRATION_ENABLED` | dev `true` / prod `false` | 是否开放自助注册 |
+| `API_DOCS_ENABLED` | prod `false` | prod 下是否开放 Swagger UI / OpenAPI |
+| `CORS_ALLOWED_ORIGINS` | 空（关闭） | 逗号分隔的允许来源 |
+| `FORWARD_HEADERS_STRATEGY` | `none` | 部署在反向代理后设为 `native` 或 `framework`，否则限流和审计看到的是代理 IP |
+
+其他可调属性（`application.yml`）：`lazyrest.security.jwt.access-token-ttl`（15m）、`refresh-token-ttl`（14d）、`lazyrest.auth.login-rate-limit.max-attempts`（10）/ `window`（1m）。
+
+---
+
+## 安全说明
+
+- **仓库里没有任何密钥**。dev 的 JWT 密钥以 `dev-only-` 开头，和 `prod` profile 一起使用会被拒绝启动。
+- 密码使用 BCrypt（`DelegatingPasswordEncoder`，可平滑升级算法）。登录失败对“用户不存在”和“密码错误”返回相同信息。
+- 访问令牌 15 分钟有效，权限写在令牌里：角色变更最晚在下一次刷新时生效；禁用用户立即无法登录和刷新。
+- 刷新令牌与 API Key 都是 256 位随机值，只存 SHA-256；API Key 只在 `/mcp` 上被接受。
+- 限流是**单实例内存**实现：多副本时每个实例单独计数。
+- CSRF 关闭：API 完全无状态，只用 Bearer 令牌，不使用 Cookie。CORS 默认关闭。
+- 错误响应永不包含堆栈或内部信息；500 只返回 `requestId`，用于对照日志。
+- Actuator 只公开 `health`，其余端点需要 ADMIN。
+- **MCP 注意事项**：注册一个工具就等于把它开放出去；Agent 读到的数据会进入模型上下文；用户写入的内容可能包含针对 Agent 的提示注入 —— 因此 Agent 只能创建草稿，发布必须由人完成。
+- 未覆盖：MFA、账户锁定（只有限流）、MCP 的 OAuth 授权、TLS（请在反向代理终止）。
+
+---
+
+## 测试
+
+```bash
+./mvnw verify                      # 68 个测试，H2，不需要 Docker
+./mvnw -Ptestcontainers test       # MySQL 8.4 + PostgreSQL 17（Testcontainers，需要 Docker）
+```
+
+覆盖：单元测试（限流、JWT 配置快速失败、prod 配置守卫、查询工具）、`@WebMvcTest`（绑定、校验、ProblemDetail）、`@DataJpaTest`（Flyway 迁移 + Hibernate 校验 + 查询）、全栈 `@SpringBootTest`（登录/刷新轮换/重用检测、RBAC、所有权、分页排序、审计、限流）、MCP（用官方 MCP Java SDK 客户端走 `initialize` → `tools/list` → `tools/call`，覆盖认证、只读 Key、权限拒绝、审计）。CI 中还会以 `prod` profile 在真实 MySQL / PostgreSQL 上跑通全流程。
+
+---
+
+## 作为模板使用
+
+1. **改坐标**：修改 `pom.xml` 的 `groupId` / `artifactId` / `name`。
+2. **改包名**：用 IDE 把 `com.lazy.rest` 重命名为你的包（或 `git mv` 目录后全局替换 `com.lazy.rest`）。
+3. **删除示例模块**：
+   - 删除 `article/` 包、`mcp/ArticleMcpTools.java`、`mcp/ArticleWriteMcpTools.java`；
+   - 在尚未上线前直接从 `V1__schema.sql` 删掉 `articles` 表（已上线则新增迁移 `DROP TABLE`）；
+   - 删除 `DevDataSeeder` 中的文章数据，以及 `ArticleApiTests`、`ArticleControllerWebMvcTest`、MCP 测试中与文章相关的部分。
+4. **加你的领域**：`Entity + Repository + Service（@PreAuthorize / @Audited / @Validated）+ Controller`，需要给 Agent 用时再加一个 `@McpTool` 适配器。
+5. 新权限加到 `V2__reference_data.sql`（或新的迁移脚本）里。
+
+---
+
+## 路线图
+
+- [ ] MCP 的 OAuth 2.1 授权（RFC 9728 元数据 + 授权服务器），让远程客户端无需静态 Key
+- [ ] 更多 MCP 示例：Resources 与 Prompts
+- [ ] 可选的 Redis：分布式限流与缓存
+- [ ] Stateless MCP 模式，便于水平扩展
+- [ ] OpenTelemetry 链路追踪
+- [ ] 项目生成器（替换包名 / 去掉示例模块一步完成）
+
+## 从 v1 升级
+
+v2 是重写，不兼容 v1：Java 21、Spring Boot 4.1、Flyway 管理表结构、API 前缀从 context-path `/api` 改为控制器路径 `/api/...`。详见 [CHANGELOG](CHANGELOG.md)。v1 代码保留在 git 历史中。
+
+## 许可证
+
+[Apache License 2.0](LICENSE)
+
+---
+
+由 FantasyAI Lab 维护。觉得有用就点个 ⭐，欢迎提 Issue / PR。
