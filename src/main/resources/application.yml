@@ -1,11 +1,11 @@
 # ---------------------------------------------------------------------------
-# LazyREST - shared configuration (all profiles)
+# AgentREST - shared configuration (all profiles)
 # Profile-specific files: application-dev.yml (default), application-prod.yml
 # No secrets live in this repository. See README "Configuration".
 # ---------------------------------------------------------------------------
 spring:
   application:
-    name: lazy-rest
+    name: agentrest
   profiles:
     # `./mvnw spring-boot:run` works with zero setup (H2 in-memory + demo data)
     default: dev
@@ -35,12 +35,12 @@ spring:
   ai:
     mcp:
       server:
-        name: lazyrest
+        name: agentrest
         version: '@project.version@'
         type: SYNC
         protocol: STREAMABLE
         instructions: >-
-          LazyREST exposes a small article/knowledge-base API. Use searchArticles to find
+          AgentREST exposes a small article/knowledge-base API. Use searchArticles to find
           articles, getArticle to read one in full, and createArticleDraft to propose a new
           draft (drafts are never published automatically; a human publishes them).
         capabilities:
@@ -56,12 +56,12 @@ server:
     include-stacktrace: never
     include-message: never
 
-lazyrest:
+agentrest:
   security:
     jwt:
       # REQUIRED outside dev: at least 32 bytes. Set via env JWT_SECRET.
       secret: ${JWT_SECRET:}
-      issuer: lazyrest
+      issuer: agentrest
       access-token-ttl: 15m
       refresh-token-ttl: 14d
     cors:
@@ -75,10 +75,11 @@ lazyrest:
       max-attempts: 10
       window: 1m
     # Optional: create the first admin on an empty database (prod bootstrap).
+    # AGENTREST_ADMIN_* (the pre-2.1 LAZYREST_ADMIN_* names still work as a fallback).
     bootstrap-admin:
-      username: ${LAZYREST_ADMIN_USERNAME:}
-      email: ${LAZYREST_ADMIN_EMAIL:}
-      password: ${LAZYREST_ADMIN_PASSWORD:}
+      username: ${AGENTREST_ADMIN_USERNAME:${LAZYREST_ADMIN_USERNAME:}}
+      email: ${AGENTREST_ADMIN_EMAIL:${LAZYREST_ADMIN_EMAIL:}}
+      password: ${AGENTREST_ADMIN_PASSWORD:${LAZYREST_ADMIN_PASSWORD:}}
   mcp:
     # Write tools (createArticleDraft) are only registered when this is true.
     # Even then, the caller needs the `mcp:write` permission and a non read-only API key.

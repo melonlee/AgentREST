@@ -10,12 +10,12 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.lazy.rest</groupId>
-    <artifactId>lazy-rest</artifactId>
-    <version>2.0.0</version>
-    <name>LazyREST</name>
-    <description>An honest, production-shaped Spring Boot REST starter whose endpoints are also MCP tools for AI agents</description>
-    <url>https://github.com/melonlee/LazyREST</url>
+    <groupId>com.fantasyailab</groupId>
+    <artifactId>agentrest</artifactId>
+    <version>2.1.0</version>
+    <name>AgentREST</name>
+    <description>AgentREST - Spring Boot REST + MCP starter: a production-shaped REST API whose endpoints are also secure, audited MCP tools for AI agents</description>
+    <url>https://github.com/melonlee/AgentREST</url>
 
     <licenses>
         <license>

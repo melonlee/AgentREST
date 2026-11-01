@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------
 # prod profile: MySQL 8 (or PostgreSQL) configured entirely from environment.
 # Startup fails fast when JWT_SECRET / DB_URL are missing.
-#   DB_URL       jdbc:mysql://host:3306/lazyrest   or   jdbc:postgresql://host:5432/lazyrest
+#   DB_URL       jdbc:mysql://host:3306/agentrest   or   jdbc:postgresql://host:5432/agentrest
 #   DB_USERNAME / DB_PASSWORD
 #   JWT_SECRET   >= 32 random bytes, e.g. `openssl rand -base64 48`
 # ---------------------------------------------------------------------------
@@ -20,7 +20,7 @@ server:
   shutdown: graceful
   forward-headers-strategy: ${FORWARD_HEADERS_STRATEGY:none}
 
-lazyrest:
+agentrest:
   mcp:
     write-tools-enabled: ${MCP_WRITE_TOOLS_ENABLED:false}
   auth:
