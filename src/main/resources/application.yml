@@ -1,71 +1,116 @@
-server:
-  port: 8080
-  servlet:
-    context-path: /api
-
+# ---------------------------------------------------------------------------
+# LazyREST - shared configuration (all profiles)
+# Profile-specific files: application-dev.yml (default), application-prod.yml
+# No secrets live in this repository. See README "Configuration".
+# ---------------------------------------------------------------------------
 spring:
   application:
     name: lazy-rest
-  
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/lazy_rest?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
-    username: root
-    password: root
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      initial-size: 5
-      min-idle: 5
-      max-active: 20
-      max-wait: 60000
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 300000
-      validation-query: SELECT 1
-      test-while-idle: true
-      test-on-borrow: false
-      test-on-return: false
-      pool-prepared-statements: true
-      max-pool-prepared-statement-per-connection-size: 20
-      filters: stat,wall
-      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      
+  profiles:
+    # `./mvnw spring-boot:run` works with zero setup (H2 in-memory + demo data)
+    default: dev
+  threads:
+    virtual:
+      enabled: true
+  web:
+    # Error/validation messages default to English; clients may send Accept-Language (e.g. zh-CN).
+    locale: en
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    show-sql: true
+    open-in-view: false
     hibernate:
-      ddl-auto: update
+      # Flyway owns the schema. Hibernate only validates that entities match it.
+      ddl-auto: validate
     properties:
       hibernate:
-        format_sql: true
-        
-  redis:
-    host: localhost
-    port: 6379
-    database: 0
-    timeout: 10000
-    lettuce:
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0
+        jdbc:
+          time_zone: UTC
+        type:
+          preferred_instant_jdbc_type: TIMESTAMP
+  flyway:
+    enabled: true
+  data:
+    web:
+      pageable:
+        max-page-size: 100
+  ai:
+    mcp:
+      server:
+        name: lazyrest
+        version: '@project.version@'
+        type: SYNC
+        protocol: STREAMABLE
+        instructions: >-
+          LazyREST exposes a small article/knowledge-base API. Use searchArticles to find
+          articles, getArticle to read one in full, and createArticleDraft to propose a new
+          draft (drafts are never published automatically; a human publishes them).
+        capabilities:
+          tool: true
+          resource: false
+          prompt: false
+          completion: false
+        streamable-http:
+          mcp-endpoint: /mcp
 
-jwt:
-  secret: your-secret-key-here-must-be-at-least-256-bits
-  expiration: 86400
+server:
+  error:
+    include-stacktrace: never
+    include-message: never
+
+lazyrest:
+  security:
+    jwt:
+      # REQUIRED outside dev: at least 32 bytes. Set via env JWT_SECRET.
+      secret: ${JWT_SECRET:}
+      issuer: lazyrest
+      access-token-ttl: 15m
+      refresh-token-ttl: 14d
+    cors:
+      # Comma-separated list, e.g. https://app.example.com. Empty = CORS disabled.
+      allowed-origins: ${CORS_ALLOWED_ORIGINS:}
+  auth:
+    # Public self-registration (POST /api/auth/register). Off by default.
+    registration-enabled: false
+    login-rate-limit:
+      # Max login/register/refresh attempts per client IP per window
+      max-attempts: 10
+      window: 1m
+    # Optional: create the first admin on an empty database (prod bootstrap).
+    bootstrap-admin:
+      username: ${LAZYREST_ADMIN_USERNAME:}
+      email: ${LAZYREST_ADMIN_EMAIL:}
+      password: ${LAZYREST_ADMIN_PASSWORD:}
+  mcp:
+    # Write tools (createArticleDraft) are only registered when this is true.
+    # Even then, the caller needs the `mcp:write` permission and a non read-only API key.
+    write-tools-enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+      roles: ADMIN
+      probes:
+        enabled: true
+  info:
+    java:
+      enabled: true
+    os:
+      enabled: true
 
 springdoc:
   api-docs:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
-    operationsSorter: method
-    
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,metrics
-  endpoint:
-    health:
-      show-details: always
+    persist-authorization: true
+    tags-sorter: alpha
+    operations-sorter: method
+  paths-to-match: /api/**
+
+logging:
+  pattern:
+    level: '%5p [%X{requestId:-}]'

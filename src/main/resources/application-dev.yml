@@ -1,0 +1,28 @@
+# ---------------------------------------------------------------------------
+# dev profile (default): H2 in-memory database in MySQL compatibility mode,
+# demo users / articles / API key, obviously-fake JWT secret. NEVER use in prod.
+# ---------------------------------------------------------------------------
+spring:
+  datasource:
+    url: jdbc:h2:mem:lazyrest-${random.uuid};MODE=MySQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ''
+  flyway:
+    locations: classpath:db/migration/mysql
+
+lazyrest:
+  security:
+    jwt:
+      secret: dev-only-insecure-jwt-secret-never-use-in-production-0123456789
+  auth:
+    registration-enabled: true
+  mcp:
+    write-tools-enabled: true
+  dev:
+    seed-data: true
+    # Demo API key bound to the `editor` user (read + write MCP tools).
+    api-key: lr_dev_editor_0123456789abcdefghijklmnop
+
+logging:
+  level:
+    com.lazy.rest: DEBUG

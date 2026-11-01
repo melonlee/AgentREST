@@ -1,0 +1,38 @@
+# ---------------------------------------------------------------------------
+# prod profile: MySQL 8 (or PostgreSQL) configured entirely from environment.
+# Startup fails fast when JWT_SECRET / DB_URL are missing.
+#   DB_URL       jdbc:mysql://host:3306/lazyrest   or   jdbc:postgresql://host:5432/lazyrest
+#   DB_USERNAME / DB_PASSWORD
+#   JWT_SECRET   >= 32 random bytes, e.g. `openssl rand -base64 48`
+# ---------------------------------------------------------------------------
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:10}
+  flyway:
+    # resolves to db/migration/mysql or db/migration/postgresql
+    locations: classpath:db/migration/{vendor}
+
+server:
+  shutdown: graceful
+  forward-headers-strategy: ${FORWARD_HEADERS_STRATEGY:none}
+
+lazyrest:
+  mcp:
+    write-tools-enabled: ${MCP_WRITE_TOOLS_ENABLED:false}
+  auth:
+    registration-enabled: ${REGISTRATION_ENABLED:false}
+
+springdoc:
+  # API docs / Swagger UI are off in prod unless explicitly enabled
+  api-docs:
+    enabled: ${API_DOCS_ENABLED:false}
+  swagger-ui:
+    enabled: ${API_DOCS_ENABLED:false}
+
+logging:
+  level:
+    root: INFO

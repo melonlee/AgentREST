@@ -1,5 +1,18 @@
-.idea/*
-target/*
-lazyrest.iml
+# Build
+target/
+!.mvn/wrapper/maven-wrapper.jar
 
+# IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
 
+# OS
+.DS_Store
+
+# Local env / secrets
+.env
+*.local.yml
