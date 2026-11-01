@@ -365,7 +365,7 @@ docs/decisions.md    技术选型与取舍
 ## 测试
 
 ```bash
-./mvnw verify                      # 68 个测试，H2，不需要 Docker
+./mvnw verify                      # 70 个测试，H2，不需要 Docker
 ./mvnw -Ptestcontainers test       # MySQL 8.4 + PostgreSQL 17（Testcontainers，需要 Docker）
 ```
 

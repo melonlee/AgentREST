@@ -305,7 +305,7 @@ Tunables in `application.yml`: `agentrest.security.jwt.access-token-ttl` (15m), 
 ## Testing
 
 ```bash
-./mvnw verify                      # 68 tests on H2, no Docker needed
+./mvnw verify                      # 70 tests on H2, no Docker needed
 ./mvnw -Ptestcontainers test       # MySQL 8.4 + PostgreSQL 17 via Testcontainers (Docker required)
 ```
 

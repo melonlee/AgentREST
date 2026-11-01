@@ -169,7 +169,7 @@
           <div class="tile"><h3>MCP <code>mcp</code></h3><p>Streamable HTTP 端点 <code>/mcp</code>：<code>searchArticles</code>、<code>getArticle</code>、<code>createArticleDraft</code>。带 JSON Schema 和 <code>readOnlyHint</code> 等提示，必须认证。</p></div>
           <div class="tile"><h3>错误与追踪</h3><p>RFC 9457 <code>application/problem+json</code>（含 <code>code</code>、<code>requestId</code>、字段级 <code>errors</code>），<code>X-Request-Id</code> 写入日志 MDC。</p></div>
           <div class="tile"><h3>持久化</h3><p>Spring Data JPA + Flyway 迁移（Hibernate 只校验）。dev = H2 + 演示数据；prod = MySQL 8 或 PostgreSQL，缺少密钥直接拒绝启动。</p></div>
-          <div class="tile"><h3>运维与交付</h3><p>OpenAPI 3 + Swagger UI、Actuator（仅 health 公开）、Prometheus、优雅停机、虚拟线程；多阶段 Dockerfile、docker-compose、GitHub Actions CI。68 个测试 + Testcontainers。</p></div>
+          <div class="tile"><h3>运维与交付</h3><p>OpenAPI 3 + Swagger UI、Actuator（仅 health 公开）、Prometheus、优雅停机、虚拟线程；多阶段 Dockerfile、docker-compose、GitHub Actions CI。70 个测试 + Testcontainers。</p></div>
         </div>
       </div>
     </section>

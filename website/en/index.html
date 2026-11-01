@@ -169,7 +169,7 @@
           <div class="tile"><h3>MCP <code>mcp</code></h3><p>Streamable HTTP endpoint <code>/mcp</code>: <code>searchArticles</code>, <code>getArticle</code>, <code>createArticleDraft</code>, with JSON schemas and hints like <code>readOnlyHint</code>. Authentication required.</p></div>
           <div class="tile"><h3>Errors &amp; tracing</h3><p>RFC 9457 <code>application/problem+json</code> with <code>code</code>, <code>requestId</code> and field-level <code>errors</code>; <code>X-Request-Id</code> in the log MDC.</p></div>
           <div class="tile"><h3>Persistence</h3><p>Spring Data JPA + Flyway migrations (Hibernate only validates). dev = H2 + demo data; prod = MySQL 8 or PostgreSQL, refusing to start without secrets.</p></div>
-          <div class="tile"><h3>Ops &amp; delivery</h3><p>OpenAPI 3 + Swagger UI, Actuator (only health public), Prometheus, graceful shutdown, virtual threads; multi-stage Dockerfile, docker-compose, GitHub Actions CI. 68 tests + Testcontainers.</p></div>
+          <div class="tile"><h3>Ops &amp; delivery</h3><p>OpenAPI 3 + Swagger UI, Actuator (only health public), Prometheus, graceful shutdown, virtual threads; multi-stage Dockerfile, docker-compose, GitHub Actions CI. 70 tests + Testcontainers.</p></div>
         </div>
       </div>
     </section>
