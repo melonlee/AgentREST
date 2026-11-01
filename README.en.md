@@ -1,14 +1,19 @@
-<!-- banner -->
+<p align="center">
+  <a href="https://melonlee.github.io/LazyREST/en/"><img src="docs/assets/brand/lazyrest-banner.png" alt="LazyREST — your REST API, ready for AI agents" width="100%"></a>
+</p>
 
 # LazyREST
 
-> An **honest, production-shaped** Spring Boot REST starter where your endpoints are also **MCP tools for AI agents**.
+> An **honest, production-shaped** Spring Boot REST starter where your endpoints are also **MCP tools for AI agents** — same permissions, same audit trail.
 
 [![CI](https://github.com/melonlee/LazyREST/actions/workflows/ci.yml/badge.svg)](https://github.com/melonlee/LazyREST/actions/workflows/ci.yml)
-![Java 21](https://img.shields.io/badge/Java-21-orange)
-![Spring Boot 4.1](https://img.shields.io/badge/Spring%20Boot-4.1-brightgreen)
-![Spring AI 2.0 MCP](https://img.shields.io/badge/Spring%20AI-2.0%20MCP-blue)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-0B9467)](LICENSE)
+![Java 21](https://img.shields.io/badge/Java-21-0B9467?logo=openjdk&logoColor=white)
+![Spring Boot 4.1](https://img.shields.io/badge/Spring%20Boot-4.1-0B9467?logo=springboot&logoColor=white)
+![MCP server](https://img.shields.io/badge/MCP-Streamable%20HTTP-0B9467)
+[![Use this template](https://img.shields.io/badge/Use%20this%20template-0B110E?logo=github)](https://github.com/melonlee/LazyREST/generate)
+
+**[Website](https://melonlee.github.io/LazyREST/en/)** · **[Use this template](https://github.com/melonlee/LazyREST/generate)** · [1-minute quick start](#1-minute-quick-start) · [MCP setup](#let-ai-agents-call-your-api-mcp)
 
 [简体中文](README.md) | English
 
@@ -17,7 +22,9 @@ LazyREST v2 stands on two pillars:
 1. **A small but genuinely production-grade REST baseline** - runs with one command, everything is tested, and every feature listed here actually exists.
 2. **AI-ready** - selected service methods are exposed as **MCP tools** (Model Context Protocol) through Spring AI's MCP server, so Claude Code, Claude Desktop, Cursor and other agents can call your business API. Permissions, ownership checks, validation and auditing are exactly the same as for REST.
 
-<!-- banner: screenshot of Claude Code calling a LazyREST MCP tool -->
+![A real Claude Code session calling LazyREST's searchArticles and getArticle tools over MCP](docs/assets/screenshots/claude-code-mcp.png)
+
+<sub>A real `claude -p` run (its stream-json transcript laid out as a terminal); both tool calls are in the audit log with `channel=MCP`.</sub>
 
 ---
 
@@ -67,11 +74,17 @@ Demo users (created by the **dev profile only**, never in prod):
 
 Demo API key (bound to `editor`, read + write): `lr_dev_editor_0123456789abcdefghijklmnop`
 
-<!-- banner: Swagger UI screenshot -->
+![Swagger UI: authorize with the accessToken from POST /api/auth/login](docs/assets/screenshots/swagger-authorize.png)
 
 ---
 
 ## A curl session
+
+<details><summary>Screenshot: real terminal output of these commands (ending in a ProblemDetail and an audit query)</summary>
+
+![Real curl session: login, create draft, search, validation failure as RFC 9457 ProblemDetail, admin audit query](docs/assets/screenshots/terminal-curl-problemdetail.png)
+
+</details>
 
 Verified locally (needs `jq`):
 
@@ -109,7 +122,7 @@ curl -s "localhost:8080/api/audit-logs?actor=alice&size=5" -H "Authorization: Be
 
 Agents do not get database access and do not bypass business rules: they call the **same service layer** as REST through MCP, with the same permissions, ownership checks, validation and audit trail.
 
-<!-- banner: architecture diagram (REST client + AI agent -> Spring Security -> service layer -> DB, audit) -->
+![Architecture: REST clients and AI agents go through the same Spring Security chain (JWT / API key, RBAC), the same service layer, and land in the same database and audit log](docs/assets/brand/lazyrest-architecture.png)
 
 | Tool | Kind | Description |
 |---|---|---|
@@ -191,6 +204,8 @@ npx -y @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transpo
   --method tools/call --tool-name searchArticles --tool-arg query=mcp
 ```
 
+![MCP Inspector CLI: real tools/list and tools/call output](docs/assets/screenshots/terminal-mcp-inspector.png)
+
 ### Prompts to try
 
 - "Use lazyrest to find articles about MCP and summarize them."
@@ -198,6 +213,8 @@ npx -y @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transpo
 - "List my drafts and tell me which ones are missing a summary."
 
 Then see everything the agent did: `GET /api/audit-logs?channel=MCP`.
+
+![Audit log: every agent tool call is recorded; a read-only key trying to write is recorded as DENIED](docs/assets/screenshots/terminal-audit-mcp.png)
 
 ### Expose your own tool
 
@@ -294,6 +311,8 @@ Unit tests, `@WebMvcTest`, `@DataJpaTest` (real Flyway migrations + Hibernate va
 
 ## Use it as a template
 
+Click **Use this template** on GitHub (or open <https://github.com/melonlee/LazyREST/generate>) to create your own repository, then:
+
 1. Change `groupId` / `artifactId` / `name` in `pom.xml`.
 2. Rename the `com.lazy.rest` package (IDE refactoring, or `git mv` + search/replace).
 3. Remove the example module: the `article/` package, `mcp/ArticleMcpTools.java`, `mcp/ArticleWriteMcpTools.java`, the `articles` table (edit `V1__schema.sql` before your first deployment, or add a `DROP TABLE` migration afterwards), the article seed data in `DevDataSeeder` and the article-related tests.
@@ -321,4 +340,4 @@ v2 is a rewrite and not compatible with v1: Java 21, Spring Boot 4.1, Flyway-man
 
 ---
 
-Maintained by FantasyAI Lab. If LazyREST helps you, a ⭐ is appreciated - issues and PRs welcome.
+Maintained by [Melon](https://github.com/melonlee) / [FantasyAI Lab](https://fantasyailab.com/) · [Website](https://melonlee.github.io/LazyREST/en/). If LazyREST helps you, a ⭐ is appreciated - issues and PRs welcome.

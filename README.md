@@ -1,14 +1,19 @@
-<!-- banner -->
+<p align="center">
+  <a href="https://melonlee.github.io/LazyREST/"><img src="docs/assets/brand/lazyrest-banner.png" alt="LazyREST — 你的业务 API，同时是 AI Agent 可以安全调用的 MCP 工具" width="100%"></a>
+</p>
 
 # LazyREST
 
-> 一个**诚实的、生产级形态**的 Spring Boot REST 脚手架 —— 你的业务接口，同时也是 AI Agent 可以安全调用的 **MCP 工具**。
+> 一个**诚实的、生产级形态**的 Spring Boot REST 脚手架 —— 你的业务接口，同时也是 AI Agent 可以安全调用的 **MCP 工具**：同样的权限，同样的审计。
 
 [![CI](https://github.com/melonlee/LazyREST/actions/workflows/ci.yml/badge.svg)](https://github.com/melonlee/LazyREST/actions/workflows/ci.yml)
-![Java 21](https://img.shields.io/badge/Java-21-orange)
-![Spring Boot 4.1](https://img.shields.io/badge/Spring%20Boot-4.1-brightgreen)
-![Spring AI 2.0 MCP](https://img.shields.io/badge/Spring%20AI-2.0%20MCP-blue)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-0B9467)](LICENSE)
+![Java 21](https://img.shields.io/badge/Java-21-0B9467?logo=openjdk&logoColor=white)
+![Spring Boot 4.1](https://img.shields.io/badge/Spring%20Boot-4.1-0B9467?logo=springboot&logoColor=white)
+![MCP server](https://img.shields.io/badge/MCP-Streamable%20HTTP-0B9467)
+[![Use this template](https://img.shields.io/badge/Use%20this%20template-0B110E?logo=github)](https://github.com/melonlee/LazyREST/generate)
+
+**[官网](https://melonlee.github.io/LazyREST/)** · **[Use this template](https://github.com/melonlee/LazyREST/generate)** · [1 分钟快速开始](#1-分钟快速开始) · [MCP 接入](#让-ai-agent-调用你的接口mcp)
 
 简体中文 | [English](README.en.md)
 
@@ -17,7 +22,9 @@ LazyREST v2 有两个支柱：
 1. **小而真实的生产级 REST 基线** —— 一条命令跑起来，所有功能都有测试覆盖，README 里写的每一项都真的实现了。
 2. **AI-ready** —— 选定的 Service 方法通过 Spring AI 的 MCP Server 暴露为 **MCP 工具**（Model Context Protocol），Claude Code / Claude Desktop / Cursor 等 Agent 可以直接调用你的业务 API；权限、所有权校验、参数校验、审计与 REST 完全共用同一套规则。
 
-<!-- banner: screenshot of Claude Code calling a LazyREST MCP tool -->
+![真实的 Claude Code 会话：通过 MCP 调用 LazyREST 的 searchArticles 和 getArticle](docs/assets/screenshots/claude-code-mcp.png)
+
+<sub>真实的 `claude -p` 运行记录（stream-json 原文排版成终端样式），两次工具调用都以 `channel=MCP` 记入审计日志。</sub>
 
 ---
 
@@ -83,11 +90,17 @@ dev 环境自动创建的演示账号（**仅 dev profile**，prod 不会创建�
 
 演示 API Key（绑定 `editor`，可读写）：`lr_dev_editor_0123456789abcdefghijklmnop`
 
-<!-- banner: Swagger UI screenshot -->
+![Swagger UI：用 POST /api/auth/login 拿到的 accessToken 完成 Authorize](docs/assets/screenshots/swagger-authorize.png)
 
 ---
 
 ## 用 curl 走一遍
+
+<details><summary>截图：同一组命令的真实终端输出（以 ProblemDetail 和审计查询结尾）</summary>
+
+![真实 curl 会话：登录、创建草稿、搜索、校验失败返回 RFC 9457 ProblemDetail、管理员查询审计](docs/assets/screenshots/terminal-curl-problemdetail.png)
+
+</details>
 
 下面的命令在本地实测通过（需要 `jq`）：
 
@@ -157,7 +170,7 @@ curl -s "localhost:8080/api/audit-logs?actor=alice&size=5" -H "Authorization: Be
 
 2026 年，团队越来越需要把**已有的业务 API** 开放给 AI Agent。LazyREST 的做法是：Agent 不直连数据库，也不绕过业务规则，而是通过 MCP 调用**同一个 Service 层** —— 和 REST 共享权限、所有权、校验与审计。
 
-<!-- banner: architecture diagram (REST client + AI agent -> Spring Security -> Service layer -> DB, audit) -->
+![架构：REST 客户端和 AI Agent 经过同一条 Spring Security 过滤链（JWT / API Key、RBAC），调用同一个 Service 层，落到同一个数据库和审计日志](docs/assets/brand/lazyrest-architecture.png)
 
 ### 暴露的工具
 
@@ -244,6 +257,8 @@ npx -y @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transpo
   --method tools/call --tool-name searchArticles --tool-arg query=mcp
 ```
 
+![MCP Inspector CLI：tools/list 与 tools/call 的真实输出](docs/assets/screenshots/terminal-mcp-inspector.png)
+
 ### 可以这样问 Agent
 
 - “用 lazyrest 搜索和 MCP 相关的文章，总结要点。”
@@ -251,6 +266,8 @@ npx -y @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transpo
 - “列出我所有的草稿，告诉我哪些还缺摘要。”
 
 然后在审计日志里能看到 Agent 做的每一件事：`GET /api/audit-logs?channel=MCP`。
+
+![审计日志：Agent 的每次工具调用都有记录，只读 Key 尝试写入被记为 DENIED](docs/assets/screenshots/terminal-audit-mcp.png)
 
 ### 暴露你自己的工具
 
@@ -354,6 +371,8 @@ docs/decisions.md    技术选型与取舍
 
 ## 作为模板使用
 
+在 GitHub 上点 **Use this template**（或打开 <https://github.com/melonlee/LazyREST/generate>）创建你自己的仓库，然后：
+
 1. **改坐标**：修改 `pom.xml` 的 `groupId` / `artifactId` / `name`。
 2. **改包名**：用 IDE 把 `com.lazy.rest` 重命名为你的包（或 `git mv` 目录后全局替换 `com.lazy.rest`）。
 3. **删除示例模块**：
@@ -384,4 +403,4 @@ v2 是重写，不兼容 v1：Java 21、Spring Boot 4.1、Flyway 管理表结构
 
 ---
 
-由 FantasyAI Lab 维护。觉得有用就点个 ⭐，欢迎提 Issue / PR。
+由 [Melon](https://github.com/melonlee) / [FantasyAI Lab](https://fantasyailab.com/) 维护 · [官网](https://melonlee.github.io/LazyREST/)。觉得有用就点个 ⭐，欢迎提 Issue / PR。
