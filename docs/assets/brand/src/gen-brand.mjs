@@ -1,30 +1,71 @@
-// Generates the LazyREST logo SVGs from code so every variant stays geometrically identical.
+// Generates the LazyREST logo SVGs (beaver mascot + "lazyrest" wordmark) from code so every
+// variant stays geometrically identical.
 // Usage: node docs/assets/brand/src/gen-brand.mjs   (writes SVGs into docs/assets/brand/)
-import { writeFileSync, mkdirSync } from "node:fs";
+//
+// Mascot sources live in ./mascot/ (FantasyAI Lab mascot family, same canvas as the 喵想 cat):
+//   beaver.svg        glossy app icon, 1024 (viewBox 100..924 = the squircle tile)
+//   beaver-flat.svg   flat version of the same icon
+//   beaver-small.svg  head-only crop for 16-48 px (favicons)
+// Everything else (mark, figure, lockups) is derived here.
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const out = join(dirname(fileURLToPath(import.meta.url)), "..");
+const src = dirname(fileURLToPath(import.meta.url));
+const out = join(src, "..");
 mkdirSync(out, { recursive: true });
+const mascot = (name) => readFileSync(join(src, "mascot", name), "utf8");
 
 export const palette = {
   ink: "#0B110E", // near-black, slightly green
   paper: "#EEF3F0",
   mint: "#34E0A1", // accent on dark
   mintDeep: "#0B9467", // accent on light
+  tile: "#111615", // mascot tile (flat)
 };
 
-// 64x64 mark: two callers (a REST client and an AI agent) merge into ONE path that ends in
-// one endpoint - same permissions, same audit trail.
-const SW = 8;
-export function markBody(ink, accent) {
-  return `<g fill="none" stroke-width="${SW}" stroke-linecap="butt" stroke-linejoin="round">
-  <path d="M3 14 H13 C25 14 24 32 36 32" stroke="${ink}"/>
-  <path d="M3 50 H13 C25 50 24 32 36 32 H45" stroke="${accent}"/>
+const ICON = mascot("beaver.svg");
+const SQUIRCLE = ICON.match(/<path id="squircle" d="([^"]+)"/)[1];
+
+// ---------------------------------------------------------------- flat head mark
+// Head-only crop of beaver-small.svg, flattened to solid fills so it stays crisp at 16-40 px
+// (header logo, favicon.svg, next to text). `id` keeps clip ids unique when inlined.
+const HEAD_T = "translate(512 1060) scale(1.16) translate(-512 -1000) rotate(-4 512 760)";
+const HEAD = "M 104 1110 C 104 900 136 780 196 716 C 172 540 318 392 512 392 C 706 392 852 540 828 716 C 888 780 920 900 920 1110 Z";
+export function markBody({ tile, edge, edgeW = 36, id }) {
+  const f = tile; // features are punched in the tile colour
+  return `<defs><clipPath id="${id}"><path d="${SQUIRCLE}"/></clipPath></defs>
+<path d="${SQUIRCLE}" fill="${tile}"/>
+<g clip-path="url(#${id})">
+<circle cx="790" cy="236" r="70" fill="${palette.mint}"/>
+<g transform="${HEAD_T}">
+<g fill="#fff"><circle cx="246" cy="520" r="62"/><circle cx="778" cy="520" r="62"/><path d="${HEAD}"/></g>
+<circle cx="254" cy="526" r="32" fill="#c9c4bc"/><circle cx="770" cy="526" r="32" fill="#c9c4bc"/>
+<rect x="352" y="542" width="80" height="112" rx="40" fill="${f}"/><circle cx="406" cy="574" r="17" fill="#fff"/>
+<rect x="592" y="542" width="80" height="112" rx="40" fill="${f}"/><circle cx="646" cy="574" r="17" fill="#fff"/>
+<path d="M 404 750 C 404 712 450 700 512 700 C 574 700 620 712 620 750 C 620 790 572 800 512 800 C 452 800 404 790 404 750 Z" fill="#e4e1db"/>
+<path d="M 456 690 C 456 664 482 654 512 654 C 542 654 568 664 568 690 C 568 716 534 728 512 728 C 490 728 456 716 456 690 Z" fill="${f}"/>
+<path d="M 468 790 L 556 790 L 556 862 Q 556 874 544 874 L 480 874 Q 468 874 468 862 Z" fill="#fffaf0" stroke="${f}" stroke-width="12" stroke-linejoin="round"/>
+<path d="M 512 792 L 512 872" stroke="${f}" stroke-width="11"/>
 </g>
-<circle cx="52" cy="32" r="9" fill="${accent}"/>`;
+${edge ? `<path d="${SQUIRCLE}" fill="none" stroke="${edge}" stroke-width="${edgeW}"/>` : ""}
+</g>`;
+}
+const MARK_LIGHT = { tile: palette.tile, edge: palette.tile, edgeW: 56, id: "lr-m" }; // dark tile + rim so the white body never melts into a white page
+const MARK_DARK = { tile: "#1A2521", edge: "#34443D", id: "lr-md" }; // lifted tile + edge on near-black
+
+// ---------------------------------------------------------------- figure (no tile)
+// The glossy beaver from the app icon without its tile: clipped flat at the bottom edge so it can
+// "rise" from the edge of a card or the canvas. Used on the website and the marketing images.
+function figure() {
+  return ICON
+    .replace(/width="1024" height="1024" viewBox="100 100 824 824"/, 'width="840" height="824" viewBox="100 100 840 824" role="img" aria-label="LazyREST beaver"')
+    .replace('<clipPath id="clip"><use href="#squircle"/></clipPath>', '<clipPath id="clip"><rect x="60" y="60" width="920" height="864"/></clipPath>')
+    .replace('<use href="#squircle" fill="url(#bg)"/>', "")
+    .replace('<use href="#squircle" fill="none" stroke="url(#rim)" stroke-width="3"/>', "");
 }
 
+// ---------------------------------------------------------------- wordmark
 // Monoline geometric wordmark "lazyrest" built from strokes (no font dependency).
 // x-height band y 20..60 (stroke centred 23.75..56.25), ascender 0, descender ~84.
 const S = 7.5;
@@ -65,41 +106,38 @@ export function wordmarkBody(ink, accent) {
 </g>`;
 }
 
-function svg(w, h, body, title) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${title}">
+function svg(w, h, body, title, viewBox = `0 0 ${w} ${h}`) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="${viewBox}" role="img" aria-label="${title}">
 <title>${title}</title>
 ${body}
 </svg>
 `;
 }
 
-// Horizontal lockup: mark height = x-height band + a bit, centred on the x-height.
-function lockup(ink, accent) {
-  const s = 1.12; // mark drawn at 64 units, wordmark x-height 40
-  const markH = 64 * s;
-  const pad = 6;
-  const wy = 2 + pad; // wordmark top
-  const my = wy + 40 - markH / 2; // centre mark on x-height centre (y=40)
-  const wx = Math.round(64 * s + 24);
-  const w = wx + WORDMARK_W + pad;
-  const h = WORDMARK_H + 2 * pad + 4;
-  const body = `<g transform="translate(${pad} ${my}) scale(${s})">${markBody(ink, accent)}</g>
-<g transform="translate(${wx + pad} ${wy})">${wordmarkBody(ink, accent)}</g>`;
-  return { w: Math.ceil(w + pad), h, body };
+// Horizontal lockup: the beaver tile is centred on the wordmark's x-height (y=40) and spans
+// roughly ascender..descender, so it reads as a peer of the lettering, not a badge.
+function lockup(ink, accent, mark) {
+  const T = 84; // tile size in wordmark units (x-height = 40)
+  const pad = 4;
+  const gap = 22;
+  const wy = pad + T / 2 - 40; // wordmark top so that its x-height centre meets the tile centre
+  const wx = pad + T + gap;
+  const w = Math.ceil(wx + WORDMARK_W + pad);
+  const h = Math.max(T + 2 * pad, Math.ceil(wy + WORDMARK_H));
+  const body = `<svg x="${pad}" y="${pad}" width="${T}" height="${T}" viewBox="100 100 824 824">${markBody(mark)}</svg>
+<g transform="translate(${wx} ${wy})">${wordmarkBody(ink, accent)}</g>`;
+  return { w, h, body };
 }
 
-// App-icon style tile (favicon, avatars)
-function tile(bg, ink, accent) {
-  return `<rect width="64" height="64" rx="14" fill="${bg}"/>
-<g transform="translate(9 9) scale(0.72)">${markBody(ink, accent)}</g>`;
-}
-
-const L = lockup(palette.ink, palette.mintDeep);
-const D = lockup(palette.paper, palette.mint);
-const files = {
-  "lazyrest-mark.svg": svg(64, 64, markBody(palette.ink, palette.mintDeep), "LazyREST"),
-  "lazyrest-mark-dark.svg": svg(64, 64, markBody(palette.paper, palette.mint), "LazyREST"),
-  "lazyrest-icon.svg": svg(64, 64, tile(palette.ink, palette.paper, palette.mint), "LazyREST"),
+const L = lockup(palette.ink, palette.mintDeep, MARK_LIGHT);
+const D = lockup(palette.paper, palette.mint, MARK_DARK);
+export const files = {
+  "lazyrest-icon.svg": ICON.replace("<defs>", "<title>LazyREST</title>\n<defs>"),
+  "lazyrest-icon-small.svg": mascot("beaver-small.svg").replace("<defs>", "<title>LazyREST</title>\n<defs>"),
+  "lazyrest-icon-flat.svg": mascot("beaver-flat.svg").replace(/^<svg /, '<svg width="1024" height="1024" '),
+  "lazyrest-beaver.svg": figure(),
+  "lazyrest-mark.svg": svg(64, 64, markBody(MARK_LIGHT), "LazyREST", "100 100 824 824"),
+  "lazyrest-mark-dark.svg": svg(64, 64, markBody(MARK_DARK), "LazyREST", "100 100 824 824"),
   "lazyrest-wordmark.svg": svg(WORDMARK_W, WORDMARK_H, wordmarkBody(palette.ink, palette.mintDeep), "LazyREST"),
   "lazyrest-wordmark-dark.svg": svg(WORDMARK_W, WORDMARK_H, wordmarkBody(palette.paper, palette.mint), "LazyREST"),
   "lazyrest-logo.svg": svg(L.w, L.h, L.body, "LazyREST"),
