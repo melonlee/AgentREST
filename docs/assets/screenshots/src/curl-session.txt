@@ -10,20 +10,20 @@ $ curl -s -X POST localhost:8080/api/articles -H "Authorization: Bearer $TOKEN" 
   "status": 400,
   "title": "Validation failed",
   "code": "VALIDATION_FAILED",
-  "requestId": "a90aa008-ad2c-429e-854a-4e1816ccd69a",
-  "timestamp": "2026-11-01T07:16:34.661745Z",
+  "requestId": "aae16aaa-2428-485e-b6b4-507919f64c5b",
+  "timestamp": "2026-11-01T10:46:19.778119Z",
   "errors": [
     {
-      "field": "title",
-      "message": "must not be blank"
+      "message": "must not be blank",
+      "field": "title"
     },
     {
-      "field": "content",
-      "message": "must not be blank"
+      "message": "must not be blank",
+      "field": "content"
     }
   ]
 }
 $ ADMIN=$(curl -s -X POST localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{"username":"admin","password":"admin123"}' | jq -r .accessToken)
 $ curl -s 'localhost:8080/api/audit-logs?actor=alice&size=3' -H "Authorization: Bearer $ADMIN" | jq -c '.content[] | {action,outcome,channel,resourceId,durationMs}'
-{"action":"ARTICLE_CREATE","outcome":"SUCCESS","channel":"REST","resourceId":"8","durationMs":5}
-{"action":"AUTH_LOGIN","outcome":"SUCCESS","channel":"REST","resourceId":null,"durationMs":105}
+{"action":"ARTICLE_CREATE","outcome":"SUCCESS","channel":"REST","resourceId":"8","durationMs":7}
+{"action":"AUTH_LOGIN","outcome":"SUCCESS","channel":"REST","resourceId":null,"durationMs":193}

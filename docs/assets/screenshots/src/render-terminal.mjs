@@ -69,7 +69,7 @@ function renderTranscript(text) {
 function renderClaude(jsonl, prompt) {
   const ev = jsonl.trim().split("\n").map((l) => JSON.parse(l));
   const init = ev.find((e) => e.type === "system");
-  const html = [`<div class="cmd"><span class="ps">$</span> ${wrapCommand(`claude -p ${JSON.stringify(prompt)} --mcp-config mcp.json --allowedTools "mcp__agentrest__searchArticles,mcp__agentrest__getArticle" --output-format stream-json --verbose`).map(esc).join("\n")}</div>`];
+  const html = [`<div class="cmd"><span class="ps">$</span> ${wrapCommand(`claude -p ${JSON.stringify(prompt)} --mcp-config mcp.json --strict-mcp-config --allowedTools "mcp__agentrest__searchArticles,mcp__agentrest__getArticle" --max-turns 6 --output-format stream-json --verbose`).map(esc).join("\n")}</div>`];
   html.push(`<div class="o dim">  init · claude ${esc(init.claude_code_version)} · mcp: ${init.mcp_servers.map((s) => `${esc(s.name)} <span class="ok">${esc(s.status)}</span>`).join(", ")}</div>`);
   html.push(`<div class="user">&gt; ${esc(prompt)}</div>`);
   const md = (t) => esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, '<span class="code">$1</span>');

@@ -1,13 +1,13 @@
 $ ADMIN=$(curl -s -X POST localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{"username":"admin","password":"admin123"}' | jq -r .accessToken)
 $ curl -s 'localhost:8080/api/audit-logs?channel=MCP&size=5' -H "Authorization: Bearer $ADMIN" | jq -r '.content[] | [.occurredAt[11:19], .actor, .channel, .action, .resourceId, .outcome, .durationMs, .detail] | @tsv' | column -t -s $'\t'
-07:21:03  alice   MCP  MCP_TOOL_CALL  createArticleDraft  DENIED   0  args={title=Hi, summaryLength=0, contentLength=1} error=Missing permission mcp:write
-07:17:44  editor  MCP  MCP_TOOL_CALL  getArticle          SUCCESS  9  args={id=2}
-07:17:40  editor  MCP  MCP_TOOL_CALL  searchArticles      SUCCESS  3  args={query=MCP, page=0, size=10}
-07:17:23  editor  MCP  MCP_TOOL_CALL  searchArticles      SUCCESS  4  args={query=mcp, page=0, size=10}
+10:47:28  alice   MCP  MCP_TOOL_CALL  createArticleDraft  DENIED   0  args={title=Hi, summaryLength=0, contentLength=1} error=Missing permission mcp:write
+10:46:48  editor  MCP  MCP_TOOL_CALL  getArticle          SUCCESS  8  args={id=2}
+10:46:42  editor  MCP  MCP_TOOL_CALL  searchArticles      SUCCESS  6  args={query=MCP, page=0, size=10}
+10:46:27  editor  MCP  MCP_TOOL_CALL  searchArticles      SUCCESS  3  args={query=mcp, page=0, size=10}
 $ curl -s 'localhost:8080/api/audit-logs?channel=MCP&size=1' -H "Authorization: Bearer $ADMIN" | jq '.content[0]'
 {
-  "id": 16,
-  "occurredAt": "2026-11-01T07:21:03.723881Z",
+  "id": 12,
+  "occurredAt": "2026-11-01T10:47:28.311053Z",
   "actor": "alice",
   "action": "MCP_TOOL_CALL",
   "resourceType": "mcp-tool",
@@ -15,7 +15,7 @@ $ curl -s 'localhost:8080/api/audit-logs?channel=MCP&size=1' -H "Authorization: 
   "channel": "MCP",
   "outcome": "DENIED",
   "detail": "args={title=Hi, summaryLength=0, contentLength=1} error=Missing permission mcp:write",
-  "requestId": "1e23220e-3219-4e59-9197-036d47bb6f64",
+  "requestId": "6077df48-ad93-4fa3-a32e-9b40207495be",
   "clientIp": "0:0:0:0:0:0:0:1",
   "durationMs": 0
 }
