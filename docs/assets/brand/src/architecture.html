@@ -1,0 +1,108 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css">
+<style>
+.canvas { width: 1680px; height: 880px; }
+.canvas > header, .canvas > footer, .canvas > .lbl { position: absolute; }
+.canvas::after { right: -380px; top: -500px; }
+header { position: absolute; left: 60px; top: 46px; }
+header img { height: 30px; display: block; margin-bottom: 18px; }
+header h1 { font-size: 30px; letter-spacing: -.015em; font-weight: 700; }
+header p { margin-top: 6px; color: var(--muted); font-size: 16px; }
+.box { position: absolute; background: rgba(17,25,22,.94); border: 1px solid var(--line-2); border-radius: 14px; padding: 18px 18px 16px; }
+.box.mcpb { border-color: rgba(52,224,161,.55); box-shadow: 0 0 0 4px rgba(52,224,161,.06); }
+.box.core { border-color: rgba(52,224,161,.35); }
+.k { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+.box h3 { font-size: 18px; font-weight: 650; margin-bottom: 10px; letter-spacing: -.01em; }
+.box ul { list-style: none; display: grid; gap: 7px; }
+.box li { font-family: var(--mono); font-size: 12.5px; color: var(--muted); line-height: 1.35; }
+.box li b { color: var(--paper); font-weight: 500; }
+.box li .m { color: var(--mint); }
+svg.wires { position: absolute; inset: 0; z-index: 0; }
+.lbl { position: absolute; font-family: var(--mono); font-size: 11.5px; color: var(--muted); background: var(--ink); padding: 2px 6px; border-radius: 4px; transform: translate(-50%, -50%); z-index: 2; }
+.lbl.m { color: var(--mint); }
+footer { position: absolute; left: 60px; right: 60px; bottom: 44px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+footer .chip { font-size: 13px; }
+footer .chip.m { color: var(--mint); border-color: rgba(52,224,161,.45); }
+</style></head><body>
+<div class="canvas">
+  <header><img src="../lazyrest-logo-dark.svg"><h1>One service layer, two front doors</h1><p>REST clients and AI agents pass the same security, the same business rules and land in the same audit log.</p></header>
+
+  <svg class="wires" width="1680" height="880" viewBox="0 0 1680 880">
+    <defs>
+      <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#8FA199"/></marker>
+      <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#34E0A1"/></marker>
+    </defs>
+    <g fill="none" stroke-width="2">
+      <path d="M350 330 H418" stroke="#8FA199" marker-end="url(#ag)"/>
+      <path d="M710 330 H778" stroke="#8FA199" marker-end="url(#ag)"/>
+      <path d="M1050 330 H1118" stroke="#8FA199" marker-end="url(#ag)"/>
+      <path d="M350 590 H418" stroke="#34E0A1" marker-end="url(#am)"/>
+      <path d="M710 590 H778" stroke="#34E0A1" marker-end="url(#am)"/>
+      <path d="M1050 590 H1118" stroke="#34E0A1" marker-end="url(#am)"/>
+      <path d="M1370 330 H1438" stroke="#8FA199" marker-end="url(#ag)"/>
+      <path d="M1370 590 H1438" stroke="#8FA199" marker-end="url(#ag)"/>
+    </g>
+  </svg>
+  <span class="lbl" style="left:384px;top:310px">Bearer JWT</span>
+  <span class="lbl m" style="left:384px;top:570px">X-API-Key</span>
+  <span class="lbl" style="left:1084px;top:310px">REST</span>
+  <span class="lbl m" style="left:1084px;top:570px">MCP</span>
+
+  <div class="box" style="left:60px;top:240px;width:290px;height:180px">
+    <div class="k">Caller</div><h3>REST client</h3>
+    <ul><li>curl · your frontend · Swagger UI</li><li><b>POST /api/auth/login</b></li><li>JWT 15 min + rotating refresh</li></ul>
+  </div>
+  <div class="box mcpb" style="left:60px;top:500px;width:290px;height:180px">
+    <div class="k" style="color:var(--mint)">Caller</div><h3>AI agent</h3>
+    <ul><li>Claude Code · Desktop · Cursor</li><li><b>Streamable HTTP /mcp</b></li><li>API key · optional read-only</li></ul>
+  </div>
+
+  <div class="box" style="left:420px;top:240px;width:290px;height:440px">
+    <div class="k">Spring Security 7</div><h3>Filter chain</h3>
+    <ul>
+      <li><b>/api/**</b> → JWT (HS256)</li>
+      <li><b>/mcp</b> → API key <span class="m">lr_…</span> or JWT</li>
+      <li>unauthenticated → <b>401</b></li>
+      <li>rate limit on login / refresh</li>
+      <li>X-Request-Id on every request</li>
+    </ul>
+    <div class="k" style="margin-top:26px">Errors</div>
+    <ul><li>REST → RFC 9457 <b>ProblemDetail</b></li><li>MCP → <b>isError: true</b></li><li>no stack traces, ever</li></ul>
+  </div>
+
+  <div class="box" style="left:780px;top:240px;width:270px;height:180px">
+    <div class="k">Adapter</div><h3>REST controllers</h3>
+    <ul><li>/api/articles · /api/users</li><li>/api/api-keys</li><li>/api/audit-logs · OpenAPI 3</li></ul>
+  </div>
+  <div class="box mcpb" style="left:780px;top:500px;width:270px;height:180px">
+    <div class="k" style="color:var(--mint)">Adapter</div><h3>MCP tools</h3>
+    <ul><li><span class="m">searchArticles</span> · <span class="m">getArticle</span></li><li><span class="m">createArticleDraft</span> (write)</li><li>via McpToolExecutor</li></ul>
+  </div>
+
+  <div class="box core" style="left:1120px;top:240px;width:250px;height:440px">
+    <div class="k">Shared core</div><h3>Service layer</h3>
+    <ul>
+      <li><b>@PreAuthorize</b> RBAC</li>
+      <li>roles → permissions</li>
+      <li>ownership checks</li>
+      <li><b>@Validated</b> input</li>
+      <li><b>@Audited</b> every action</li>
+      <li>optimistic locking</li>
+    </ul>
+    <div class="k" style="margin-top:26px">Write tools: 3 gates</div>
+    <ul><li>1 write-tools-enabled</li><li>2 mcp:write</li><li>3 article:write</li></ul>
+  </div>
+
+  <div class="box" style="left:1440px;top:240px;width:180px;height:180px">
+    <div class="k">Data</div><h3>Database</h3>
+    <ul><li>JPA + Flyway</li><li>H2 (dev)</li><li>MySQL / PostgreSQL</li></ul>
+  </div>
+  <div class="box core" style="left:1440px;top:500px;width:180px;height:180px">
+    <div class="k">Data</div><h3>Audit log</h3>
+    <ul><li>who · what · when</li><li>outcome</li><li>channel <b>REST</b>|<span class="m">MCP</span></li></ul>
+  </div>
+
+  <footer>
+    <span class="chip m">same permissions</span><span class="chip m">same validation</span><span class="chip m">same audit trail</span>
+    <span class="chip">Spring Boot 4.1 · Java 21 · Spring AI 2.0 MCP server</span>
+  </footer>
+</div></body></html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="339" height="88" viewBox="0 0 339 88" role="img" aria-label="LazyREST">
+<title>LazyREST</title>
+<g fill="none" stroke-width="7.5" stroke-linecap="butt" stroke-linejoin="round">
+  <path d="M3.75 0 V46 A14 14 0 0 0 17.75 60 M66.75 40 A18 18 0 1 0 66.75 40.01 M66.75 20 V60 M80.5 23.75 H109.75 L84.25 56.25 H113.5 M126.25 20 V40 A18 18 0 0 0 162.25 40 M162.25 20 V66 A18 18 0 0 1 144.25 84 H128.5" stroke="#EEF3F0"/>
+  <path d="M181.75 20 V60 M181.75 40 A18 18 0 0 1 199.75 22 H208 M220.75 40 H256.75 A18 18 0 1 0 251.48 52.73 M303.5 23.75 H282.375 A8.125 8.125 0 0 0 282.375 40 H291.625 A8.125 8.125 0 0 1 291.625 56.25 H270.5 M322.5 6 V46 A14 14 0 0 0 336.5 60 H338.5 M312.5 23.75 H337.5" stroke="#34E0A1"/>
+</g>
+</svg>

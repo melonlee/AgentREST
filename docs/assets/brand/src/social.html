@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="brand.css">
+<style>
+.canvas { width: 1280px; height: 640px; padding: 64px 64px 0; display: grid; grid-template-columns: 1fr 560px; gap: 48px; }
+.logo { height: 54px; display: block; margin-bottom: 52px; }
+h1 { font-size: 58px; line-height: 1.06; letter-spacing: -.03em; font-weight: 750; }
+p.sub { margin-top: 22px; font-size: 20px; line-height: 1.5; color: var(--muted); }
+.chips { margin-top: 30px; }
+.right { padding-top: 6px; display: grid; gap: 18px; align-content: start; }
+.term pre { font-size: 13px; }
+.canvas > footer { left: 64px; bottom: 40px; font-family: var(--mono); font-size: 15px; color: var(--muted); }
+</style></head><body>
+<div class="canvas">
+  <div>
+    <img class="logo" src="../lazyrest-logo-dark.svg">
+    <h1>Your REST API,<br><span class="mint">ready for AI agents.</span></h1>
+    <p class="sub">Spring Boot starter whose endpoints are also MCP tools — same permissions, same audit trail.</p>
+    <div class="chips"><span class="chip"><b>Spring Boot</b> 4.1</span><span class="chip"><b>Java</b> 21</span><span class="chip"><b>MCP</b> Streamable HTTP</span><span class="chip">JWT · API keys · RBAC</span></div>
+  </div>
+  <div class="right"><!--include:term-mcp--><!--include:audit-card--></div>
+  <footer>github.com/melonlee/LazyREST</footer>
+</div></body></html>

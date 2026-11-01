@@ -1,0 +1,8 @@
+<!-- Rows are copied from a real GET /api/audit-logs response captured on the dev profile. -->
+<div class="card audit">
+  <div class="card-head"><span class="dots"><i></i><i></i><i></i></span>GET /api/audit-logs · one trail for REST and MCP</div>
+  <div class="row"><span class="tag rest">REST</span><span>alice</span><span>ARTICLE_CREATE</span><span class="muted">article/8</span><span class="ok">SUCCESS</span></div>
+  <div class="row"><span class="tag mcp">MCP</span><span>editor</span><span>searchArticles</span><span class="muted">query=MCP</span><span class="ok">SUCCESS</span></div>
+  <div class="row"><span class="tag mcp">MCP</span><span>editor</span><span>getArticle</span><span class="muted">id=2</span><span class="ok">SUCCESS</span></div>
+  <div class="row"><span class="tag mcp">MCP</span><span>alice</span><span>createArticleDraft</span><span class="muted">no mcp:write</span><span class="deny">DENIED</span></div>
+</div>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="LazyREST">
+<title>LazyREST</title>
+<g fill="none" stroke-width="8" stroke-linecap="butt" stroke-linejoin="round">
+  <path d="M3 14 H13 C25 14 24 32 36 32" stroke="#EEF3F0"/>
+  <path d="M3 50 H13 C25 50 24 32 36 32 H45" stroke="#34E0A1"/>
+</g>
+<circle cx="52" cy="32" r="9" fill="#34E0A1"/>
+</svg>
