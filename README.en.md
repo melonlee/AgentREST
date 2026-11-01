@@ -17,6 +17,8 @@
 
 [简体中文](README.md) | English
 
+<img src="docs/assets/brand/icons/lazyrest-icon-64.png" width="20" height="20" alt="The LazyREST beaver"> The mascot is a **beaver (河狸)**: you stay lazy, it builds the bridge between your API and AI agents. Like 喵想, it belongs to the FantasyAI Lab mascot family.
+
 LazyREST v2 stands on two pillars:
 
 1. **A small but genuinely production-grade REST baseline** - runs with one command, everything is tested, and every feature listed here actually exists.

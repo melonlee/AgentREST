@@ -17,6 +17,8 @@
 
 简体中文 | [English](README.en.md)
 
+<img src="docs/assets/brand/icons/lazyrest-icon-64.png" width="20" height="20" alt="LazyREST 河狸"> 吉祥物是一只**河狸**：你负责偷懒，它负责在你的 API 和 AI Agent 之间搭桥。它和喵想一样，属于 FantasyAI Lab 吉祥物家族。
+
 LazyREST v2 有两个支柱：
 
 1. **小而真实的生产级 REST 基线** —— 一条命令跑起来，所有功能都有测试覆盖，README 里写的每一项都真的实现了。
