@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://melonlee.github.io/AgentREST/en/"><img src="docs/assets/brand/lazyrest-banner.png" alt="AgentREST — your REST API, ready for AI agents" width="100%"></a>
+  <a href="https://melonlee.github.io/AgentREST/en/"><img src="docs/assets/brand/agentrest-banner.png" alt="AgentREST — your REST API, ready for AI agents" width="100%"></a>
 </p>
 
 # AgentREST
@@ -19,7 +19,7 @@
 
 [简体中文](README.md) | English
 
-<img src="docs/assets/brand/icons/lazyrest-icon-64.png" width="20" height="20" alt="The AgentREST beaver"> The mascot is a **beaver (河狸)**: you focus on your business logic, it builds the bridge between your API and AI agents. Like 喵想, it belongs to the FantasyAI Lab mascot family.
+<img src="docs/assets/brand/icons/agentrest-icon-64.png" width="20" height="20" alt="The AgentREST beaver"> The mascot is a **beaver (河狸)**: you focus on your business logic, it holds a plug in each paw and connects your API to AI agents (MCP being the "USB-C for AI"). Like 喵想, it belongs to the FantasyAI Lab mascot family.
 
 AgentREST v2 stands on two pillars:
 
@@ -126,7 +126,7 @@ curl -s "localhost:8080/api/audit-logs?actor=alice&size=5" -H "Authorization: Be
 
 Agents do not get database access and do not bypass business rules: they call the **same service layer** as REST through MCP, with the same permissions, ownership checks, validation and audit trail.
 
-![Architecture: REST clients and AI agents go through the same Spring Security chain (JWT / API key, RBAC), the same service layer, and land in the same database and audit log](docs/assets/brand/lazyrest-architecture.png)
+![Architecture: REST clients and AI agents go through the same Spring Security chain (JWT / API key, RBAC), the same service layer, and land in the same database and audit log](docs/assets/brand/agentrest-architecture.png)
 
 | Tool | Kind | Description |
 |---|---|---|

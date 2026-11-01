@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://melonlee.github.io/AgentREST/"><img src="docs/assets/brand/lazyrest-banner.png" alt="AgentREST — 你的业务 API，同时是 AI Agent 可以安全调用的 MCP 工具" width="100%"></a>
+  <a href="https://melonlee.github.io/AgentREST/"><img src="docs/assets/brand/agentrest-banner.png" alt="AgentREST — 你的业务 API，同时是 AI Agent 可以安全调用的 MCP 工具" width="100%"></a>
 </p>
 
 # AgentREST
@@ -19,7 +19,7 @@
 
 简体中文 | [English](README.en.md)
 
-<img src="docs/assets/brand/icons/lazyrest-icon-64.png" width="20" height="20" alt="AgentREST 河狸"> 吉祥物是一只**河狸**：你专心写业务，它负责在你的 API 和 AI Agent 之间搭桥。它和喵想一样，属于 FantasyAI Lab 吉祥物家族。
+<img src="docs/assets/brand/icons/agentrest-icon-64.png" width="20" height="20" alt="AgentREST 河狸"> 吉祥物是一只**河狸**：你专心写业务，它两只爪子各攥一个插头，把你的 API 接到 AI Agent 上（MCP 就是 AI 的 USB-C）。它和喵想一样，属于 FantasyAI Lab 吉祥物家族。
 
 AgentREST v2 有两个支柱：
 
@@ -174,7 +174,7 @@ curl -s "localhost:8080/api/audit-logs?actor=alice&size=5" -H "Authorization: Be
 
 2026 年，团队越来越需要把**已有的业务 API** 开放给 AI Agent。AgentREST 的做法是：Agent 不直连数据库，也不绕过业务规则，而是通过 MCP 调用**同一个 Service 层** —— 和 REST 共享权限、所有权、校验与审计。
 
-![架构：REST 客户端和 AI Agent 经过同一条 Spring Security 过滤链（JWT / API Key、RBAC），调用同一个 Service 层，落到同一个数据库和审计日志](docs/assets/brand/lazyrest-architecture.png)
+![架构：REST 客户端和 AI Agent 经过同一条 Spring Security 过滤链（JWT / API Key、RBAC），调用同一个 Service 层，落到同一个数据库和审计日志](docs/assets/brand/agentrest-architecture.png)
 
 ### 暴露的工具
 

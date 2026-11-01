@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="405" height="88" viewBox="0 0 405 88" role="img" aria-label="AgentREST">
+<title>AgentREST</title>
+<g fill="none" stroke-width="7.5" stroke-linecap="butt" stroke-linejoin="round">
+  <path d="M39.75 40 A18 18 0 1 0 39.75 40.01 M39.75 20 V60 M92.25 40 A18 18 0 1 0 92.25 40.01 M92.25 20 V66 A18 18 0 0 1 74.25 84 H58.5 M108.75 40 H144.75 A18 18 0 1 0 139.48 52.73 M161.25 20 V60 M161.25 40 A18 18 0 0 1 197.25 40 V60 M220 6 V46 A14 14 0 0 0 234 60 H236 M210 23.75 H235" stroke="#EEF3F0"/>
+  <path d="M247.75 20 V60 M247.75 40 A18 18 0 0 1 265.75 22 H274 M286.75 40 H322.75 A18 18 0 1 0 317.48 52.73 M369.5 23.75 H348.375 A8.125 8.125 0 0 0 348.375 40 H357.625 A8.125 8.125 0 0 1 357.625 56.25 H336.5 M388.5 6 V46 A14 14 0 0 0 402.5 60 H404.5 M378.5 23.75 H403.5" stroke="#34E0A1"/>
+</g>
+</svg>

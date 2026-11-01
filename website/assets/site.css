@@ -210,7 +210,7 @@ section { padding: 88px 0; border-top: 1px solid var(--line); scroll-margin-top:
   .step .code { grid-column: 1; grid-row: auto; }
 }
 
-/* beaver mascot: rises from behind a card, paws resting on its top edge (same pose as the app icon) */
+/* beaver mascot: rises from behind a card, joining two plugs; its cables run down into the card below */
 .peek { position: relative; min-width: 0; }
 .peek > .beaver { position: absolute; bottom: 100%; right: 30px; width: 176px; height: auto; pointer-events: none; animation: rise .9s cubic-bezier(.2,.8,.2,1) .25s both; }
 .peek > .card { position: relative; z-index: 1; }

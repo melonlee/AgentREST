@@ -6,7 +6,7 @@ All notable changes to this project are documented here. The format follows
 ## [2.1.0] - 2026-11-01
 
 LazyREST is now **AgentREST** - "Spring Boot REST + MCP starter" / 「你的业务 API，让 AI Agent 安全调用」.
-Same code, same REST API, same database schema; the beaver mascot stays. The GitHub repository moves to
+Same code, same REST API, same database schema; the beaver mascot stays (now joining two plugs - MCP as the "USB-C for AI"). The GitHub repository moves to
 `melonlee/AgentREST` (old URLs redirect) and the website to <https://melonlee.github.io/AgentREST/>.
 
 ### Changed (breaking for template users)
@@ -37,6 +37,9 @@ Same code, same REST API, same database schema; the beaver mascot stays. The Git
 ### Added
 
 - Tests for `ar_`-prefixed key issuance and legacy `lr_` acceptance over MCP.
+- New brand assets under the new name: `agentrest` wordmark, plug-joining beaver icon / mark / favicon set and
+  lockups, README banner, social preview, share card, Chinese poster and architecture diagram
+  (`docs/assets/brand/agentrest-*`; the `lazyrest-*` files are gone).
 
 ## [2.0.0] - 2026-11-01
 

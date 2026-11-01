@@ -12,23 +12,23 @@ const out = join(src, "..");
 const icons = join(out, "icons");
 const site = join(src, "../../../../website/assets");
 const pages = {
-  banner: { file: "banner.html", out: "lazyrest-banner.png", w: 1280, h: 400 },
-  social: { file: "social.html", out: "lazyrest-social-preview.png", w: 1280, h: 640, dpr: 1 },
-  share: { file: "share-card-en.html", out: "lazyrest-share-card-en.png", w: 1200, h: 630, dpr: 1 },
-  poster: { file: "poster-zh.html", out: "lazyrest-poster-zh.png", w: 1080, h: 1440, dpr: 1 },
-  arch: { file: "architecture.html", out: "lazyrest-architecture.png", w: 1680, h: 880 },
+  banner: { file: "banner.html", out: "agentrest-banner.png", w: 1280, h: 400 },
+  social: { file: "social.html", out: "agentrest-social-preview.png", w: 1280, h: 640, dpr: 1 },
+  share: { file: "share-card-en.html", out: "agentrest-share-card-en.png", w: 1200, h: 630, dpr: 1 },
+  poster: { file: "poster-zh.html", out: "agentrest-poster-zh.png", w: 1080, h: 1440, dpr: 1 },
+  arch: { file: "architecture.html", out: "agentrest-architecture.png", w: 1680, h: 880 },
 };
 // [svg, out png, width] - transparent background, height from the viewBox aspect ratio
 const logos = [
-  ["lazyrest-logo.svg", "lazyrest-logo.png", 960], ["lazyrest-logo-dark.svg", "lazyrest-logo-dark.png", 960],
-  ["lazyrest-wordmark.svg", "lazyrest-wordmark.png", 720], ["lazyrest-wordmark-dark.svg", "lazyrest-wordmark-dark.png", 720],
-  ["lazyrest-mark.svg", "lazyrest-mark.png", 512], ["lazyrest-mark-dark.svg", "lazyrest-mark-dark.png", 512],
-  ["lazyrest-icon.svg", "lazyrest-icon.png", 1024], ["lazyrest-beaver.svg", "lazyrest-beaver.png", 840],
+  ["agentrest-logo.svg", "agentrest-logo.png", 960], ["agentrest-logo-dark.svg", "agentrest-logo-dark.png", 960],
+  ["agentrest-wordmark.svg", "agentrest-wordmark.png", 720], ["agentrest-wordmark-dark.svg", "agentrest-wordmark-dark.png", 720],
+  ["agentrest-mark.svg", "agentrest-mark.png", 512], ["agentrest-mark-dark.svg", "agentrest-mark-dark.png", 512],
+  ["agentrest-icon.svg", "agentrest-icon.png", 1024], ["agentrest-beaver.svg", "agentrest-beaver.png", 840],
 ];
 // App icon sizes: the full beaver down to 64 px, the head-only crop below that (it stays legible).
 const iconSizes = [
-  ["lazyrest-icon.svg", [512, 256, 128, 64]],
-  ["lazyrest-icon-small.svg", [48, 32, 16]],
+  ["agentrest-icon.svg", [512, 256, 128, 64]],
+  ["agentrest-icon-small.svg", [48, 32, 16]],
 ];
 const only = process.argv.slice(2);
 const want = (t) => !only.length || only.includes(t);
@@ -87,21 +87,21 @@ try {
     const small = {};
     for (const [file, sizes] of iconSizes) {
       for (const s of sizes) {
-        small[s] = await svgToPng(file, s, s, { path: join(icons, `lazyrest-icon-${s}.png`) });
+        small[s] = await svgToPng(file, s, s, { path: join(icons, `agentrest-icon-${s}.png`) });
       }
     }
     // apple-touch-icon: opaque square, iOS applies its own rounded mask
-    await svgToPng("lazyrest-icon.svg", 180, 180, { bg: "#161b1a", path: join(icons, "apple-touch-icon.png") });
+    await svgToPng("agentrest-icon.svg", 180, 180, { bg: "#161b1a", path: join(icons, "apple-touch-icon.png") });
     writeFileSync(join(icons, "favicon.ico"), ico([16, 32, 48].map((size) => ({ size, png: small[size] }))));
-    copyFileSync(join(out, "lazyrest-mark.svg"), join(icons, "favicon.svg"));
+    copyFileSync(join(out, "agentrest-mark.svg"), join(icons, "favicon.svg"));
     console.log("saved icons/ (sizes, apple-touch-icon, favicon.ico, favicon.svg)");
   }
   if (want("site")) {
     // website/ ships copies so the Pages artifact is self-contained
     for (const f of ["favicon.svg", "favicon.ico", "apple-touch-icon.png"]) copyFileSync(join(icons, f), join(site, f));
-    copyFileSync(join(icons, "lazyrest-icon-32.png"), join(site, "favicon-32.png"));
-    copyFileSync(join(icons, "lazyrest-icon-16.png"), join(site, "favicon-16.png"));
-    for (const f of ["lazyrest-logo-dark.svg", "lazyrest-beaver.svg", "lazyrest-social-preview.png"]) copyFileSync(join(out, f), join(site, f));
+    copyFileSync(join(icons, "agentrest-icon-32.png"), join(site, "favicon-32.png"));
+    copyFileSync(join(icons, "agentrest-icon-16.png"), join(site, "favicon-16.png"));
+    for (const f of ["agentrest-logo-dark.svg", "agentrest-beaver.svg", "agentrest-social-preview.png"]) copyFileSync(join(out, f), join(site, f));
     console.log("synced website/assets");
   }
 } finally { await browser.close(); clearTimeout(killer); }
