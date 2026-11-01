@@ -1,8 +1,8 @@
 $ TOKEN=$(curl -s -X POST localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{"username":"alice","password":"alice123"}' | jq -r .accessToken)
-$ curl -s -X POST localhost:8080/api/articles -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d '{"title":"Hello LazyREST","summary":"My first draft","content":"Written with curl"}' | jq -c '{id,title,status,author,version}'
-{"id":8,"title":"Hello LazyREST","status":"DRAFT","author":"alice","version":0}
+$ curl -s -X POST localhost:8080/api/articles -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d '{"title":"Hello AgentREST","summary":"My first draft","content":"Written with curl"}' | jq -c '{id,title,status,author,version}'
+{"id":8,"title":"Hello AgentREST","status":"DRAFT","author":"alice","version":0}
 $ curl -s 'localhost:8080/api/articles?q=hello&size=5&sort=createdAt,desc' -H "Authorization: Bearer $TOKEN" | jq -c '{totalElements, titles: [.content[].title]}'
-{"totalElements":1,"titles":["Hello LazyREST"]}
+{"totalElements":1,"titles":["Hello AgentREST"]}
 $ curl -s -X POST localhost:8080/api/articles -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d '{"title":""}' | jq .
 {
   "detail": "Request validation failed",

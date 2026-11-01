@@ -1,1 +1,1 @@
-{"mcpServers":{"lazyrest":{"type":"http","url":"http://localhost:8080/mcp","headers":{"X-API-Key":"lr_dev_editor_0123456789abcdefghijklmnop"}}}}
+{"mcpServers":{"agentrest":{"type":"http","url":"http://localhost:8080/mcp","headers":{"X-API-Key":"ar_dev_editor_0123456789abcdefghijklmnop"}}}}

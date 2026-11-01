@@ -1,4 +1,4 @@
-// LazyREST website: progressive enhancement only. Every section works without this file.
+// AgentREST website: progressive enhancement only. Every section works without this file.
 (() => {
   "use strict";
 

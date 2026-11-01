@@ -3,30 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LazyREST: your REST API, ready for AI agents · Spring Boot + MCP starter</title>
-  <meta name="description" content="LazyREST is an honest, production-shaped Spring Boot 4.1 / Java 21 REST starter whose endpoints are also MCP tools for AI agents like Claude Code: same permissions, same audit trail. JWT + rotating refresh tokens, API keys, RBAC, RFC 9457, Flyway, Docker." />
+  <title>AgentREST: your REST API, ready for AI agents · Spring Boot REST + MCP starter</title>
+  <meta name="description" content="AgentREST is an honest, production-shaped Spring Boot 4.1 / Java 21 REST starter whose endpoints are also MCP tools for AI agents like Claude Code: same permissions, same audit trail. JWT + rotating refresh tokens, API keys, RBAC, RFC 9457, Flyway, Docker." />
   <meta name="theme-color" content="#0B110E" />
   <meta name="color-scheme" content="dark" />
 
-  <link rel="canonical" href="https://melonlee.github.io/LazyREST/en/" />
-  <link rel="alternate" hreflang="zh-CN" href="https://melonlee.github.io/LazyREST/" />
-  <link rel="alternate" hreflang="en" href="https://melonlee.github.io/LazyREST/en/" />
-  <link rel="alternate" hreflang="x-default" href="https://melonlee.github.io/LazyREST/" />
+  <link rel="canonical" href="https://melonlee.github.io/AgentREST/en/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://melonlee.github.io/AgentREST/" />
+  <link rel="alternate" hreflang="en" href="https://melonlee.github.io/AgentREST/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://melonlee.github.io/AgentREST/" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://melonlee.github.io/LazyREST/en/" />
-  <meta property="og:site_name" content="LazyREST" />
+  <meta property="og:url" content="https://melonlee.github.io/AgentREST/en/" />
+  <meta property="og:site_name" content="AgentREST" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:locale:alternate" content="zh_CN" />
-  <meta property="og:title" content="LazyREST: your REST API, ready for AI agents" />
+  <meta property="og:title" content="AgentREST: your REST API, ready for AI agents" />
   <meta property="og:description" content="A Spring Boot 4.1 REST starter whose endpoints are also MCP tools: same permissions, same audit trail." />
-  <meta property="og:image" content="https://melonlee.github.io/LazyREST/assets/lazyrest-social-preview.png" />
+  <meta property="og:image" content="https://melonlee.github.io/AgentREST/assets/lazyrest-social-preview.png" />
   <meta property="og:image:width" content="1280" />
   <meta property="og:image:height" content="640" />
-  <meta property="og:image:alt" content="LazyREST: Your REST API, ready for AI agents" />
+  <meta property="og:image:alt" content="AgentREST: Your REST API, ready for AI agents" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="LazyREST: your REST API, ready for AI agents" />
+  <meta name="twitter:title" content="AgentREST: your REST API, ready for AI agents" />
   <meta name="twitter:description" content="A Spring Boot 4.1 REST starter whose endpoints are also MCP tools: same permissions, same audit trail." />
-  <meta name="twitter:image" content="https://melonlee.github.io/LazyREST/assets/lazyrest-social-preview.png" />
+  <meta name="twitter:image" content="https://melonlee.github.io/AgentREST/assets/lazyrest-social-preview.png" />
 
   <link rel="icon" href="../assets/favicon.ico" sizes="48x48" />
   <link rel="icon" href="../assets/favicon-32.png" type="image/png" sizes="32x32" />
@@ -41,7 +41,7 @@
 
   <header class="site-header">
     <nav class="wrap nav" aria-label="Main">
-      <a class="brand" href="./" aria-label="LazyREST home"><img src="../assets/lazyrest-logo-dark.svg" alt="LazyREST" width="125" height="26" /></a>
+      <a class="brand" href="./" aria-label="AgentREST home"><img src="../assets/lazyrest-logo-dark.svg" alt="AgentREST" width="125" height="26" /></a>
       <div class="nav-links">
         <a href="#how">How it works</a>
         <a href="#mcp">MCP</a>
@@ -52,7 +52,7 @@
       </div>
       <div class="nav-right">
         <a class="lang" href="../" hreflang="zh-CN" lang="zh-CN">中文</a>
-        <a class="btn sm" href="https://github.com/melonlee/LazyREST">
+        <a class="btn sm" href="https://github.com/melonlee/AgentREST">
           <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
           <span class="gh-text">GitHub</span>
         </a>
@@ -68,22 +68,22 @@
           <h1>Your REST API,<br /><em>ready for AI agents.</em></h1>
           <p class="lead">An <b>honest, production-shaped</b> Spring Boot REST starter. Selected service methods are also exposed as <b>MCP tools</b>, so Claude Code, Claude Desktop and Cursor can call your business API with <b>the same permissions, validation and audit trail</b> as REST.</p>
           <div class="cta">
-            <a class="btn primary" href="https://github.com/melonlee/LazyREST/generate">Use this template</a>
-            <a class="btn" href="https://github.com/melonlee/LazyREST">View on GitHub</a>
+            <a class="btn primary" href="https://github.com/melonlee/AgentREST/generate">Use this template</a>
+            <a class="btn" href="https://github.com/melonlee/AgentREST">View on GitHub</a>
           </div>
           <p class="note">Only JDK 21 needed: <code>./mvnw spring-boot:run</code>. No database, Redis or Docker.</p>
         </div>
         <div class="hero-stack">
           <div class="peek">
-          <img class="beaver" src="../assets/lazyrest-beaver.svg" width="840" height="824" alt="The LazyREST beaver mascot" />
+          <img class="beaver" src="../assets/lazyrest-beaver.svg" width="840" height="824" alt="The AgentREST beaver mascot" />
           <div class="card term">
-            <div class="card-head"><span class="dots"><i></i><i></i><i></i></span><span>~/LazyREST</span></div>
-<pre><span class="p">$</span> claude mcp add --transport http lazyrest \
-    http://localhost:8080/mcp --header "X-API-Key: lr_…"
-<span class="p">$</span> claude -p "Search LazyREST for articles about MCP…"
-<span class="m">●</span> lazyrest - searchArticles(query: "MCP")
+            <div class="card-head"><span class="dots"><i></i><i></i><i></i></span><span>~/AgentREST</span></div>
+<pre><span class="p">$</span> claude mcp add --transport http agentrest \
+    http://localhost:8080/mcp --header "X-API-Key: ar_…"
+<span class="p">$</span> claude -p "Search AgentREST for articles about MCP…"
+<span class="m">●</span> agentrest - searchArticles(query: "MCP")
 <span class="c">  ⎿ 1 result · "Exposing Spring services as MCP tools"</span>
-<span class="m">●</span> lazyrest - getArticle(id: 2)</pre>
+<span class="m">●</span> agentrest - getArticle(id: 2)</pre>
           </div>
           </div>
           <div class="card">
@@ -107,7 +107,7 @@
         <div class="grid g3">
           <div class="tile bad"><div class="label">Option 1</div><h3>Let the agent hit the database</h3><p>Bypasses every business rule: no permissions, no ownership checks, no validation, and no record of who did what.</p></div>
           <div class="tile bad"><div class="label">Option 2</div><h3>Build a separate agent API</h3><p>Two sets of permissions, validation and auditing that drift apart over time, and the drift is where the holes are.</p></div>
-          <div class="tile good"><div class="label">LazyREST</div><h3>Agents use the same service layer</h3><p>MCP tools are thin adapters over the same services as REST: <code>@PreAuthorize</code>, ownership, <code>@Validated</code> and <code>@Audited</code> are all reused.</p></div>
+          <div class="tile good"><div class="label">AgentREST</div><h3>Agents use the same service layer</h3><p>MCP tools are thin adapters over the same services as REST: <code>@PreAuthorize</code>, ownership, <code>@Validated</code> and <code>@Audited</code> are all reused.</p></div>
         </div>
       </div>
     </section>
@@ -138,18 +138,18 @@
           <div class="step">
             <h3>Register the MCP server</h3>
             <p>Claude Code speaks HTTP natively; pass the key as a header.</p>
-            <div class="code"><pre><span class="p">$ </span>claude mcp add --transport http lazyrest \
+            <div class="code"><pre><span class="p">$ </span>claude mcp add --transport http agentrest \
   http://localhost:8080/mcp \
-  --header "X-API-Key: lr_dev_editor_0123456789abcdefghijklmnop"</pre></div>
+  --header "X-API-Key: ar_dev_editor_0123456789abcdefghijklmnop"</pre></div>
           </div>
           <div class="step">
             <h3>Just ask</h3>
             <p>The agent picks the tools; every call lands in the audit log (<code>channel=MCP</code>).</p>
-            <div class="code"><pre><span class="p">&gt; </span>Search LazyREST for articles about MCP, then read the most relevant one and summarize it in two sentences.</pre></div>
+            <div class="code"><pre><span class="p">&gt; </span>Search AgentREST for articles about MCP, then read the most relevant one and summarize it in two sentences.</pre></div>
           </div>
         </div>
         <figure class="figure">
-          <img src="../assets/claude-code-mcp.webp" width="1252" height="664" loading="lazy" alt="A real Claude Code session calling the lazyrest searchArticles and getArticle tools and summarizing the result" />
+          <img src="../assets/claude-code-mcp.webp" width="1252" height="664" loading="lazy" alt="A real Claude Code session calling the agentrest searchArticles and getArticle tools and summarizing the result" />
           <figcaption>A real <code>claude -p</code> run (its stream-json transcript laid out as a terminal, content unchanged). Claude Desktop works through <code>mcp-remote</code>; the MCP Inspector CLI is verified too.</figcaption>
         </figure>
       </div>
@@ -162,7 +162,7 @@
         <p class="sec-lead">Not included, so not claimed: caching / Redis, file upload, multi-tenancy, an OAuth2 authorization server, MFA. Add them when you need them.</p>
         <div class="feat">
           <div class="tile"><h3>Auth <code>auth</code></h3><p>BCrypt login, JWT access tokens (HS256, 15 min), opaque refresh tokens: hashed, rotated on every use, reuse detection revokes the family. Per-IP rate limit on login / refresh / register (429 + <code>Retry-After</code>).</p></div>
-          <div class="tile"><h3>API keys</h3><p><code>lr_</code> prefix, stored as SHA-256 only, shown once, revocable, optionally read-only; accepted on <code>/mcp</code> only.</p></div>
+          <div class="tile"><h3>API keys</h3><p><code>ar_</code> prefix (legacy <code>lr_</code> keys from 2.0 keep working), stored as SHA-256 only, shown once, revocable, optionally read-only; accepted on <code>/mcp</code> only.</p></div>
           <div class="tile"><h3>RBAC <code>user</code></h3><p>Roles plus fine-grained permissions (<code>article:write</code>, <code>audit:read</code>, <code>mcp:write</code> …), <code>@PreAuthorize</code> method security, admin user management, first admin bootstrapped from env vars.</p></div>
           <div class="tile"><h3>Example domain <code>article</code></h3><p>CRUD, Jakarta Validation, paging + whitelisted sorting, safely escaped search, ownership checks (others' drafts 404, editing others' articles 403), optimistic locking, publishing. Delete it in one go.</p></div>
           <div class="tile"><h3>Audit <code>audit</code></h3><p>An <code>@Audited</code> aspect records who, what, outcome (SUCCESS / DENIED / FAILURE), channel (REST / MCP), requestId, IP and duration, persisted in its own transaction and queryable by admins.</p></div>
@@ -179,7 +179,7 @@
         <p class="kicker">Security model</p>
         <h2 class="sec-title">An agent can do exactly what its key's owner can do</h2>
         <div class="grid g3">
-          <div class="tile"><h3>Authentication required</h3><p><code>/mcp</code> accepts <code>X-API-Key: lr_…</code> (or <code>Bearer lr_…</code>) as well as normal JWTs; anything else gets a 401 ProblemDetail. Read-only keys keep only <code>*:read</code> permissions.</p></div>
+          <div class="tile"><h3>Authentication required</h3><p><code>/mcp</code> accepts <code>X-API-Key: ar_…</code> (or <code>Bearer ar_…</code>) as well as normal JWTs; anything else gets a 401 ProblemDetail. Read-only keys keep only <code>*:read</code> permissions.</p></div>
           <div class="tile"><h3>Write tools: three gates</h3><p>If any gate is closed, nothing is written. Agents can only create <b>drafts</b>; publishing always takes a human (REST only).</p></div>
           <div class="tile"><h3>Every call audited</h3><p>Each tool call records an <code>MCP_TOOL_CALL</code> entry (argument summary, outcome, duration); the business actions inside are recorded with <code>channel=MCP</code>. Tool errors go back to the model as one readable sentence, with no internals.</p></div>
         </div>
@@ -199,8 +199,8 @@
         <div class="qs">
           <div class="tile">
             <h3>Local dev (JDK 21 only)</h3>
-            <div class="code"><pre><span class="p">$ </span>git clone https://github.com/melonlee/LazyREST.git
-<span class="p">$ </span>cd LazyREST
+            <div class="code"><pre><span class="p">$ </span>git clone https://github.com/melonlee/AgentREST.git
+<span class="p">$ </span>cd AgentREST
 <span class="p">$ </span>./mvnw spring-boot:run</pre></div>
             <p>Swagger UI: <code>http://localhost:8080/swagger-ui.html</code> · MCP: <code>http://localhost:8080/mcp</code></p>
             <table class="users"><tbody>
@@ -215,8 +215,8 @@
             <div class="code"><pre><span class="p">$ </span>cp .env.example .env
 <span class="c"># set JWT_SECRET, database and admin passwords</span>
 <span class="p">$ </span>docker compose up --build</pre></div>
-            <p>Runs the <code>prod</code> profile: Flyway creates the schema, the first start creates the admin from <code>LAZYREST_ADMIN_*</code>, and a missing required variable stops startup with a message saying which one. For PostgreSQL just change <code>DB_URL</code>.</p>
-            <p>As a template: click <a href="https://github.com/melonlee/LazyREST/generate">Use this template</a>, change the coordinates and package, delete the <code>article</code> example module, add your domain.</p>
+            <p>Runs the <code>prod</code> profile: Flyway creates the schema, the first start creates the admin from <code>AGENTREST_ADMIN_*</code>, and a missing required variable stops startup with a message saying which one. For PostgreSQL just change <code>DB_URL</code>.</p>
+            <p>As a template: click <a href="https://github.com/melonlee/AgentREST/generate">Use this template</a>, change the coordinates and package, delete the <code>article</code> example module, add your domain.</p>
           </div>
         </div>
       </div>
@@ -243,11 +243,11 @@
         <h2 class="sec-title">Questions</h2>
         <div class="faq">
           <details><summary>Can I run several replicas?</summary><p>The REST side is stateless, so yes. MCP Streamable HTTP sessions live in memory: use sticky sessions with several replicas, or switch to <code>protocol: STATELESS</code> (and swap the transport bean in <code>McpServerConfig</code> for the stateless variant).</p></details>
-          <details><summary>Does MCP support OAuth?</summary><p>Not yet. Authentication is a personal API key (or a normal JWT). OAuth 2.1 for MCP is on the roadmap; until there is an authorization server, LazyREST deliberately does not advertise OAuth metadata in <code>WWW-Authenticate</code>, so clients don't start a login flow that cannot succeed.</p></details>
+          <details><summary>Does MCP support OAuth?</summary><p>Not yet. Authentication is a personal API key (or a normal JWT). OAuth 2.1 for MCP is on the roadmap; until there is an authorization server, AgentREST deliberately does not advertise OAuth metadata in <code>WWW-Authenticate</code>, so clients don't start a login flow that cannot succeed.</p></details>
           <details><summary>Is the rate limit accurate across instances?</summary><p>No. The login / refresh / register limiter is in-memory per instance, so each replica counts on its own. Swap in Bucket4j + Redis when you need a global limit.</p></details>
           <details><summary>Is there caching / Redis?</summary><p>No. Nothing in the example needs it, so v2 does not claim it.</p></details>
           <details><summary>Is production safe by default?</summary><p>With the <code>prod</code> profile, a missing <code>JWT_SECRET</code> or database config stops startup, the dev secret is rejected, MCP write tools, self-registration and Swagger UI are off by default, and Actuator exposes only health.</p></details>
-          <details><summary>Can I use PostgreSQL?</summary><p>Yes. Set <code>DB_URL</code> to <code>jdbc:postgresql://host:5432/lazyrest</code> and Flyway picks <code>db/migration/postgresql</code>. CI runs the full flow on MySQL 8.4 and PostgreSQL 17 with Testcontainers.</p></details>
+          <details><summary>Can I use PostgreSQL?</summary><p>Yes. Set <code>DB_URL</code> to <code>jdbc:postgresql://host:5432/agentrest</code> and Flyway picks <code>db/migration/postgresql</code>. CI runs the full flow on MySQL 8.4 and PostgreSQL 17 with Testcontainers.</p></details>
         </div>
       </div>
     </section>
@@ -257,12 +257,12 @@
           <img class="beaver" src="../assets/lazyrest-beaver.svg" width="840" height="824" alt="" loading="lazy" />
           <div class="card closing-card">
             <div>
-              <h2>You stay lazy. <em>The beaver wires your API to AI.</em></h2>
-              <p>One command to run it, and your endpoints are MCP tools too. The beaver is LazyREST’s mascot, part of the FantasyAI Lab mascot family with <b>喵想</b>.</p>
+              <h2>You write the business logic. <em>The beaver wires your API to AI.</em></h2>
+              <p>One command to run it, and your endpoints are MCP tools too. The beaver is AgentREST’s mascot, part of the FantasyAI Lab mascot family with <b>喵想</b>.</p>
             </div>
             <div class="cta">
-              <a class="btn primary" href="https://github.com/melonlee/LazyREST/generate">Use this template</a>
-              <a class="btn" href="https://github.com/melonlee/LazyREST">View the source on GitHub</a>
+              <a class="btn primary" href="https://github.com/melonlee/AgentREST/generate">Use this template</a>
+              <a class="btn" href="https://github.com/melonlee/AgentREST">View the source on GitHub</a>
             </div>
           </div>
         </div>
@@ -272,14 +272,15 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <img src="../assets/lazyrest-logo-dark.svg" alt="LazyREST" width="106" height="22" loading="lazy" />
+      <img src="../assets/lazyrest-logo-dark.svg" alt="AgentREST" width="106" height="22" loading="lazy" />
       <nav aria-label="Footer">
-        <a href="https://github.com/melonlee/LazyREST">GitHub</a>
-        <a href="https://github.com/melonlee/LazyREST/blob/HEAD/LICENSE">Apache-2.0</a>
+        <a href="https://github.com/melonlee/AgentREST">GitHub</a>
+        <a href="https://github.com/melonlee/AgentREST/blob/HEAD/LICENSE">Apache-2.0</a>
         <a href="https://github.com/melonlee">Author: Melon</a>
         <a href="https://fantasyailab.com/">FantasyAI Lab</a>
         <a href="../" hreflang="zh-CN" lang="zh-CN">简体中文</a>
       </nav>
+      <small>Formerly LazyREST (renamed 2026-11)</small>
     </div>
   </footer>
 </body>

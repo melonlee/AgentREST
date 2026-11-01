@@ -69,7 +69,7 @@ function renderTranscript(text) {
 function renderClaude(jsonl, prompt) {
   const ev = jsonl.trim().split("\n").map((l) => JSON.parse(l));
   const init = ev.find((e) => e.type === "system");
-  const html = [`<div class="cmd"><span class="ps">$</span> ${wrapCommand(`claude -p ${JSON.stringify(prompt)} --mcp-config mcp.json --allowedTools "mcp__lazyrest__searchArticles,mcp__lazyrest__getArticle" --output-format stream-json --verbose`).map(esc).join("\n")}</div>`];
+  const html = [`<div class="cmd"><span class="ps">$</span> ${wrapCommand(`claude -p ${JSON.stringify(prompt)} --mcp-config mcp.json --allowedTools "mcp__agentrest__searchArticles,mcp__agentrest__getArticle" --output-format stream-json --verbose`).map(esc).join("\n")}</div>`];
   html.push(`<div class="o dim">  init · claude ${esc(init.claude_code_version)} · mcp: ${init.mcp_servers.map((s) => `${esc(s.name)} <span class="ok">${esc(s.status)}</span>`).join(", ")}</div>`);
   html.push(`<div class="user">&gt; ${esc(prompt)}</div>`);
   const md = (t) => esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, '<span class="code">$1</span>');
@@ -101,7 +101,7 @@ const shots = [
   { out: "terminal-curl-problemdetail.png", title: "curl · REST session (alice) → ProblemDetail → audit", body: renderTranscript(readFileSync(join(src, "curl-session.txt"), "utf8")), width: 1180 },
   { out: "terminal-mcp-inspector.png", title: "MCP Inspector CLI · tools/list + tools/call", body: renderTranscript(readFileSync(join(src, "inspector-session.txt"), "utf8")), width: 1180 },
   { out: "terminal-audit-mcp.png", title: "GET /api/audit-logs?channel=MCP (admin)", body: renderTranscript(readFileSync(join(src, "audit-session.txt"), "utf8")), width: 1340 },
-  { out: "claude-code-mcp.png", title: "Claude Code → LazyREST over MCP", body: renderClaude(readFileSync(join(src, "claude-run.jsonl"), "utf8"), "Search LazyREST for articles about MCP, then read the most relevant one and summarize it in two sentences."), width: 1180, wrap: true },
+  { out: "claude-code-mcp.png", title: "Claude Code → AgentREST over MCP", body: renderClaude(readFileSync(join(src, "claude-run.jsonl"), "utf8"), "Search AgentREST for articles about MCP, then read the most relevant one and summarize it in two sentences."), width: 1180, wrap: true },
 ];
 
 const css = `

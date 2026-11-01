@@ -3,30 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LazyREST：你的业务 API，让 AI Agent 安全调用 · Spring Boot + MCP 脚手架</title>
-  <meta name="description" content="LazyREST 是一个诚实的、生产级形态的 Spring Boot 4.1 / Java 21 REST 脚手架：接口同时是 MCP 工具，Claude Code 等 AI Agent 可以安全调用 —— 同样的权限，同样的审计。JWT + 刷新令牌、API Key、RBAC、RFC 9457、Flyway、Docker，开箱即用。" />
+  <title>AgentREST：你的业务 API，让 AI Agent 安全调用 · Spring Boot REST + MCP 脚手架</title>
+  <meta name="description" content="AgentREST 是一个诚实的、生产级形态的 Spring Boot 4.1 / Java 21 REST 脚手架：接口同时是 MCP 工具，Claude Code 等 AI Agent 可以安全调用 —— 同样的权限，同样的审计。JWT + 刷新令牌、API Key、RBAC、RFC 9457、Flyway、Docker，开箱即用。" />
   <meta name="theme-color" content="#0B110E" />
   <meta name="color-scheme" content="dark" />
 
-  <link rel="canonical" href="https://melonlee.github.io/LazyREST/" />
-  <link rel="alternate" hreflang="zh-CN" href="https://melonlee.github.io/LazyREST/" />
-  <link rel="alternate" hreflang="en" href="https://melonlee.github.io/LazyREST/en/" />
-  <link rel="alternate" hreflang="x-default" href="https://melonlee.github.io/LazyREST/" />
+  <link rel="canonical" href="https://melonlee.github.io/AgentREST/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://melonlee.github.io/AgentREST/" />
+  <link rel="alternate" hreflang="en" href="https://melonlee.github.io/AgentREST/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://melonlee.github.io/AgentREST/" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://melonlee.github.io/LazyREST/" />
-  <meta property="og:site_name" content="LazyREST" />
+  <meta property="og:url" content="https://melonlee.github.io/AgentREST/" />
+  <meta property="og:site_name" content="AgentREST" />
   <meta property="og:locale" content="zh_CN" />
   <meta property="og:locale:alternate" content="en_US" />
-  <meta property="og:title" content="LazyREST：你的业务 API，让 AI Agent 安全调用" />
+  <meta property="og:title" content="AgentREST：你的业务 API，让 AI Agent 安全调用" />
   <meta property="og:description" content="Spring Boot 4.1 REST 脚手架，接口同时是 MCP 工具 —— 同样的权限，同样的审计。" />
-  <meta property="og:image" content="https://melonlee.github.io/LazyREST/assets/lazyrest-social-preview.png" />
+  <meta property="og:image" content="https://melonlee.github.io/AgentREST/assets/lazyrest-social-preview.png" />
   <meta property="og:image:width" content="1280" />
   <meta property="og:image:height" content="640" />
-  <meta property="og:image:alt" content="LazyREST：Your REST API, ready for AI agents" />
+  <meta property="og:image:alt" content="AgentREST：Your REST API, ready for AI agents" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="LazyREST：你的业务 API，让 AI Agent 安全调用" />
+  <meta name="twitter:title" content="AgentREST：你的业务 API，让 AI Agent 安全调用" />
   <meta name="twitter:description" content="Spring Boot 4.1 REST 脚手架，接口同时是 MCP 工具 —— 同样的权限，同样的审计。" />
-  <meta name="twitter:image" content="https://melonlee.github.io/LazyREST/assets/lazyrest-social-preview.png" />
+  <meta name="twitter:image" content="https://melonlee.github.io/AgentREST/assets/lazyrest-social-preview.png" />
 
   <link rel="icon" href="assets/favicon.ico" sizes="48x48" />
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32" />
@@ -41,7 +41,7 @@
 
   <header class="site-header">
     <nav class="wrap nav" aria-label="主导航">
-      <a class="brand" href="./" aria-label="LazyREST 首页"><img src="assets/lazyrest-logo-dark.svg" alt="LazyREST" width="125" height="26" /></a>
+      <a class="brand" href="./" aria-label="AgentREST 首页"><img src="assets/lazyrest-logo-dark.svg" alt="AgentREST" width="125" height="26" /></a>
       <div class="nav-links">
         <a href="#how">原理</a>
         <a href="#mcp">MCP 接入</a>
@@ -52,7 +52,7 @@
       </div>
       <div class="nav-right">
         <a class="lang" href="en/" hreflang="en" lang="en">EN</a>
-        <a class="btn sm" href="https://github.com/melonlee/LazyREST">
+        <a class="btn sm" href="https://github.com/melonlee/AgentREST">
           <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
           <span class="gh-text">GitHub</span>
         </a>
@@ -68,22 +68,22 @@
           <h1>你的业务 API，<br /><em>让 AI Agent 安全调用。</em></h1>
           <p class="lead">一个<b>诚实的、生产级形态</b>的 Spring Boot REST 脚手架。选定的 Service 方法同时暴露为 <b>MCP 工具</b>，Claude Code、Claude Desktop、Cursor 可以直接调用 —— 和 REST <b>同样的权限、同样的校验、同样的审计</b>。</p>
           <div class="cta">
-            <a class="btn primary" href="https://github.com/melonlee/LazyREST/generate">Use this template</a>
-            <a class="btn" href="https://github.com/melonlee/LazyREST">在 GitHub 查看源码</a>
+            <a class="btn primary" href="https://github.com/melonlee/AgentREST/generate">Use this template</a>
+            <a class="btn" href="https://github.com/melonlee/AgentREST">在 GitHub 查看源码</a>
           </div>
           <p class="note">只需 JDK 21：<code>./mvnw spring-boot:run</code>，不需要数据库、Redis 或 Docker。</p>
         </div>
         <div class="hero-stack">
           <div class="peek">
-          <img class="beaver" src="assets/lazyrest-beaver.svg" width="840" height="824" alt="LazyREST 吉祥物河狸" />
+          <img class="beaver" src="assets/lazyrest-beaver.svg" width="840" height="824" alt="AgentREST 吉祥物河狸" />
           <div class="card term">
-            <div class="card-head"><span class="dots"><i></i><i></i><i></i></span><span>~/LazyREST</span></div>
-<pre><span class="p">$</span> claude mcp add --transport http lazyrest \
-    http://localhost:8080/mcp --header "X-API-Key: lr_…"
-<span class="p">$</span> claude -p "Search LazyREST for articles about MCP…"
-<span class="m">●</span> lazyrest - searchArticles(query: "MCP")
+            <div class="card-head"><span class="dots"><i></i><i></i><i></i></span><span>~/AgentREST</span></div>
+<pre><span class="p">$</span> claude mcp add --transport http agentrest \
+    http://localhost:8080/mcp --header "X-API-Key: ar_…"
+<span class="p">$</span> claude -p "Search AgentREST for articles about MCP…"
+<span class="m">●</span> agentrest - searchArticles(query: "MCP")
 <span class="c">  ⎿ 1 result · "Exposing Spring services as MCP tools"</span>
-<span class="m">●</span> lazyrest - getArticle(id: 2)</pre>
+<span class="m">●</span> agentrest - getArticle(id: 2)</pre>
           </div>
           </div>
           <div class="card">
@@ -107,7 +107,7 @@
         <div class="grid g3">
           <div class="tile bad"><div class="label">做法一</div><h3>让 Agent 直连数据库</h3><p>绕过所有业务规则：没有权限、没有所有权校验、没有参数校验，出了事也查不到是谁做的。</p></div>
           <div class="tile bad"><div class="label">做法二</div><h3>再写一套 Agent 专用接口</h3><p>两套权限、两套校验、两套审计，迟早不一致 —— 而不一致的地方就是漏洞。</p></div>
-          <div class="tile good"><div class="label">LazyREST</div><h3>Agent 走同一个 Service 层</h3><p>MCP 工具只是薄薄的适配器，调用和 REST 相同的 Service：<code>@PreAuthorize</code>、所有权、<code>@Validated</code>、<code>@Audited</code> 全部复用。</p></div>
+          <div class="tile good"><div class="label">AgentREST</div><h3>Agent 走同一个 Service 层</h3><p>MCP 工具只是薄薄的适配器，调用和 REST 相同的 Service：<code>@PreAuthorize</code>、所有权、<code>@Validated</code>、<code>@Audited</code> 全部复用。</p></div>
         </div>
       </div>
     </section>
@@ -138,9 +138,9 @@
           <div class="step">
             <h3>注册 MCP 服务器</h3>
             <p>Claude Code 原生支持 HTTP 传输，用请求头带上 Key。</p>
-            <div class="code"><pre><span class="p">$ </span>claude mcp add --transport http lazyrest \
+            <div class="code"><pre><span class="p">$ </span>claude mcp add --transport http agentrest \
   http://localhost:8080/mcp \
-  --header "X-API-Key: lr_dev_editor_0123456789abcdefghijklmnop"</pre></div>
+  --header "X-API-Key: ar_dev_editor_0123456789abcdefghijklmnop"</pre></div>
           </div>
           <div class="step">
             <h3>直接提问</h3>
@@ -149,7 +149,7 @@
           </div>
         </div>
         <figure class="figure">
-          <img src="assets/claude-code-mcp.webp" width="1252" height="664" loading="lazy" alt="真实的 Claude Code 会话：调用 lazyrest 的 searchArticles 和 getArticle 工具并给出总结" />
+          <img src="assets/claude-code-mcp.webp" width="1252" height="664" loading="lazy" alt="真实的 Claude Code 会话：调用 agentrest 的 searchArticles 和 getArticle 工具并给出总结" />
           <figcaption>真实的 <code>claude -p</code> 运行记录（stream-json 原文排版成终端样式，未改动内容）。Claude Desktop 可通过 <code>mcp-remote</code> 桥接，MCP Inspector CLI 也已验证。</figcaption>
         </figure>
       </div>
@@ -162,7 +162,7 @@
         <p class="sec-lead">不写就不吹：没有缓存 / Redis、文件上传、多租户、OAuth2 授权服务器、MFA。需要时再加。</p>
         <div class="feat">
           <div class="tile"><h3>认证 <code>auth</code></h3><p>BCrypt 登录，JWT 访问令牌（HS256，15 分钟），不透明刷新令牌：哈希存储、每次轮换、重用检测吊销整组。登录 / 刷新 / 注册按 IP 限流（429 + <code>Retry-After</code>）。</p></div>
-          <div class="tile"><h3>API Key</h3><p><code>lr_</code> 前缀，只存 SHA-256，明文只显示一次，可吊销，可设为只读；只在 <code>/mcp</code> 上被接受。</p></div>
+          <div class="tile"><h3>API Key</h3><p><code>ar_</code> 前缀（2.0 签发的 <code>lr_</code> Key 继续有效），只存 SHA-256，明文只显示一次，可吊销，可设为只读；只在 <code>/mcp</code> 上被接受。</p></div>
           <div class="tile"><h3>RBAC <code>user</code></h3><p>角色 + 细粒度权限（<code>article:write</code>、<code>audit:read</code>、<code>mcp:write</code> …），<code>@PreAuthorize</code> 方法级安全，管理员用户管理，首个管理员由环境变量引导。</p></div>
           <div class="tile"><h3>示例领域 <code>article</code></h3><p>CRUD、Jakarta Validation、分页 + 白名单排序、安全转义的搜索、所有权校验（他人草稿 404、改他人文章 403）、乐观锁、发布流程。可整体删除。</p></div>
           <div class="tile"><h3>审计 <code>audit</code></h3><p><code>@Audited</code> 切面记录谁、做了什么、结果（SUCCESS / DENIED / FAILURE）、渠道（REST / MCP）、requestId、IP、耗时；独立事务持久化，管理员可查询。</p></div>
@@ -179,7 +179,7 @@
         <p class="kicker">安全模型</p>
         <h2 class="sec-title">Agent 的权限 = Key 主人的权限，一分不多</h2>
         <div class="grid g3">
-          <div class="tile"><h3>必须认证</h3><p><code>/mcp</code> 接受 <code>X-API-Key: lr_…</code>（或 <code>Bearer lr_…</code>），也接受普通 JWT；未认证返回 401 ProblemDetail。只读 Key 只保留 <code>*:read</code> 权限。</p></div>
+          <div class="tile"><h3>必须认证</h3><p><code>/mcp</code> 接受 <code>X-API-Key: ar_…</code>（或 <code>Bearer ar_…</code>），也接受普通 JWT；未认证返回 401 ProblemDetail。只读 Key 只保留 <code>*:read</code> 权限。</p></div>
           <div class="tile"><h3>写工具三重门控</h3><p>任何一道门关着，写操作都不会发生。Agent 只能创建<b>草稿</b>，发布永远需要人（仅 REST）。</p></div>
           <div class="tile"><h3>每次调用都审计</h3><p>每次工具调用记录一条 <code>MCP_TOOL_CALL</code>（参数摘要、结果、耗时），内部业务操作也以 <code>channel=MCP</code> 记录。工具错误以一句可读的话返回给模型，不泄露内部信息。</p></div>
         </div>
@@ -199,8 +199,8 @@
         <div class="qs">
           <div class="tile">
             <h3>本地开发（只需 JDK 21）</h3>
-            <div class="code"><pre><span class="p">$ </span>git clone https://github.com/melonlee/LazyREST.git
-<span class="p">$ </span>cd LazyREST
+            <div class="code"><pre><span class="p">$ </span>git clone https://github.com/melonlee/AgentREST.git
+<span class="p">$ </span>cd AgentREST
 <span class="p">$ </span>./mvnw spring-boot:run</pre></div>
             <p>Swagger UI：<code>http://localhost:8080/swagger-ui.html</code>　MCP：<code>http://localhost:8080/mcp</code></p>
             <table class="users"><tbody>
@@ -215,8 +215,8 @@
             <div class="code"><pre><span class="p">$ </span>cp .env.example .env
 <span class="c"># 填入 JWT_SECRET、数据库密码、管理员密码</span>
 <span class="p">$ </span>docker compose up --build</pre></div>
-            <p>使用 <code>prod</code> profile：Flyway 自动建表，首次启动按 <code>LAZYREST_ADMIN_*</code> 创建管理员；缺少必需的环境变量时直接拒绝启动并指出缺了什么。换 PostgreSQL 只需改 <code>DB_URL</code>。</p>
-            <p>作为模板：点 <a href="https://github.com/melonlee/LazyREST/generate">Use this template</a>，改坐标和包名，删掉 <code>article</code> 示例模块，加上你的领域。</p>
+            <p>使用 <code>prod</code> profile：Flyway 自动建表，首次启动按 <code>AGENTREST_ADMIN_*</code> 创建管理员；缺少必需的环境变量时直接拒绝启动并指出缺了什么。换 PostgreSQL 只需改 <code>DB_URL</code>。</p>
+            <p>作为模板：点 <a href="https://github.com/melonlee/AgentREST/generate">Use this template</a>，改坐标和包名，删掉 <code>article</code> 示例模块，加上你的领域。</p>
           </div>
         </div>
       </div>
@@ -243,11 +243,11 @@
         <h2 class="sec-title">常见问题</h2>
         <div class="faq">
           <details><summary>能部署多个副本吗？</summary><p>REST 部分完全无状态，可以。MCP 的 Streamable HTTP 会话保存在内存里：多副本时请开启粘性会话，或者切换到 <code>protocol: STATELESS</code>（同时把 <code>McpServerConfig</code> 的传输 Bean 换成无状态版本）。</p></details>
-          <details><summary>MCP 支持 OAuth 吗？</summary><p>还不支持。目前用个人 API Key（或普通 JWT）认证。MCP 的 OAuth 2.1 授权在路线图上；在有授权服务器之前，LazyREST 刻意不在 <code>WWW-Authenticate</code> 里声明 OAuth 元数据，以免客户端尝试一个无法完成的登录流程。</p></details>
+          <details><summary>MCP 支持 OAuth 吗？</summary><p>还不支持。目前用个人 API Key（或普通 JWT）认证。MCP 的 OAuth 2.1 授权在路线图上；在有授权服务器之前，AgentREST 刻意不在 <code>WWW-Authenticate</code> 里声明 OAuth 元数据，以免客户端尝试一个无法完成的登录流程。</p></details>
           <details><summary>限流在多实例下准吗？</summary><p>不准 —— 登录 / 刷新 / 注册的限流是单实例内存实现，每个实例单独计数。需要全局限流时，可换成 Bucket4j + Redis。</p></details>
           <details><summary>有缓存 / Redis 吗？</summary><p>没有。示例里没有任何东西需要它，所以 v2 不声称有。</p></details>
           <details><summary>生产环境默认安全吗？</summary><p><code>prod</code> profile 下：缺少 <code>JWT_SECRET</code> / 数据库配置直接拒绝启动，dev 假密钥被拒绝，MCP 写工具、自助注册和 Swagger UI 默认关闭，Actuator 只公开 health。</p></details>
-          <details><summary>能用 PostgreSQL 吗？</summary><p>可以。把 <code>DB_URL</code> 换成 <code>jdbc:postgresql://host:5432/lazyrest</code>，Flyway 会自动选择 <code>db/migration/postgresql</code>。CI 用 Testcontainers 在 MySQL 8.4 和 PostgreSQL 17 上跑全流程。</p></details>
+          <details><summary>能用 PostgreSQL 吗？</summary><p>可以。把 <code>DB_URL</code> 换成 <code>jdbc:postgresql://host:5432/agentrest</code>，Flyway 会自动选择 <code>db/migration/postgresql</code>。CI 用 Testcontainers 在 MySQL 8.4 和 PostgreSQL 17 上跑全流程。</p></details>
         </div>
       </div>
     </section>
@@ -257,12 +257,12 @@
           <img class="beaver" src="assets/lazyrest-beaver.svg" width="840" height="824" alt="" loading="lazy" />
           <div class="card closing-card">
             <div>
-              <h2>你负责偷懒，<em>河狸负责把接口接给 AI。</em></h2>
-              <p>一条命令跑起来，接口同时就是 MCP 工具。河狸是 LazyREST 的吉祥物，和 <b>喵想</b> 同属 FantasyAI Lab 吉祥物家族。</p>
+              <h2>你专心写业务，<em>河狸负责把接口接给 AI。</em></h2>
+              <p>一条命令跑起来，接口同时就是 MCP 工具。河狸是 AgentREST 的吉祥物，和 <b>喵想</b> 同属 FantasyAI Lab 吉祥物家族。</p>
             </div>
             <div class="cta">
-              <a class="btn primary" href="https://github.com/melonlee/LazyREST/generate">Use this template</a>
-              <a class="btn" href="https://github.com/melonlee/LazyREST">在 GitHub 查看源码</a>
+              <a class="btn primary" href="https://github.com/melonlee/AgentREST/generate">Use this template</a>
+              <a class="btn" href="https://github.com/melonlee/AgentREST">在 GitHub 查看源码</a>
             </div>
           </div>
         </div>
@@ -272,14 +272,15 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <img src="assets/lazyrest-logo-dark.svg" alt="LazyREST" width="106" height="22" loading="lazy" />
+      <img src="assets/lazyrest-logo-dark.svg" alt="AgentREST" width="106" height="22" loading="lazy" />
       <nav aria-label="页脚">
-        <a href="https://github.com/melonlee/LazyREST">GitHub</a>
-        <a href="https://github.com/melonlee/LazyREST/blob/HEAD/LICENSE">Apache-2.0</a>
+        <a href="https://github.com/melonlee/AgentREST">GitHub</a>
+        <a href="https://github.com/melonlee/AgentREST/blob/HEAD/LICENSE">Apache-2.0</a>
         <a href="https://github.com/melonlee">作者 Melon</a>
         <a href="https://fantasyailab.com/">FantasyAI Lab</a>
         <a href="en/" hreflang="en" lang="en">English</a>
       </nav>
+      <small>原名 LazyREST（2026-11 改名）</small>
     </div>
   </footer>
 </body>

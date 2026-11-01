@@ -1,30 +1,32 @@
 <p align="center">
-  <a href="https://melonlee.github.io/LazyREST/en/"><img src="docs/assets/brand/lazyrest-banner.png" alt="LazyREST — your REST API, ready for AI agents" width="100%"></a>
+  <a href="https://melonlee.github.io/AgentREST/en/"><img src="docs/assets/brand/lazyrest-banner.png" alt="AgentREST — your REST API, ready for AI agents" width="100%"></a>
 </p>
 
-# LazyREST
+# AgentREST
 
-> An **honest, production-shaped** Spring Boot REST starter where your endpoints are also **MCP tools for AI agents** — same permissions, same audit trail.
+<sub>Formerly LazyREST (renamed 2026-11) · 原名 LazyREST（2026-11 改名）</sub>
 
-[![CI](https://github.com/melonlee/LazyREST/actions/workflows/ci.yml/badge.svg)](https://github.com/melonlee/LazyREST/actions/workflows/ci.yml)
+> **Spring Boot REST + MCP starter.** An **honest, production-shaped** Spring Boot REST starter where your endpoints are also **MCP tools for AI agents** — same permissions, same audit trail.
+
+[![CI](https://github.com/melonlee/AgentREST/actions/workflows/ci.yml/badge.svg)](https://github.com/melonlee/AgentREST/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-0B9467)](LICENSE)
 ![Java 21](https://img.shields.io/badge/Java-21-0B9467?logo=openjdk&logoColor=white)
 ![Spring Boot 4.1](https://img.shields.io/badge/Spring%20Boot-4.1-0B9467?logo=springboot&logoColor=white)
 ![MCP server](https://img.shields.io/badge/MCP-Streamable%20HTTP-0B9467)
-[![Use this template](https://img.shields.io/badge/Use%20this%20template-0B110E?logo=github)](https://github.com/melonlee/LazyREST/generate)
+[![Use this template](https://img.shields.io/badge/Use%20this%20template-0B110E?logo=github)](https://github.com/melonlee/AgentREST/generate)
 
-**[Website](https://melonlee.github.io/LazyREST/en/)** · **[Use this template](https://github.com/melonlee/LazyREST/generate)** · [1-minute quick start](#1-minute-quick-start) · [MCP setup](#let-ai-agents-call-your-api-mcp)
+**[Website](https://melonlee.github.io/AgentREST/en/)** · **[Use this template](https://github.com/melonlee/AgentREST/generate)** · [1-minute quick start](#1-minute-quick-start) · [MCP setup](#let-ai-agents-call-your-api-mcp)
 
 [简体中文](README.md) | English
 
-<img src="docs/assets/brand/icons/lazyrest-icon-64.png" width="20" height="20" alt="The LazyREST beaver"> The mascot is a **beaver (河狸)**: you stay lazy, it builds the bridge between your API and AI agents. Like 喵想, it belongs to the FantasyAI Lab mascot family.
+<img src="docs/assets/brand/icons/lazyrest-icon-64.png" width="20" height="20" alt="The AgentREST beaver"> The mascot is a **beaver (河狸)**: you focus on your business logic, it builds the bridge between your API and AI agents. Like 喵想, it belongs to the FantasyAI Lab mascot family.
 
-LazyREST v2 stands on two pillars:
+AgentREST v2 stands on two pillars:
 
 1. **A small but genuinely production-grade REST baseline** - runs with one command, everything is tested, and every feature listed here actually exists.
 2. **AI-ready** - selected service methods are exposed as **MCP tools** (Model Context Protocol) through Spring AI's MCP server, so Claude Code, Claude Desktop, Cursor and other agents can call your business API. Permissions, ownership checks, validation and auditing are exactly the same as for REST.
 
-![A real Claude Code session calling LazyREST's searchArticles and getArticle tools over MCP](docs/assets/screenshots/claude-code-mcp.png)
+![A real Claude Code session calling AgentREST's searchArticles and getArticle tools over MCP](docs/assets/screenshots/claude-code-mcp.png)
 
 <sub>A real `claude -p` run (its stream-json transcript laid out as a terminal); both tool calls are in the audit log with `channel=MCP`.</sub>
 
@@ -37,7 +39,7 @@ Every item below is implemented and covered by automated tests.
 | Module | What you get |
 |---|---|
 | **auth** | Username/password login (BCrypt), JWT access tokens (HS256, 15 min), **opaque refresh tokens** (hashed, rotated on every use, reuse detection revokes the whole family), logout, optional self-registration, `/api/auth/me`; per-IP **rate limiting** on login/refresh/register (429 + `Retry-After`) |
-| **API keys** | Personal API keys (`lr_` prefix, SHA-256 at rest, shown once, revocable, optional **read-only**) for MCP clients |
+| **API keys** | Personal API keys (`ar_` prefix - legacy `lr_` keys from 2.0 keep working - SHA-256 at rest, shown once, revocable, optional **read-only**) for MCP clients |
 | **user** | RBAC: roles (`ROLE_ADMIN` / `ROLE_EDITOR` / `ROLE_USER`) + fine-grained permissions (`article:write`, `audit:read`, `mcp:write`, ...), `@PreAuthorize` method security, admin user management, first admin bootstrapped from env vars |
 | **article** (example domain) | CRUD, Jakarta Validation, paging + whitelisted sorting, search (escaped LIKE), status/author filters, **ownership checks** (others' drafts are 404, editing others' articles is 403), optimistic locking, publish workflow |
 | **audit** | `@Audited` AOP: who / what / resource / when / outcome (SUCCESS / DENIED / FAILURE) / channel (REST / MCP) / request id / IP / duration, persisted in its own transaction, queryable by admins |
@@ -56,8 +58,8 @@ Every item below is implemented and covered by automated tests.
 You only need **JDK 21** - no database, Redis or Docker:
 
 ```bash
-git clone https://github.com/melonlee/LazyREST.git
-cd LazyREST
+git clone https://github.com/melonlee/AgentREST.git
+cd AgentREST
 ./mvnw spring-boot:run
 ```
 
@@ -74,7 +76,7 @@ Demo users (created by the **dev profile only**, never in prod):
 | `alice` / `alice123` | ROLE_USER | read articles, write own drafts |
 | `bob` / `bob123456` | ROLE_USER | same as alice |
 
-Demo API key (bound to `editor`, read + write): `lr_dev_editor_0123456789abcdefghijklmnop`
+Demo API key (bound to `editor`, read + write): `ar_dev_editor_0123456789abcdefghijklmnop` (the pre-rename `lr_dev_editor_…` key is seeded too, to exercise legacy-prefix support)
 
 ![Swagger UI: authorize with the accessToken from POST /api/auth/login](docs/assets/screenshots/swagger-authorize.png)
 
@@ -96,12 +98,12 @@ TOKEN=$(curl -s -X POST localhost:8080/api/auth/login -H 'Content-Type: applicat
 
 curl -s -X POST localhost:8080/api/articles -H "Authorization: Bearer $TOKEN" \
   -H 'Content-Type: application/json' \
-  -d '{"title":"Hello LazyREST","summary":"My first draft","content":"Written with curl"}' | jq -c .
-# {"id":8,"title":"Hello LazyREST",...,"status":"DRAFT","author":"alice",...,"version":0}
+  -d '{"title":"Hello AgentREST","summary":"My first draft","content":"Written with curl"}' | jq -c .
+# {"id":8,"title":"Hello AgentREST",...,"status":"DRAFT","author":"alice",...,"version":0}
 
 curl -s "localhost:8080/api/articles?q=hello&size=5&sort=createdAt,desc" \
   -H "Authorization: Bearer $TOKEN" | jq -c '{totalElements, titles: [.content[].title]}'
-# {"totalElements":1,"titles":["Hello LazyREST"]}
+# {"totalElements":1,"titles":["Hello AgentREST"]}
 
 curl -s -X POST localhost:8080/api/articles -H "Authorization: Bearer $TOKEN" \
   -H 'Content-Type: application/json' -d '{"title":""}' | jq .
@@ -134,9 +136,9 @@ Agents do not get database access and do not bypass business rules: they call th
 
 **Security model**
 
-- `/mcp` requires `X-API-Key: lr_...` (or `Authorization: Bearer lr_...`) or a regular JWT; otherwise 401 ProblemDetail.
+- `/mcp` requires `X-API-Key: ar_...` (or `Authorization: Bearer ar_...`; legacy `lr_...` keys from LazyREST 2.0 keep working) or a regular JWT; otherwise 401 ProblemDetail.
 - The agent acts with the permissions of the key's owner; **read-only keys** keep only `*:read` permissions.
-- Write tools pass three gates: `lazyrest.mcp.write-tools-enabled` (off by default in prod - the tool is then absent from `tools/list`), the `mcp:write` permission, and the service-level `article:write` check.
+- Write tools pass three gates: `agentrest.mcp.write-tools-enabled` (off by default in prod - the tool is then absent from `tools/list`), the `mcp:write` permission, and the service-level `article:write` check.
 - Every tool call writes an `MCP_TOOL_CALL` audit entry (argument summary, outcome, duration); nested business operations are recorded with `channel=MCP`.
 - Failures come back as `isError: true` with one readable sentence - no stack traces, no internals.
 
@@ -150,8 +152,8 @@ curl -s -X POST localhost:8080/api/api-keys -H "Authorization: Bearer $TOKEN" \
 ### Claude Code
 
 ```bash
-claude mcp add --transport http lazyrest http://localhost:8080/mcp \
-  --header "X-API-Key: lr_dev_editor_0123456789abcdefghijklmnop"
+claude mcp add --transport http agentrest http://localhost:8080/mcp \
+  --header "X-API-Key: ar_dev_editor_0123456789abcdefghijklmnop"
 ```
 
 Or commit a project `.mcp.json` and keep the key in the environment:
@@ -159,11 +161,11 @@ Or commit a project `.mcp.json` and keep the key in the environment:
 ```json
 {
   "mcpServers": {
-    "lazyrest": {
+    "agentrest": {
       "type": "http",
       "url": "http://localhost:8080/mcp",
       "headers": {
-        "X-API-Key": "${LAZYREST_API_KEY}"
+        "X-API-Key": "${AGENTREST_API_KEY}"
       }
     }
   }
@@ -171,8 +173,8 @@ Or commit a project `.mcp.json` and keep the key in the environment:
 ```
 
 ```bash
-export LAZYREST_API_KEY=lr_dev_editor_0123456789abcdefghijklmnop
-claude mcp list   # lazyrest: http://localhost:8080/mcp (HTTP) - ✓ Connected
+export AGENTREST_API_KEY=ar_dev_editor_0123456789abcdefghijklmnop
+claude mcp list   # agentrest: http://localhost:8080/mcp (HTTP) - ✓ Connected
 ```
 
 ### Claude Desktop
@@ -182,11 +184,11 @@ Claude Desktop's config file only launches local (stdio) servers, so bridge with
 ```json
 {
   "mcpServers": {
-    "lazyrest": {
+    "agentrest": {
       "command": "npx",
-      "args": ["-y", "mcp-remote", "http://localhost:8080/mcp", "--header", "X-API-Key:${LAZYREST_API_KEY}"],
+      "args": ["-y", "mcp-remote", "http://localhost:8080/mcp", "--header", "X-API-Key:${AGENTREST_API_KEY}"],
       "env": {
-        "LAZYREST_API_KEY": "lr_dev_editor_0123456789abcdefghijklmnop"
+        "AGENTREST_API_KEY": "ar_dev_editor_0123456789abcdefghijklmnop"
       }
     }
   }
@@ -199,10 +201,10 @@ Other Streamable-HTTP clients (Cursor, ...): use the URL `http://localhost:8080/
 
 ```bash
 npx -y @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transport http \
-  --header "X-API-Key: lr_dev_editor_0123456789abcdefghijklmnop" --method tools/list
+  --header "X-API-Key: ar_dev_editor_0123456789abcdefghijklmnop" --method tools/list
 
 npx -y @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transport http \
-  --header "X-API-Key: lr_dev_editor_0123456789abcdefghijklmnop" \
+  --header "X-API-Key: ar_dev_editor_0123456789abcdefghijklmnop" \
   --method tools/call --tool-name searchArticles --tool-arg query=mcp
 ```
 
@@ -210,7 +212,7 @@ npx -y @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transpo
 
 ### Prompts to try
 
-- "Use lazyrest to find articles about MCP and summarize them."
+- "Use agentrest to find articles about MCP and summarize them."
 - "Read article 2 and save a beginner-friendly rewrite as a draft with createArticleDraft."
 - "List my drafts and tell me which ones are missing a summary."
 
@@ -240,16 +242,16 @@ cp .env.example .env      # set JWT_SECRET (openssl rand -base64 48), DB passwor
 docker compose up --build
 ```
 
-The app runs with the `prod` profile against MySQL 8.4; Flyway creates the schema and the first admin is created from `LAZYREST_ADMIN_*`. Missing required variables stop both compose and the app with a message naming them.
+The app runs with the `prod` profile against MySQL 8.4; Flyway creates the schema and the first admin is created from `AGENTREST_ADMIN_*`. Missing required variables stop both compose and the app with a message naming them.
 
-PostgreSQL: set `DB_URL=jdbc:postgresql://host:5432/lazyrest` (Flyway picks `db/migration/postgresql`).
+PostgreSQL: set `DB_URL=jdbc:postgresql://host:5432/agentrest` (Flyway picks `db/migration/postgresql`).
 
 ---
 
 ## Project structure
 
 ```
-src/main/java/com/lazy/rest/
+src/main/java/com/fantasyailab/agentrest/
 ├── auth/            login / refresh / logout / register / me, JWT, rate limiting, SecurityConfig
 │   └── apikey/      API key entity, service, filter, endpoints
 ├── user/            User / Role / Permission, user admin, bootstrap admin
@@ -270,18 +272,18 @@ docs/decisions.md    technical decisions and trade-offs
 | Variable | Default | Description |
 |---|---|---|
 | `SPRING_PROFILES_ACTIVE` | `dev` | `dev` (H2 + demo data) or `prod` |
-| `DB_URL` | - | **required in prod**, e.g. `jdbc:mysql://db:3306/lazyrest` |
+| `DB_URL` | - | **required in prod**, e.g. `jdbc:mysql://db:3306/agentrest` |
 | `DB_USERNAME` / `DB_PASSWORD` | - | **required in prod** |
 | `DB_POOL_SIZE` | `10` | Hikari pool size |
 | `JWT_SECRET` | obvious dev-only value | **required in prod**, >= 32 bytes; the dev value is rejected with `prod` |
-| `LAZYREST_ADMIN_USERNAME` / `_EMAIL` / `_PASSWORD` | - | creates the first admin on an empty database (password >= 12 chars) |
+| `AGENTREST_ADMIN_USERNAME` / `_EMAIL` / `_PASSWORD` | - | creates the first admin on an empty database (password >= 12 chars) |
 | `MCP_WRITE_TOOLS_ENABLED` | dev `true` / prod `false` | register MCP write tools |
 | `REGISTRATION_ENABLED` | dev `true` / prod `false` | public self-registration |
 | `API_DOCS_ENABLED` | prod `false` | Swagger UI / OpenAPI in prod |
 | `CORS_ALLOWED_ORIGINS` | empty (off) | comma-separated origins |
 | `FORWARD_HEADERS_STRATEGY` | `none` | set to `native` or `framework` behind a reverse proxy, otherwise rate limiting and audit see the proxy IP |
 
-Tunables in `application.yml`: `lazyrest.security.jwt.access-token-ttl` (15m), `refresh-token-ttl` (14d), `lazyrest.auth.login-rate-limit.max-attempts` (10) / `window` (1m).
+Tunables in `application.yml`: `agentrest.security.jwt.access-token-ttl` (15m), `refresh-token-ttl` (14d), `agentrest.auth.login-rate-limit.max-attempts` (10) / `window` (1m).
 
 ---
 
@@ -313,10 +315,10 @@ Unit tests, `@WebMvcTest`, `@DataJpaTest` (real Flyway migrations + Hibernate va
 
 ## Use it as a template
 
-Click **Use this template** on GitHub (or open <https://github.com/melonlee/LazyREST/generate>) to create your own repository, then:
+Click **Use this template** on GitHub (or open <https://github.com/melonlee/AgentREST/generate>) to create your own repository, then:
 
 1. Change `groupId` / `artifactId` / `name` in `pom.xml`.
-2. Rename the `com.lazy.rest` package (IDE refactoring, or `git mv` + search/replace).
+2. Rename the `com.fantasyailab.agentrest` package (IDE refactoring, or `git mv` + search/replace).
 3. Remove the example module: the `article/` package, `mcp/ArticleMcpTools.java`, `mcp/ArticleWriteMcpTools.java`, the `articles` table (edit `V1__schema.sql` before your first deployment, or add a `DROP TABLE` migration afterwards), the article seed data in `DevDataSeeder` and the article-related tests.
 4. Add your domain as `Entity + Repository + Service (@PreAuthorize / @Audited / @Validated) + Controller`, plus an `@McpTool` adapter when agents should use it.
 5. Add new permissions in a Flyway migration.
@@ -332,6 +334,16 @@ Click **Use this template** on GitHub (or open <https://github.com/melonlee/Lazy
 - [ ] OpenTelemetry tracing
 - [ ] Project generator (rename package / drop the example module in one step)
 
+## Upgrading from LazyREST 2.0
+
+AgentREST 2.1 is LazyREST 2.0 under a new name: the REST API, database schema and Flyway migrations are unchanged, so existing databases upgrade in place. What changed (details in the [CHANGELOG](CHANGELOG.md)):
+
+- Package `com.lazy.rest` → `com.fantasyailab.agentrest`, Maven coordinates `com.fantasyailab:agentrest` (`target/agentrest-2.1.0.jar`), Docker image `agentrest`.
+- Config prefix `lazyrest.*` → `agentrest.*`; env vars `LAZYREST_ADMIN_*` → `AGENTREST_ADMIN_*` (the old names still work as a fallback).
+- MCP server name `lazyrest` → `agentrest`: re-add the server in your client (`claude mcp add --transport http agentrest …`) and update `.mcp.json` keys and `mcp__agentrest__…` tool allow-lists.
+- New API keys start with `ar_`; existing `lr_` keys keep working. The dev demo key is now `ar_dev_editor_…` (dev still seeds the old `lr_dev_editor_…` too).
+- JWT issuer `lazyrest` → `agentrest`: access tokens issued before the upgrade are rejected - log in again or use your refresh token.
+
 ## Upgrading from v1
 
 v2 is a rewrite and not compatible with v1: Java 21, Spring Boot 4.1, Flyway-managed schema, and the `/api` prefix moved from the servlet context path into controller mappings. See the [CHANGELOG](CHANGELOG.md). v1 remains in the git history.
@@ -342,4 +354,4 @@ v2 is a rewrite and not compatible with v1: Java 21, Spring Boot 4.1, Flyway-man
 
 ---
 
-Maintained by [Melon](https://github.com/melonlee) / [FantasyAI Lab](https://fantasyailab.com/) · [Website](https://melonlee.github.io/LazyREST/en/). If LazyREST helps you, a ⭐ is appreciated - issues and PRs welcome.
+Maintained by [Melon](https://github.com/melonlee) / [FantasyAI Lab](https://fantasyailab.com/) · [Website](https://melonlee.github.io/AgentREST/en/). If AgentREST helps you, a ⭐ is appreciated - issues and PRs welcome.

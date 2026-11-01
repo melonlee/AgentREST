@@ -3,6 +3,41 @@
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [2.1.0] - 2026-11-01
+
+LazyREST is now **AgentREST** - "Spring Boot REST + MCP starter" / 「你的业务 API，让 AI Agent 安全调用」.
+Same code, same REST API, same database schema; the beaver mascot stays. The GitHub repository moves to
+`melonlee/AgentREST` (old URLs redirect) and the website to <https://melonlee.github.io/AgentREST/>.
+
+### Changed (breaking for template users)
+
+- Java package `com.lazy.rest` → `com.fantasyailab.agentrest`; main class `LazyRestApplication` → `AgentRestApplication`.
+- Maven coordinates `com.lazy.rest:lazy-rest` → `com.fantasyailab:agentrest`; the jar is now `target/agentrest-2.1.0.jar`.
+- `spring.application.name`, MCP server name (`serverInfo.name`) and JWT issuer `lazyrest` → `agentrest`; MCP instructions,
+  OpenAPI title (`AgentREST API`) and log output use the new name. Access tokens issued by 2.0 fail issuer validation -
+  clients log in again or refresh (refresh tokens are opaque and stay valid).
+- Configuration prefix `lazyrest.*` → `agentrest.*` (e.g. `agentrest.mcp.write-tools-enabled`, `agentrest.security.jwt.*`).
+- Env vars `LAZYREST_ADMIN_USERNAME` / `_EMAIL` / `_PASSWORD` → `AGENTREST_ADMIN_*`; the old names are still read as a fallback.
+- Docker image / compose image `agentrest:2.1.0`, container user `agentrest`, compose database and user `agentrest`
+  (existing compose volumes created as `lazyrest` keep their old database name - set `DB_URL` / `DB_USERNAME` accordingly).
+- Newly issued API keys use the **`ar_`** prefix. Keys with the legacy **`lr_`** prefix are still accepted
+  (`X-API-Key` and `Authorization: Bearer`), so existing keys keep working with no data migration.
+- Dev demo API key is now `ar_dev_editor_0123456789abcdefghijklmnop`; the dev profile also seeds the old
+  `lr_dev_editor_…` key (`agentrest.dev.legacy-api-key`).
+
+### Migration notes
+
+- **Released Flyway migrations are unchanged** (checksums intact), so v2.0.0 databases upgrade in place.
+- MCP clients: re-register the server under the new name, e.g.
+  `claude mcp add --transport http agentrest http://localhost:8080/mcp --header "X-API-Key: ar_…"`, rename the
+  `.mcp.json` / Claude Desktop key to `agentrest` and tool allow-lists to `mcp__agentrest__…`.
+- Projects generated from the template before the rename: nothing forces you to follow; to pick up the
+  legacy-prefix support, port `ApiKeyService.hasApiKeyPrefix` and its two call sites.
+
+### Added
+
+- Tests for `ar_`-prefixed key issuance and legacy `lr_` acceptance over MCP.
+
 ## [2.0.0] - 2026-11-01
 
 A complete rewrite. LazyREST is now an honest, production-shaped Spring Boot REST starter whose

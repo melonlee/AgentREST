@@ -1,30 +1,32 @@
 <p align="center">
-  <a href="https://melonlee.github.io/LazyREST/"><img src="docs/assets/brand/lazyrest-banner.png" alt="LazyREST — 你的业务 API，同时是 AI Agent 可以安全调用的 MCP 工具" width="100%"></a>
+  <a href="https://melonlee.github.io/AgentREST/"><img src="docs/assets/brand/lazyrest-banner.png" alt="AgentREST — 你的业务 API，同时是 AI Agent 可以安全调用的 MCP 工具" width="100%"></a>
 </p>
 
-# LazyREST
+# AgentREST
 
-> 一个**诚实的、生产级形态**的 Spring Boot REST 脚手架 —— 你的业务接口，同时也是 AI Agent 可以安全调用的 **MCP 工具**：同样的权限，同样的审计。
+<sub>原名 LazyREST（2026-11 改名）</sub>
 
-[![CI](https://github.com/melonlee/LazyREST/actions/workflows/ci.yml/badge.svg)](https://github.com/melonlee/LazyREST/actions/workflows/ci.yml)
+> **Spring Boot REST + MCP 脚手架 —— 你的业务 API，让 AI Agent 安全调用。** 一个**诚实的、生产级形态**的 Spring Boot REST 脚手架 —— 你的业务接口，同时也是 AI Agent 可以安全调用的 **MCP 工具**：同样的权限，同样的审计。
+
+[![CI](https://github.com/melonlee/AgentREST/actions/workflows/ci.yml/badge.svg)](https://github.com/melonlee/AgentREST/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-0B9467)](LICENSE)
 ![Java 21](https://img.shields.io/badge/Java-21-0B9467?logo=openjdk&logoColor=white)
 ![Spring Boot 4.1](https://img.shields.io/badge/Spring%20Boot-4.1-0B9467?logo=springboot&logoColor=white)
 ![MCP server](https://img.shields.io/badge/MCP-Streamable%20HTTP-0B9467)
-[![Use this template](https://img.shields.io/badge/Use%20this%20template-0B110E?logo=github)](https://github.com/melonlee/LazyREST/generate)
+[![Use this template](https://img.shields.io/badge/Use%20this%20template-0B110E?logo=github)](https://github.com/melonlee/AgentREST/generate)
 
-**[官网](https://melonlee.github.io/LazyREST/)** · **[Use this template](https://github.com/melonlee/LazyREST/generate)** · [1 分钟快速开始](#1-分钟快速开始) · [MCP 接入](#让-ai-agent-调用你的接口mcp)
+**[官网](https://melonlee.github.io/AgentREST/)** · **[Use this template](https://github.com/melonlee/AgentREST/generate)** · [1 分钟快速开始](#1-分钟快速开始) · [MCP 接入](#让-ai-agent-调用你的接口mcp)
 
 简体中文 | [English](README.en.md)
 
-<img src="docs/assets/brand/icons/lazyrest-icon-64.png" width="20" height="20" alt="LazyREST 河狸"> 吉祥物是一只**河狸**：你负责偷懒，它负责在你的 API 和 AI Agent 之间搭桥。它和喵想一样，属于 FantasyAI Lab 吉祥物家族。
+<img src="docs/assets/brand/icons/lazyrest-icon-64.png" width="20" height="20" alt="AgentREST 河狸"> 吉祥物是一只**河狸**：你专心写业务，它负责在你的 API 和 AI Agent 之间搭桥。它和喵想一样，属于 FantasyAI Lab 吉祥物家族。
 
-LazyREST v2 有两个支柱：
+AgentREST v2 有两个支柱：
 
 1. **小而真实的生产级 REST 基线** —— 一条命令跑起来，所有功能都有测试覆盖，README 里写的每一项都真的实现了。
 2. **AI-ready** —— 选定的 Service 方法通过 Spring AI 的 MCP Server 暴露为 **MCP 工具**（Model Context Protocol），Claude Code / Claude Desktop / Cursor 等 Agent 可以直接调用你的业务 API；权限、所有权校验、参数校验、审计与 REST 完全共用同一套规则。
 
-![真实的 Claude Code 会话：通过 MCP 调用 LazyREST 的 searchArticles 和 getArticle](docs/assets/screenshots/claude-code-mcp.png)
+![真实的 Claude Code 会话：通过 MCP 调用 AgentREST 的 searchArticles 和 getArticle](docs/assets/screenshots/claude-code-mcp.png)
 
 <sub>真实的 `claude -p` 运行记录（stream-json 原文排版成终端样式），两次工具调用都以 `channel=MCP` 记入审计日志。</sub>
 
@@ -53,7 +55,7 @@ LazyREST v2 有两个支柱：
 | 模块 | 内容 |
 |---|---|
 | **auth** | 用户名密码登录（BCrypt）、JWT 访问令牌（HS256，15 分钟）、**不透明刷新令牌**（哈希存储、每次使用即轮换、重用检测会吊销整组令牌）、登出、可开关的自助注册、`/api/auth/me`；登录/刷新/注册按 IP **限流**（429 + `Retry-After`） |
-| **API Key** | 个人 API Key（`lr_` 前缀，只存 SHA-256，明文只显示一次，可吊销，可设为**只读**），专供 MCP 客户端使用 |
+| **API Key** | 个人 API Key（`ar_` 前缀，2.0 签发的 `lr_` Key 继续有效；只存 SHA-256，明文只显示一次，可吊销，可设为**只读**），专供 MCP 客户端使用 |
 | **user** | RBAC：角色（`ROLE_ADMIN` / `ROLE_EDITOR` / `ROLE_USER`）+ 细粒度权限（`article:write`、`audit:read`、`mcp:write` …），`@PreAuthorize` 方法级安全，管理员用户管理接口，首个管理员通过环境变量引导创建 |
 | **article**（示例领域） | CRUD、Jakarta Validation、分页 + 排序（白名单）、搜索（安全转义的 LIKE）、状态/作者过滤、**所有权校验**（草稿对他人返回 404，修改他人文章 403）、乐观锁、发布流程 |
 | **audit** | `@Audited` AOP 审计：谁 / 做了什么 / 资源 / 何时 / 结果（SUCCESS / DENIED / FAILURE）/ 渠道（REST / MCP）/ requestId / IP / 耗时，独立事务持久化，管理员可按条件查询 |
@@ -72,8 +74,8 @@ LazyREST v2 有两个支柱：
 只需要 **JDK 21**（不需要数据库、Redis 或 Docker）：
 
 ```bash
-git clone https://github.com/melonlee/LazyREST.git
-cd LazyREST
+git clone https://github.com/melonlee/AgentREST.git
+cd AgentREST
 ./mvnw spring-boot:run
 ```
 
@@ -90,7 +92,7 @@ dev 环境自动创建的演示账号（**仅 dev profile**，prod 不会创建�
 | `alice` / `alice123` | ROLE_USER | 读文章、写自己的草稿 |
 | `bob` / `bob123456` | ROLE_USER | 同上 |
 
-演示 API Key（绑定 `editor`，可读写）：`lr_dev_editor_0123456789abcdefghijklmnop`
+演示 API Key（绑定 `editor`，可读写）：`ar_dev_editor_0123456789abcdefghijklmnop`（改名前的 `lr_dev_editor_…` 也会被创建，用来验证旧前缀兼容）
 
 ![Swagger UI：用 POST /api/auth/login 拿到的 accessToken 完成 Authorize](docs/assets/screenshots/swagger-authorize.png)
 
@@ -114,18 +116,18 @@ TOKEN=$(curl -s -X POST localhost:8080/api/auth/login -H 'Content-Type: applicat
 # 2. 创建草稿（201 + Location）
 curl -s -X POST localhost:8080/api/articles -H "Authorization: Bearer $TOKEN" \
   -H 'Content-Type: application/json' \
-  -d '{"title":"Hello LazyREST","summary":"My first draft","content":"Written with curl"}' | jq -c .
-# {"id":8,"title":"Hello LazyREST",...,"status":"DRAFT","author":"alice",...,"version":0}
+  -d '{"title":"Hello AgentREST","summary":"My first draft","content":"Written with curl"}' | jq -c .
+# {"id":8,"title":"Hello AgentREST",...,"status":"DRAFT","author":"alice",...,"version":0}
 
 # 3. 搜索 + 分页 + 排序
 curl -s "localhost:8080/api/articles?q=hello&size=5&sort=createdAt,desc" \
   -H "Authorization: Bearer $TOKEN" | jq -c '{totalElements, titles: [.content[].title]}'
-# {"totalElements":1,"titles":["Hello LazyREST"]}
+# {"totalElements":1,"titles":["Hello AgentREST"]}
 
 # 4. 更新（乐观锁 version +1）
 curl -s -X PUT localhost:8080/api/articles/8 -H "Authorization: Bearer $TOKEN" \
-  -H 'Content-Type: application/json' -d '{"title":"Hello LazyREST v2","content":"Edited"}' | jq -c '{id,title,version}'
-# {"id":8,"title":"Hello LazyREST v2","version":1}
+  -H 'Content-Type: application/json' -d '{"title":"Hello AgentREST v2","content":"Edited"}' | jq -c '{id,title,version}'
+# {"id":8,"title":"Hello AgentREST v2","version":1}
 
 # 5. 校验失败 -> RFC 9457 ProblemDetail
 curl -s -X POST localhost:8080/api/articles -H "Authorization: Bearer $TOKEN" \
@@ -170,7 +172,7 @@ curl -s "localhost:8080/api/audit-logs?actor=alice&size=5" -H "Authorization: Be
 
 ## 让 AI Agent 调用你的接口（MCP）
 
-2026 年，团队越来越需要把**已有的业务 API** 开放给 AI Agent。LazyREST 的做法是：Agent 不直连数据库，也不绕过业务规则，而是通过 MCP 调用**同一个 Service 层** —— 和 REST 共享权限、所有权、校验与审计。
+2026 年，团队越来越需要把**已有的业务 API** 开放给 AI Agent。AgentREST 的做法是：Agent 不直连数据库，也不绕过业务规则，而是通过 MCP 调用**同一个 Service 层** —— 和 REST 共享权限、所有权、校验与审计。
 
 ![架构：REST 客户端和 AI Agent 经过同一条 Spring Security 过滤链（JWT / API Key、RBAC），调用同一个 Service 层，落到同一个数据库和审计日志](docs/assets/brand/lazyrest-architecture.png)
 
@@ -186,9 +188,9 @@ curl -s "localhost:8080/api/audit-logs?actor=alice&size=5" -H "Authorization: Be
 
 ### 安全模型
 
-- `/mcp` 必须认证：`X-API-Key: lr_…`（或 `Authorization: Bearer lr_…`），也接受普通 JWT。未认证返回 401 ProblemDetail。
+- `/mcp` 必须认证：`X-API-Key: ar_…`（或 `Authorization: Bearer ar_…`；LazyREST 2.0 签发的 `lr_…` Key 继续有效），也接受普通 JWT。未认证返回 401 ProblemDetail。
 - Agent 的权限 = API Key 主人的权限；**只读 Key** 只保留 `*:read` 权限。
-- 写工具三重门控：`lazyrest.mcp.write-tools-enabled`（prod 默认关闭，关闭时工具根本不会出现在 `tools/list`）→ `mcp:write` 权限 → Service 层 `article:write`。
+- 写工具三重门控：`agentrest.mcp.write-tools-enabled`（prod 默认关闭，关闭时工具根本不会出现在 `tools/list`）→ `mcp:write` 权限 → Service 层 `article:write`。
 - 每次工具调用记录一条 `MCP_TOOL_CALL` 审计（含参数摘要、结果、耗时），内部业务操作也会以 `channel=MCP` 记录。
 - 工具错误以 `isError: true` + 一句可读的话返回给模型（不含堆栈、不泄露内部信息）。
 
@@ -203,8 +205,8 @@ curl -s -X POST localhost:8080/api/api-keys -H "Authorization: Bearer $TOKEN" \
 ### Claude Code
 
 ```bash
-claude mcp add --transport http lazyrest http://localhost:8080/mcp \
-  --header "X-API-Key: lr_dev_editor_0123456789abcdefghijklmnop"
+claude mcp add --transport http agentrest http://localhost:8080/mcp \
+  --header "X-API-Key: ar_dev_editor_0123456789abcdefghijklmnop"
 ```
 
 或者提交到项目的 `.mcp.json`（Key 从环境变量读取，不进仓库）：
@@ -212,11 +214,11 @@ claude mcp add --transport http lazyrest http://localhost:8080/mcp \
 ```json
 {
   "mcpServers": {
-    "lazyrest": {
+    "agentrest": {
       "type": "http",
       "url": "http://localhost:8080/mcp",
       "headers": {
-        "X-API-Key": "${LAZYREST_API_KEY}"
+        "X-API-Key": "${AGENTREST_API_KEY}"
       }
     }
   }
@@ -224,8 +226,8 @@ claude mcp add --transport http lazyrest http://localhost:8080/mcp \
 ```
 
 ```bash
-export LAZYREST_API_KEY=lr_dev_editor_0123456789abcdefghijklmnop
-claude mcp list   # lazyrest: http://localhost:8080/mcp (HTTP) - ✓ Connected
+export AGENTREST_API_KEY=ar_dev_editor_0123456789abcdefghijklmnop
+claude mcp list   # agentrest: http://localhost:8080/mcp (HTTP) - ✓ Connected
 ```
 
 ### Claude Desktop
@@ -235,11 +237,11 @@ Claude Desktop 的配置文件只支持本地（stdio）服务器，用 [`mcp-re
 ```json
 {
   "mcpServers": {
-    "lazyrest": {
+    "agentrest": {
       "command": "npx",
-      "args": ["-y", "mcp-remote", "http://localhost:8080/mcp", "--header", "X-API-Key:${LAZYREST_API_KEY}"],
+      "args": ["-y", "mcp-remote", "http://localhost:8080/mcp", "--header", "X-API-Key:${AGENTREST_API_KEY}"],
       "env": {
-        "LAZYREST_API_KEY": "lr_dev_editor_0123456789abcdefghijklmnop"
+        "AGENTREST_API_KEY": "ar_dev_editor_0123456789abcdefghijklmnop"
       }
     }
   }
@@ -252,10 +254,10 @@ Claude Desktop 的配置文件只支持本地（stdio）服务器，用 [`mcp-re
 
 ```bash
 npx -y @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transport http \
-  --header "X-API-Key: lr_dev_editor_0123456789abcdefghijklmnop" --method tools/list
+  --header "X-API-Key: ar_dev_editor_0123456789abcdefghijklmnop" --method tools/list
 
 npx -y @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transport http \
-  --header "X-API-Key: lr_dev_editor_0123456789abcdefghijklmnop" \
+  --header "X-API-Key: ar_dev_editor_0123456789abcdefghijklmnop" \
   --method tools/call --tool-name searchArticles --tool-arg query=mcp
 ```
 
@@ -263,7 +265,7 @@ npx -y @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transpo
 
 ### 可以这样问 Agent
 
-- “用 lazyrest 搜索和 MCP 相关的文章，总结要点。”
+- “用 agentrest 搜索和 MCP 相关的文章，总结要点。”
 - “读一下第 2 篇文章，帮我改写成面向初学者的版本，用 createArticleDraft 存成草稿。”
 - “列出我所有的草稿，告诉我哪些还缺摘要。”
 
@@ -293,17 +295,17 @@ cp .env.example .env      # 填入 JWT_SECRET（openssl rand -base64 48）、数
 docker compose up --build
 ```
 
-app 使用 `prod` profile 连接 MySQL 8.4，Flyway 自动建表，首次启动按 `LAZYREST_ADMIN_*` 创建管理员。缺少任何必需的环境变量时，compose 和应用都会**直接拒绝启动**并指出缺了什么。
+app 使用 `prod` profile 连接 MySQL 8.4，Flyway 自动建表，首次启动按 `AGENTREST_ADMIN_*` 创建管理员。缺少任何必需的环境变量时，compose 和应用都会**直接拒绝启动**并指出缺了什么。
 
-使用 PostgreSQL：把 `DB_URL` 换成 `jdbc:postgresql://host:5432/lazyrest` 即可（Flyway 自动选择 `db/migration/postgresql`）。
+使用 PostgreSQL：把 `DB_URL` 换成 `jdbc:postgresql://host:5432/agentrest` 即可（Flyway 自动选择 `db/migration/postgresql`）。
 
 ---
 
 ## 项目结构
 
 ```
-src/main/java/com/lazy/rest/
-├── LazyRestApplication.java
+src/main/java/com/fantasyailab/agentrest/
+├── AgentRestApplication.java
 ├── auth/            登录 / 刷新 / 登出 / 注册 / me、JWT、限流、SecurityConfig
 │   └── apikey/      API Key 实体、服务、过滤器、接口
 ├── user/            User / Role / Permission、用户管理、首个管理员引导
@@ -330,18 +332,18 @@ docs/decisions.md    技术选型与取舍
 | 变量 | 默认值 | 说明 |
 |---|---|---|
 | `SPRING_PROFILES_ACTIVE` | `dev` | `dev`（H2 + 演示数据）或 `prod` |
-| `DB_URL` | — | **prod 必填**，如 `jdbc:mysql://db:3306/lazyrest` |
+| `DB_URL` | — | **prod 必填**，如 `jdbc:mysql://db:3306/agentrest` |
 | `DB_USERNAME` / `DB_PASSWORD` | — | **prod 必填** |
 | `DB_POOL_SIZE` | `10` | Hikari 连接池大小 |
 | `JWT_SECRET` | dev 内置的明显假值 | **prod 必填**，≥ 32 字节；dev 假值在 prod 下会被拒绝 |
-| `LAZYREST_ADMIN_USERNAME` / `_EMAIL` / `_PASSWORD` | — | 数据库没有任何用户时创建首个管理员（密码 ≥ 12 位） |
+| `AGENTREST_ADMIN_USERNAME` / `_EMAIL` / `_PASSWORD` | — | 数据库没有任何用户时创建首个管理员（密码 ≥ 12 位） |
 | `MCP_WRITE_TOOLS_ENABLED` | dev `true` / prod `false` | 是否注册 MCP 写工具 |
 | `REGISTRATION_ENABLED` | dev `true` / prod `false` | 是否开放自助注册 |
 | `API_DOCS_ENABLED` | prod `false` | prod 下是否开放 Swagger UI / OpenAPI |
 | `CORS_ALLOWED_ORIGINS` | 空（关闭） | 逗号分隔的允许来源 |
 | `FORWARD_HEADERS_STRATEGY` | `none` | 部署在反向代理后设为 `native` 或 `framework`，否则限流和审计看到的是代理 IP |
 
-其他可调属性（`application.yml`）：`lazyrest.security.jwt.access-token-ttl`（15m）、`refresh-token-ttl`（14d）、`lazyrest.auth.login-rate-limit.max-attempts`（10）/ `window`（1m）。
+其他可调属性（`application.yml`）：`agentrest.security.jwt.access-token-ttl`（15m）、`refresh-token-ttl`（14d）、`agentrest.auth.login-rate-limit.max-attempts`（10）/ `window`（1m）。
 
 ---
 
@@ -373,10 +375,10 @@ docs/decisions.md    技术选型与取舍
 
 ## 作为模板使用
 
-在 GitHub 上点 **Use this template**（或打开 <https://github.com/melonlee/LazyREST/generate>）创建你自己的仓库，然后：
+在 GitHub 上点 **Use this template**（或打开 <https://github.com/melonlee/AgentREST/generate>）创建你自己的仓库，然后：
 
 1. **改坐标**：修改 `pom.xml` 的 `groupId` / `artifactId` / `name`。
-2. **改包名**：用 IDE 把 `com.lazy.rest` 重命名为你的包（或 `git mv` 目录后全局替换 `com.lazy.rest`）。
+2. **改包名**：用 IDE 把 `com.fantasyailab.agentrest` 重命名为你的包（或 `git mv` 目录后全局替换 `com.fantasyailab.agentrest`）。
 3. **删除示例模块**：
    - 删除 `article/` 包、`mcp/ArticleMcpTools.java`、`mcp/ArticleWriteMcpTools.java`；
    - 在尚未上线前直接从 `V1__schema.sql` 删掉 `articles` 表（已上线则新增迁移 `DROP TABLE`）；
@@ -395,6 +397,16 @@ docs/decisions.md    技术选型与取舍
 - [ ] OpenTelemetry 链路追踪
 - [ ] 项目生成器（替换包名 / 去掉示例模块一步完成）
 
+## 从 LazyREST 2.0 升级
+
+AgentREST 2.1 就是改名后的 LazyREST 2.0：REST API、表结构和 Flyway 迁移都没有变化，已有数据库可以直接升级。变化如下（详见 [CHANGELOG](CHANGELOG.md)）：
+
+- 包名 `com.lazy.rest` → `com.fantasyailab.agentrest`，Maven 坐标 `com.fantasyailab:agentrest`（`target/agentrest-2.1.0.jar`），Docker 镜像 `agentrest`。
+- 配置前缀 `lazyrest.*` → `agentrest.*`；环境变量 `LAZYREST_ADMIN_*` → `AGENTREST_ADMIN_*`（旧名仍作为兜底生效）。
+- MCP 服务名 `lazyrest` → `agentrest`：在客户端里重新添加（`claude mcp add --transport http agentrest …`），并更新 `.mcp.json` 的键名和 `mcp__agentrest__…` 工具白名单。
+- 新签发的 API Key 以 `ar_` 开头，已有的 `lr_` Key 继续有效。dev 演示 Key 改为 `ar_dev_editor_…`（dev 环境仍会同时创建旧的 `lr_dev_editor_…`）。
+- JWT issuer `lazyrest` → `agentrest`：升级前签发的访问令牌会被拒绝，重新登录或用刷新令牌换新即可。
+
 ## 从 v1 升级
 
 v2 是重写，不兼容 v1：Java 21、Spring Boot 4.1、Flyway 管理表结构、API 前缀从 context-path `/api` 改为控制器路径 `/api/...`。详见 [CHANGELOG](CHANGELOG.md)。v1 代码保留在 git 历史中。
@@ -405,4 +417,4 @@ v2 是重写，不兼容 v1：Java 21、Spring Boot 4.1、Flyway 管理表结构
 
 ---
 
-由 [Melon](https://github.com/melonlee) / [FantasyAI Lab](https://fantasyailab.com/) 维护 · [官网](https://melonlee.github.io/LazyREST/)。觉得有用就点个 ⭐，欢迎提 Issue / PR。
+由 [Melon](https://github.com/melonlee) / [FantasyAI Lab](https://fantasyailab.com/) 维护 · [官网](https://melonlee.github.io/AgentREST/)。觉得有用就点个 ⭐，欢迎提 Issue / PR。

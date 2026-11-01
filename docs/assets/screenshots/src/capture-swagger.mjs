@@ -1,4 +1,4 @@
-// Real Swagger UI screenshots of a running LazyREST (localhost:8080).
+// Real Swagger UI screenshots of a running AgentREST (localhost:8080).
 // Usage: node capture-swagger.mjs <outDir>   (app running on :8080; PLAYWRIGHT_CORE=… if needed)
 import { pathToFileURL } from 'node:url';
 const { chromium } = await import(process.env.PLAYWRIGHT_CORE ? pathToFileURL(process.env.PLAYWRIGHT_CORE).href : 'playwright-core');
