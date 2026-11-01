@@ -1,0 +1,43 @@
+# LazyREST + MySQL 8.4 with the prod profile.
+#   cp .env.example .env   # then fill in the secrets
+#   docker compose up --build
+# Secrets come from .env (git-ignored); compose refuses to start if a required one is missing.
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: lazyrest
+      MYSQL_USER: lazyrest
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  app:
+    build: .
+    image: lazyrest:2.0.0
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_URL: jdbc:mysql://mysql:3306/lazyrest
+      DB_USERNAME: lazyrest
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env (openssl rand -base64 48)}
+      LAZYREST_ADMIN_USERNAME: ${LAZYREST_ADMIN_USERNAME:-admin}
+      LAZYREST_ADMIN_EMAIL: ${LAZYREST_ADMIN_EMAIL:-admin@example.com}
+      LAZYREST_ADMIN_PASSWORD: ${LAZYREST_ADMIN_PASSWORD:?Set LAZYREST_ADMIN_PASSWORD in .env (>= 12 chars)}
+      MCP_WRITE_TOOLS_ENABLED: ${MCP_WRITE_TOOLS_ENABLED:-false}
+      API_DOCS_ENABLED: ${API_DOCS_ENABLED:-true}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-}
+
+volumes:
+  mysql-data:
