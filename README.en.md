@@ -19,7 +19,7 @@
 
 [简体中文](README.md) | English
 
-<img src="docs/assets/brand/icons/agentrest-icon-64.png" width="20" height="20" alt="The AgentREST beaver"> The mascot is a **beaver (河狸)**: you focus on your business logic, it holds a plug in each paw and connects your API to AI agents (MCP being the "USB-C for AI"). Like 喵想, it belongs to the FantasyAI Lab mascot family.
+<img src="docs/assets/brand/icons/agentrest-icon-64.png" width="20" height="20" alt="The AgentREST beaver"> The mascot is a **beaver (河狸)** coiled into AgentREST's initial **A**: its body draws the two diagonals, the crossbar is a mint USB-C plug (MCP being the "USB-C for AI"), its paddle tail rests on one foot and its buck-toothed head on the other. It belongs to the FantasyAI Lab letter-animal family alongside the Capydown capybara.
 
 AgentREST v2 stands on two pillars:
 

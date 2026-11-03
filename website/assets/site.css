@@ -210,18 +210,19 @@ section { padding: 88px 0; border-top: 1px solid var(--line); scroll-margin-top:
   .step .code { grid-column: 1; grid-row: auto; }
 }
 
-/* beaver mascot: rises from behind a card, joining two plugs; its cables run down into the card below */
+/* beaver mascot: the letter-animal A rises from behind a card, its paddle tail and its buck-toothed
+   head standing on the card's top edge */
 .peek { position: relative; min-width: 0; }
 .peek { --bw: 196px; --br: 64px; }
 .peek > .beaver { position: absolute; bottom: 100%; right: var(--br); width: var(--bw); height: auto; pointer-events: none; animation: rise .9s cubic-bezier(.2,.8,.2,1) .25s both; }
 .peek > .card { position: relative; z-index: 1; }
 .hero-stack { padding-top: 128px; }
-/* Hero: the beaver's two cables end at the card's top edge (at 3% / 97% of the figure width) and
-   continue into two "sockets" in the card header - REST on one side, AI agent (MCP) on the other. */
+/* Hero: the A's two feet land on the card's top edge (at 16% / 95% of the figure width), each over a
+   "socket" in the card header - REST under one, AI agent (MCP) under the other. */
 .sockets { position: absolute; top: 0; right: var(--br); width: var(--bw); height: 0; }
 .sockets .tag { position: absolute; top: 10px; transform: translateX(-50%); white-space: nowrap; animation: plug-in .4s ease-out 1s both; }
-.sockets .tag:first-child { left: 3%; }
-.sockets .tag:last-child { left: 97%; }
+.sockets .tag:first-child { left: 16%; }
+.sockets .tag:last-child { left: 95%; }
 .sockets .tag::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 9px; height: 11px; margin-left: -4.5px; background: #3a4240; }
 @keyframes plug-in { from { opacity: 0; } }
 @keyframes rise { from { transform: translateY(40%); } }

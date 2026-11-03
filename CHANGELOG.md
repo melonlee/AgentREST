@@ -3,6 +3,26 @@
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [2.2.0] - 2026-11-03
+
+New logo: the beaver is now coiled into a capital **A** / 新标志：河狸盘成了大写 A。
+
+Brand assets and copy only - no runtime code, API, configuration or database changes. Upgrading from 2.1.0 needs no action.
+
+### Changed
+
+- The mascot is redrawn in the「字母动物」letter-animal style: the beaver's body draws the two diagonals of the **A**,
+  the crossbar is a mint USB-C plug (MCP being the "USB-C for AI"), its paddle tail stands on one foot and its
+  buck-toothed head on the other. It now shares a house style with the Capydown capybara.
+- The lockup is `[beaver A] gentrest` - the mascot replaces the initial letter instead of standing next to it.
+- Every brand asset regenerated: app icon, favicon / apple-touch-icon, mark / wordmark / logo (light and dark),
+  banner, social preview, Chinese poster, English share card, architecture diagram, and the copies of all of these
+  used by the `website/` landing pages.
+- `docs/assets/brand/src/gen-brand.mjs` is now a complete parametric generator. The hand-drawn mascot masters in
+  `docs/assets/brand/src/mascot/` are deleted - all geometry is computed, and small sizes automatically drop the fur
+  ticks, the plug slot and the tail hatching so the figure stays legible at 16-48 px.
+- README and website copy describing the mascot updated to match.
+
 ## [2.1.0] - 2026-11-01
 
 LazyREST is now **AgentREST** - "Spring Boot REST + MCP starter" / 「你的业务 API，让 AI Agent 安全调用」.

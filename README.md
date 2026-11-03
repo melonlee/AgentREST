@@ -19,7 +19,7 @@
 
 简体中文 | [English](README.en.md)
 
-<img src="docs/assets/brand/icons/agentrest-icon-64.png" width="20" height="20" alt="AgentREST 河狸"> 吉祥物是一只**河狸**：你专心写业务，它两只爪子各攥一个插头，把你的 API 接到 AI Agent 上（MCP 就是 AI 的 USB-C）。它和喵想一样，属于 FantasyAI Lab 吉祥物家族。
+<img src="docs/assets/brand/icons/agentrest-icon-64.png" width="20" height="20" alt="AgentREST 河狸"> 吉祥物是一只**河狸**，盘成了 AgentREST 的首字母 **A**：身体是字母的两道斜画，横杠是一枚薄荷绿的 USB-C 插头（MCP 就是 AI 的 USB-C），左脚是板状的尾巴，右脚是露着门牙的脑袋。和 Capydown 的卡皮巴拉同属 FantasyAI Lab 的「字母动物」家族。
 
 AgentREST v2 有两个支柱：
 

@@ -12,7 +12,7 @@
 
     <groupId>com.fantasyailab</groupId>
     <artifactId>agentrest</artifactId>
-    <version>2.1.0</version>
+    <version>2.2.0</version>
     <name>AgentREST</name>
     <description>AgentREST - Spring Boot REST + MCP starter: a production-shaped REST API whose endpoints are also secure, audited MCP tools for AI agents</description>
     <url>https://github.com/melonlee/AgentREST</url>

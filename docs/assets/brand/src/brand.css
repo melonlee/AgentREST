@@ -54,8 +54,8 @@ html, body { background: var(--ink); color: var(--paper); font-family: var(--san
 .term .c { color: var(--dim); }
 .term .m { color: var(--mint); }
 .canvas > header, .canvas > footer { position: absolute; }
-/* The beaver rising from behind a card: the figure's flat bottom crop sits exactly on the card's top
-   edge, so its paws rest on the "ledge" like in the app icon. */
+/* The beaver A rising from behind a card: the figure is cropped tight to its ink, so its tail and
+   teeth rest exactly on the card's top edge like a ledge. */
 .peek { position: relative; }
 .peek > .beaver { position: absolute; bottom: 100%; z-index: 0; display: block; pointer-events: none; }
 .peek > .card { position: relative; z-index: 1; }
